@@ -1,3 +1,4 @@
+import 'package:app_banca_finanzas/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class RegistroEmpresaScreen extends StatelessWidget {
@@ -5,9 +6,22 @@ class RegistroEmpresaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('RegistroEmpresaScreen'),
+    return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(0.0),
+          child: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.transparent,
+            elevation: 0, // hides leading widget
+          )),
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            MainHeader(
+              titlePage: 'Registro Empresa',
+            )
+          ],
+        ),
       ),
     );
   }
