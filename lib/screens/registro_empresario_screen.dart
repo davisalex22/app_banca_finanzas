@@ -49,7 +49,6 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         labelText: 'Teléfono',
                         hintText: 'Teléfono',
                       ),
-                      SizedBox(height: 10),
                     ],
                   ),
                 ),
@@ -57,40 +56,50 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                   titleCard: '2. Antecedentes del empresario',
                   subTitleCard1: '2.1 El empresario',
                   column1: Column(
-                    children: const [
-                      CustomInputField(
+                    children: [
+                      const CustomInputField(
                         labelText: 'Originario',
                         hintText: 'Originario',
                       ),
-                      CustomInputField(
+                      const CustomInputField(
                         labelText: 'Lugar',
                         hintText: 'Lugar',
                       ),
-                      CustomInputField(
+                      const CustomInputField(
+                        keyboardType: TextInputType.number,
                         labelText: 'Edad',
                         hintText: 'Edad',
                       ),
-                      CustomInputField(
-                        labelText: 'Estado civil',
+                      CustomDropDownButtom(
                         hintText: 'Estado civil',
+                        labelText: 'Estado civil',
+                        formValues: formValues,
+                        listMenu: const [
+                          "Solotero/a",
+                          "Casado/a",
+                          "Divorciado/a",
+                          "Viudo/a"
+                        ],
                       ),
-                      CustomInputField(
+                      const CustomInputField(
                         labelText: 'Ocupación',
                         hintText: 'Ocupación',
                       ),
-                      CustomInputField(
+                      const CustomInputField(
                         labelText: 'Escolaridad',
                         hintText: 'Escolaridad',
                       ),
-                      CustomInputField(
+                      const CustomInputField(
                         labelText: 'Estado de salud',
                         hintText: 'Estado de salud',
                       ),
-                      CustomInputField(
+                      const CustomInputField(
+                        minLines: 3,
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
                         labelText: 'Comentarios del Empresario',
                         hintText: 'Comentarios del Empresario',
                       ),
-                      SizedBox(height: 10),
                     ],
                   ),
                   subTitleCard2: '2.2 Los padres',
@@ -113,6 +122,7 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         hintText: 'Lugar',
                       ),
                       CustomInputField(
+                        keyboardType: TextInputType.number,
                         labelText: 'Edad',
                         hintText: 'Edad',
                       ),
@@ -125,10 +135,12 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         hintText: 'Estado de salud',
                       ),
                       CustomInputField(
+                        minLines: 3,
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
                         labelText: 'Comentarios de los padres',
                         hintText: 'Comentarios de los padres',
                       ),
-                      SizedBox(height: 10),
                     ],
                   ),
                   subTitleCard3: '2.3 Número de hermanos nacidos',
@@ -139,6 +151,7 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         hintText: 'Nombres',
                       ),
                       CustomInputField(
+                        keyboardType: TextInputType.number,
                         labelText: 'Edad',
                         hintText: 'Edad',
                       ),
@@ -176,6 +189,7 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         hintText: 'En que Lugar',
                       ),
                       CustomInputField(
+                        keyboardType: TextInputType.number,
                         labelText: 'Edad',
                         hintText: 'Edad',
                       ),
@@ -192,10 +206,12 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         hintText: 'Escolaridad',
                       ),
                       CustomInputField(
+                        minLines: 3,
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
                         labelText: 'Comentarios de la pareja',
                         hintText: 'Comentarios de la pareja',
                       ),
-                      SizedBox(height: 10),
                     ],
                   ),
                   subTitleCard2: '3.2 Los suegros',
@@ -218,6 +234,7 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         hintText: 'En que Lugar',
                       ),
                       CustomInputField(
+                        keyboardType: TextInputType.number,
                         labelText: 'Edad',
                         hintText: 'Edad',
                       ),
@@ -234,10 +251,12 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         hintText: 'Escolaridad',
                       ),
                       CustomInputField(
+                        minLines: 3,
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
                         labelText: 'Comentarios de los suegros',
                         hintText: 'Comentarios de los suegros',
                       ),
-                      SizedBox(height: 10),
                     ],
                   ),
                   subTitleCard3: '3.3 Número de cuñados',
@@ -248,6 +267,7 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         hintText: 'Nombres',
                       ),
                       CustomInputField(
+                        keyboardType: TextInputType.number,
                         labelText: 'Edad',
                         hintText: 'Edad',
                       ),
@@ -259,7 +279,7 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         labelText: 'Lugar dentro de sus hermanos',
                         hintText: 'Lugar dentro de sus hermanos',
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 8),
                     ],
                   ),
                 ),
@@ -269,10 +289,10 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                   column1: Column(
                     children: const [
                       CustomInputField(
+                        keyboardType: TextInputType.number,
                         labelText: 'Años de Casado',
                         hintText: 'Años de Casado',
                       ),
-                      SizedBox(height: 10),
                     ],
                   ),
                   subTitleCard2: '4.2 Situación afectiva del matrimonio',
@@ -282,13 +302,13 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         labelText: 'Situación afectiva del matrimonio',
                         hintText: 'Situación afectiva del matrimonio',
                       ),
-                      SizedBox(height: 10),
                     ],
                   ),
                   subTitleCard3: '4.3 Hijos',
                   column3: Column(
                     children: const [
                       CustomInputField(
+                        keyboardType: TextInputType.number,
                         labelText: 'Número de hijos',
                         hintText: 'Número de hijos',
                       ),
@@ -308,7 +328,7 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         labelText: 'Estado de salud',
                         hintText: 'Estado de salud',
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 8),
                     ],
                   ),
                 ),
@@ -321,17 +341,19 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         labelText: 'Hobbies,Color,Personas',
                         hintText: 'Hobbies,Color,Personas',
                       ),
-                      SizedBox(height: 10),
                     ],
                   ),
                   subTitleCard2: '5.2 Comentarios',
                   column2: Column(
                     children: const [
                       CustomInputField(
+                        minLines: 3,
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
                         labelText: 'Comentarios',
                         hintText: 'Comentarios',
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 8),
                     ],
                   ),
                 ),
@@ -344,17 +366,19 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         labelText: 'Hobbies,Color,Personas',
                         hintText: 'Hobbies,Color,Personas',
                       ),
-                      SizedBox(height: 10),
                     ],
                   ),
                   subTitleCard2: '5.2 Comentarios',
                   column2: Column(
                     children: const [
                       CustomInputField(
+                        minLines: 3,
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
                         labelText: 'Comentarios',
                         hintText: 'Comentarios',
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 8),
                     ],
                   ),
                 ),
@@ -367,17 +391,19 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                         labelText: 'Hobbies,Color,Personas',
                         hintText: 'Hobbies,Color,Personas',
                       ),
-                      SizedBox(height: 10),
                     ],
                   ),
                   subTitleCard2: '5.2 Comentarios',
                   column2: Column(
                     children: const [
                       CustomInputField(
+                        minLines: 3,
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
                         labelText: 'Comentarios',
                         hintText: 'Comentarios',
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 8),
                     ],
                   ),
                 ),
@@ -388,13 +414,21 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                   column1: Column(
                     children: const [
                       CustomInputField(
+                        minLines: 4,
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
                         labelText: 'Hobbies,Color,Personas',
                         hintText: 'Hobbies,Color,Personas',
                       ),
-                      SizedBox(height: 10),
                     ],
                   ),
-                )
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: CustomAlert(
+                      titleAlert: 'Información',
+                      contentAlert: 'Información guardada con éxito'),
+                ),
               ],
             ),
           ),

@@ -8,6 +8,8 @@ class CustomInputField extends StatelessWidget {
   final IconData? suffixIcon;
   final TextInputType? keyboardType;
   final bool obscureText;
+  final int? minLines;
+  final int? maxLines;
 
   // final String formProperty;
   //final Map<String, String> formValues;
@@ -21,6 +23,8 @@ class CustomInputField extends StatelessWidget {
     this.suffixIcon,
     this.keyboardType,
     this.obscureText = false,
+    this.minLines,
+    this.maxLines,
     //required this.formProperty,
     //required this.formValues,
   }) : super(key: key);
@@ -34,6 +38,8 @@ class CustomInputField extends StatelessWidget {
         textCapitalization: TextCapitalization.words,
         keyboardType: keyboardType,
         obscureText: obscureText,
+        minLines: minLines,
+        maxLines: maxLines,
         // onChanged: (value) => formValues[formProperty] = value,
         validator: (value) {
           if (value == null) {

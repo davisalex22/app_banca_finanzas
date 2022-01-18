@@ -33,11 +33,14 @@ class MainHeader extends StatelessWidget {
             ],
           ),
         ),
-        Text(titlePage,
-            style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Color(0xff8E3939))),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Text(titlePage,
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff8E3939))),
+        ),
         const SizedBox(height: 10),
       ],
     );

@@ -1,3 +1,4 @@
+import 'package:app_banca_finanzas/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomCardType2 extends StatelessWidget {
@@ -24,47 +25,55 @@ class CustomCardType2 extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        shadowColor: AppTheme.primary.withOpacity(0.5),
         clipBehavior: Clip.antiAlias,
-        child: Column(
-          children: [
-            ListTile(
-              title: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Text(titleCard,
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 17)),
               ),
-              subtitle: subTitleCard1.isEmpty
-                  ? null
-                  : Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: Text(subTitleCard1,
-                          style: const TextStyle(
-                              fontSize: 14, color: Colors.black)),
+              subTitleCard1.isEmpty
+                  ? const SizedBox(height: 0)
+                  : ListTile(
+                      title: subTitleCard1.isEmpty
+                          ? null
+                          : Text(subTitleCard1,
+                              style: const TextStyle(
+                                  fontSize: 15, color: Colors.black)),
                     ),
-            ),
-            column1,
-            ListTile(
-              subtitle: subTitleCard2.isEmpty
-                  ? null
-                  : Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: Text(subTitleCard2,
-                          style: const TextStyle(
-                              fontSize: 14, color: Colors.black)),
+              column1,
+              subTitleCard2.isEmpty
+                  ? const SizedBox(height: 10)
+                  : ListTile(
+                      title: subTitleCard2.isEmpty
+                          ? null
+                          : Text(subTitleCard2,
+                              style: const TextStyle(
+                                  fontSize: 15, color: Colors.black)),
                     ),
-            ),
-            Center(child: column2),
-            ListTile(
-              subtitle: subTitleCard3.isEmpty
-                  ? null
-                  : Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: Text(subTitleCard3,
-                          style: const TextStyle(
-                              fontSize: 14, color: Colors.black)),
+              Center(child: column2),
+              subTitleCard3.isEmpty
+                  ? const SizedBox(height: 0)
+                  : ListTile(
+                      title: subTitleCard3.isEmpty
+                          ? null
+                          : Text(subTitleCard3,
+                              style: const TextStyle(
+                                  fontSize: 15, color: Colors.black)),
                     ),
-            ),
-            Center(child: column3),
-          ],
+              Center(child: column3),
+            ],
+          ),
         ),
       ),
     );
