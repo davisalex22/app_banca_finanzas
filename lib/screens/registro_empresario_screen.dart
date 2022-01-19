@@ -410,15 +410,16 @@ class RegistroEmpresarioScreen extends StatelessWidget {
                 CustomCardType2(
                   titleCard:
                       '7. Comentario Ejecutivo de antecedendes generales',
-                  subTitleCard1: '5.1 Hobbies,Color,Personas',
                   column1: Column(
                     children: const [
                       CustomInputField(
                         minLines: 4,
                         maxLines: null,
                         keyboardType: TextInputType.multiline,
-                        labelText: 'Hobbies,Color,Personas',
-                        hintText: 'Hobbies,Color,Personas',
+                        labelText:
+                            'Comentario Ejecutivo de antecedendes generales',
+                        hintText:
+                            'Comentario Ejecutivo de antecedendes generales',
                       ),
                     ],
                   ),
@@ -434,6 +435,7 @@ class RegistroEmpresarioScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: const CustomNavigationBar(),
     );
   }
 }

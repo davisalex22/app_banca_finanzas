@@ -58,7 +58,7 @@ class CustomAlert extends StatelessWidget {
               height: 45.0,
               child: Center(
                 child: Text(
-                  'Mostrar Alerta',
+                  'Guardar',
                   style: TextStyle(fontSize: 16),
                 ),
               ),

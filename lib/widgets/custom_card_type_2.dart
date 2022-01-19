@@ -6,18 +6,22 @@ class CustomCardType2 extends StatelessWidget {
   final String subTitleCard1;
   final String subTitleCard2;
   final String subTitleCard3;
-  final Column column1;
+  final String subTitleCard4;
+  final Column? column1;
   final Column? column2;
   final Column? column3;
+  final Column? column4;
   const CustomCardType2({
     Key? key,
-    required this.titleCard,
-    required this.column1,
+    this.titleCard = '',
+    this.column1,
     this.subTitleCard1 = '',
     this.column2,
     this.column3,
     this.subTitleCard2 = '',
     this.subTitleCard3 = '',
+    this.subTitleCard4 = '',
+    this.column4,
   }) : super(key: key);
 
   @override
@@ -35,13 +39,15 @@ class CustomCardType2 extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(titleCard,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 17)),
-              ),
+              titleCard.isEmpty
+                  ? const SizedBox(height: 0)
+                  : Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(titleCard,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 17)),
+                    ),
               subTitleCard1.isEmpty
                   ? const SizedBox(height: 0)
                   : ListTile(
@@ -51,7 +57,7 @@ class CustomCardType2 extends StatelessWidget {
                               style: const TextStyle(
                                   fontSize: 15, color: Colors.black)),
                     ),
-              column1,
+              Center(child: column1),
               subTitleCard2.isEmpty
                   ? const SizedBox(height: 10)
                   : ListTile(
@@ -72,6 +78,16 @@ class CustomCardType2 extends StatelessWidget {
                                   fontSize: 15, color: Colors.black)),
                     ),
               Center(child: column3),
+              subTitleCard4.isEmpty
+                  ? const SizedBox(height: 0)
+                  : ListTile(
+                      title: subTitleCard4.isEmpty
+                          ? null
+                          : Text(subTitleCard4,
+                              style: const TextStyle(
+                                  fontSize: 15, color: Colors.black)),
+                    ),
+              Center(child: column4),
             ],
           ),
         ),
