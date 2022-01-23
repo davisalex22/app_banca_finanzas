@@ -1,12 +1,14 @@
-import 'package:app_banca_finanzas/widgets/bottom_navigation_bar.dart';
+import 'package:app_banca_finanzas/services/services.dart';
 import 'package:app_banca_finanzas/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context, listen: false);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(0.0),

@@ -6,3 +6,5 @@ export 'package:app_banca_finanzas/widgets/custom_input_field.dart';
 export 'package:app_banca_finanzas/widgets/custom_dropdown_button.dart';
 export 'package:app_banca_finanzas/widgets/custom_alert.dart';
 export 'package:app_banca_finanzas/widgets/bottom_navigation_bar.dart';
+export 'package:app_banca_finanzas/widgets/auth_background.dart';
+export 'package:app_banca_finanzas/widgets/card_container.dart';

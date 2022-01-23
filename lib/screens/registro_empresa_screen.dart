@@ -1,11 +1,15 @@
+import 'package:app_banca_finanzas/services/services.dart';
 import 'package:app_banca_finanzas/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RegistroEmpresaScreen extends StatelessWidget {
   const RegistroEmpresaScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final empresasService = Provider.of<EmpresasService>(context);
+
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(0.0),
