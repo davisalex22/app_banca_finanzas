@@ -45,62 +45,39 @@ class FormEmpresa extends StatelessWidget {
         child: Column(
           children: [
             const MainHeader(
-              titlePage: 'Registro Empresa',
+              titlePage: 'Registrar empresa',
             ),
             CustomCardType2(
-              titleCard: '1. Generales de la Empresa',
+              titleCard: '1. Información general',
               column1: Column(
                 children: [
                   CustomInputField(
-                    initialValue: registroEmp.empresaNombre,
                     onChangedValue: (value) =>
                         registroEmp.empresaNombre = value,
                     labelText: 'Nombre',
                     hintText: 'Nombre',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                   CustomInputField(
-                    initialValue: registroEmp.empresaDireccion,
                     onChangedValue: (value) =>
                         registroEmp.empresaDireccion = value,
                     labelText: 'Dirección',
                     hintText: 'Dirección',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                   CustomInputField(
-                    initialValue: registroEmp.empresaTelefono,
                     onChangedValue: (value) =>
                         registroEmp.empresaTelefono = value,
-                    labelText: 'Teléfono',
-                    hintText: 'Teléfono',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
+                    labelText: 'Correo, teléfono, etc',
+                    hintText: 'Contactos',
                   ),
                   CustomInputField(
-                    initialValue: registroEmp.empresaDomicilioFiscal,
+                    onChangedValue: (value) => registroEmp.empresaRfc = value,
+                    labelText: 'R.F.C',
+                    hintText: 'R.F.C',
+                  ),
+                  CustomInputField(
                     onChangedValue: (value) =>
                         registroEmp.empresaDomicilioFiscal = value,
-                    labelText: 'Domicilio Fiscal',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
+                    labelText: 'Domicilio fiscal',
                   ),
                 ],
               ),
@@ -110,7 +87,6 @@ class FormEmpresa extends StatelessWidget {
               column1: Column(
                 children: [
                   CustomInputField(
-                    initialValue: '${registroEmp.empresaAniosAntiguedad}',
                     onChangedValue: (value) {
                       if (int.tryParse(value) == null) {
                         registroEmp.empresaAniosAntiguedad = 0;
@@ -121,69 +97,39 @@ class FormEmpresa extends StatelessWidget {
                     keyboardType: TextInputType.number,
                     labelText: 'Años de la Empresa',
                     hintText: 'Años de la Empresa',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                 ],
               ),
             ),
             CustomCardType2(
               titleCard: '3. Estatus legal de la Empresa',
-              subTitleCard1: '3.1 Persona física',
               column1: Column(
                 children: [
                   CustomInputField(
-                    initialValue: registroEmp.empEstLegalPersonaFisica,
                     onChangedValue: (value) =>
                         registroEmp.empEstLegalPersonaFisica = value,
                     labelText: 'Persona física',
                     hintText: 'Persona física',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                 ],
               ),
-              subTitleCard2: '3.2 Persona moral',
               column2: Column(
                 children: [
                   CustomInputField(
-                    initialValue: registroEmp.empEstLegalPersonaMoral,
                     onChangedValue: (value) =>
                         registroEmp.empEstLegalPersonaMoral = value,
                     labelText: 'Persona moral',
                     hintText: 'Persona moral',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                 ],
               ),
-              subTitleCard3: '3.3 Persona no registrada',
               column3: Column(
                 children: [
                   CustomInputField(
-                    initialValue: registroEmp.empEstLegalNoRegistrada,
                     onChangedValue: (value) =>
                         registroEmp.empEstLegalNoRegistrada = value,
                     labelText: 'Persona no registrada',
                     hintText: 'Persona no registrada',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                   const SizedBox(height: 10),
                 ],
@@ -194,7 +140,6 @@ class FormEmpresa extends StatelessWidget {
               column1: Column(
                 children: [
                   CustomInputField(
-                    initialValue: registroEmp.empEstatusFiscal,
                     onChangedValue: (value) =>
                         registroEmp.empEstatusFiscal = value,
                     minLines: 3,
@@ -202,12 +147,6 @@ class FormEmpresa extends StatelessWidget {
                     keyboardType: TextInputType.multiline,
                     labelText: 'Estatus fiscal de la Empresa',
                     hintText: 'Estatus fiscal de la Empresa',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                 ],
               ),
@@ -218,7 +157,6 @@ class FormEmpresa extends StatelessWidget {
               column1: Column(
                 children: [
                   CustomInputField(
-                    initialValue: '${registroEmp.empTamNumEmpOperativos}',
                     onChangedValue: (value) {
                       if (int.tryParse(value) == null) {
                         registroEmp.empTamNumEmpOperativos = 0;
@@ -229,15 +167,8 @@ class FormEmpresa extends StatelessWidget {
                     keyboardType: TextInputType.number,
                     labelText: 'Operativos',
                     hintText: 'Operativos',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                   CustomInputField(
-                    initialValue: '${registroEmp.empTamNumEmpAdministrativos}',
                     onChangedValue: (value) {
                       if (int.tryParse(value) == null) {
                         registroEmp.empTamNumEmpAdministrativos = 0;
@@ -249,15 +180,8 @@ class FormEmpresa extends StatelessWidget {
                     keyboardType: TextInputType.number,
                     labelText: 'Administrativos',
                     hintText: 'Administrativos',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                   CustomInputField(
-                    initialValue: '${registroEmp.empTamNumEmpOtros}',
                     onChangedValue: (value) {
                       if (int.tryParse(value) == null) {
                         registroEmp.empTamNumEmpOtros = 0;
@@ -268,15 +192,8 @@ class FormEmpresa extends StatelessWidget {
                     keyboardType: TextInputType.number,
                     labelText: 'Otros',
                     hintText: 'Otros',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                   CustomInputField(
-                    initialValue: '${registroEmp.empTamNumEmpTotal}',
                     onChangedValue: (value) {
                       if (int.tryParse(value) == null) {
                         registroEmp.empTamNumEmpTotal = 0;
@@ -287,15 +204,8 @@ class FormEmpresa extends StatelessWidget {
                     keyboardType: TextInputType.number,
                     labelText: 'Total',
                     hintText: 'Total',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                   CustomInputField(
-                    initialValue: registroEmp.empTamNumEmpComentarios,
                     onChangedValue: (value) =>
                         registroEmp.empTamNumEmpComentarios = value,
                     minLines: 3,
@@ -303,12 +213,6 @@ class FormEmpresa extends StatelessWidget {
                     keyboardType: TextInputType.multiline,
                     labelText: 'Comentarios',
                     hintText: 'Comentarios',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                 ],
               ),
@@ -316,7 +220,6 @@ class FormEmpresa extends StatelessWidget {
               column2: Column(
                 children: [
                   CustomInputField(
-                    initialValue: '${registroEmp.empVentasDiarias}',
                     onChangedValue: (value) {
                       if (int.tryParse(value) == null) {
                         registroEmp.empVentasDiarias = 0;
@@ -326,15 +229,8 @@ class FormEmpresa extends StatelessWidget {
                     },
                     labelText: 'Diarias',
                     hintText: 'Diarias',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                   CustomInputField(
-                    initialValue: '${registroEmp.empVentasSemanales}',
                     onChangedValue: (value) {
                       if (int.tryParse(value) == null) {
                         registroEmp.empVentasSemanales = 0;
@@ -344,15 +240,8 @@ class FormEmpresa extends StatelessWidget {
                     },
                     labelText: 'Semanales',
                     hintText: 'Semanales',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                   CustomInputField(
-                    initialValue: '${registroEmp.empVentasMensuales}',
                     onChangedValue: (value) {
                       if (int.tryParse(value) == null) {
                         registroEmp.empVentasMensuales = 0;
@@ -361,13 +250,7 @@ class FormEmpresa extends StatelessWidget {
                       }
                     },
                     labelText: 'Mensuales',
-                    hintText: 'Menusales',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
+                    hintText: 'Mensusales',
                   ),
                 ],
               ),
@@ -375,7 +258,6 @@ class FormEmpresa extends StatelessWidget {
               column3: Column(
                 children: [
                   CustomInputField(
-                    initialValue: '${registroEmp.empValActivosTerreno}',
                     onChangedValue: (value) {
                       if (int.tryParse(value) == null) {
                         registroEmp.empValActivosTerreno = 0;
@@ -385,15 +267,8 @@ class FormEmpresa extends StatelessWidget {
                     },
                     labelText: 'Terreno',
                     hintText: 'Terreno',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                   CustomInputField(
-                    initialValue: '${registroEmp.empValActivosBienes}',
                     onChangedValue: (value) {
                       if (int.tryParse(value) == null) {
                         registroEmp.empValActivosBienes = 0;
@@ -404,15 +279,8 @@ class FormEmpresa extends StatelessWidget {
                     keyboardType: TextInputType.number,
                     labelText: 'Bienes',
                     hintText: 'Bienes',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                   CustomInputField(
-                    initialValue: '${registroEmp.empValActivosOtros}',
                     onChangedValue: (value) {
                       if (int.tryParse(value) == null) {
                         registroEmp.empValActivosOtros = 0;
@@ -422,12 +290,6 @@ class FormEmpresa extends StatelessWidget {
                     },
                     labelText: 'Otros',
                     hintText: 'Otros',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                 ],
               ),
@@ -435,7 +297,6 @@ class FormEmpresa extends StatelessWidget {
               column4: Column(
                 children: [
                   CustomInputField(
-                    initialValue: '${registroEmp.empCalculosVentasActivos}',
                     onChangedValue: (value) {
                       if (int.tryParse(value) == null) {
                         registroEmp.empCalculosVentasActivos = 0;
@@ -445,15 +306,8 @@ class FormEmpresa extends StatelessWidget {
                     },
                     labelText: 'Ventas / Empleados',
                     hintText: 'Ventas / Empleados',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                   CustomInputField(
-                    initialValue: '${registroEmp.empCalculosVentasActivos}',
                     onChangedValue: (value) {
                       if (int.tryParse(value) == null) {
                         registroEmp.empCalculosVentasActivos = 0;
@@ -463,13 +317,7 @@ class FormEmpresa extends StatelessWidget {
                     },
                     keyboardType: TextInputType.number,
                     labelText: 'Ventas / Activos',
-                    hintText: 'Venatas / Activos',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
+                    hintText: 'Ventas / Activos',
                   ),
                   const SizedBox(height: 10),
                 ],
@@ -477,57 +325,33 @@ class FormEmpresa extends StatelessWidget {
             ),
             CustomCardType2(
               titleCard: '6. Cobertura de mercado de la empresa',
-              subTitleCard1: '6.1 Local',
               column1: Column(
                 children: [
                   CustomInputField(
-                    initialValue: registroEmp.empCobMercadoLocal,
                     onChangedValue: (value) =>
                         registroEmp.empCobMercadoLocal = value,
                     labelText: 'Local',
                     hintText: 'Local',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                 ],
               ),
-              subTitleCard2: '6.2 Regional',
               column2: Column(
                 children: [
                   CustomInputField(
-                    initialValue: registroEmp.empCobMercadoRegional,
                     onChangedValue: (value) =>
                         registroEmp.empCobMercadoRegional = value,
                     labelText: 'Regional',
                     hintText: 'Regional',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                 ],
               ),
-              subTitleCard3: '6.3 Internacional',
               column3: Column(
                 children: [
                   CustomInputField(
-                    initialValue: registroEmp.empCobMercadoInternacional,
                     onChangedValue: (value) =>
                         registroEmp.empCobMercadoInternacional = value,
                     labelText: 'Internacional',
                     hintText: 'Internacional',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                   const SizedBox(height: 10),
                 ],
@@ -535,11 +359,9 @@ class FormEmpresa extends StatelessWidget {
             ),
             CustomCardType2(
               titleCard: '7. Visión de la empresa',
-              subTitleCard1: '7.1 Corto plazo',
               column1: Column(
                 children: [
                   CustomInputField(
-                    initialValue: registroEmp.empVisionCortoPlazo,
                     onChangedValue: (value) =>
                         registroEmp.empVisionCortoPlazo = value,
                     minLines: 3,
@@ -547,20 +369,12 @@ class FormEmpresa extends StatelessWidget {
                     keyboardType: TextInputType.multiline,
                     labelText: 'Corto plazo',
                     hintText: 'Corto plazo',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                 ],
               ),
-              subTitleCard2: '7.2 Largo plazo',
               column2: Column(
                 children: [
                   CustomInputField(
-                    initialValue: registroEmp.empVisionLargoPlazo,
                     onChangedValue: (value) =>
                         registroEmp.empVisionLargoPlazo = value,
                     minLines: 3,
@@ -568,12 +382,6 @@ class FormEmpresa extends StatelessWidget {
                     keyboardType: TextInputType.multiline,
                     labelText: 'Largo plazo',
                     hintText: 'Largo plazo',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
                   ),
                   const SizedBox(height: 10),
                 ],
@@ -581,26 +389,19 @@ class FormEmpresa extends StatelessWidget {
             ),
             CustomCardType2(
               titleCard:
-                  '8. Comentario Ejecutivo de antecedendes de la empresa',
+                  '8. Comentario ejecutivo de antecedendes de la empresa',
               column1: Column(
                 children: [
                   CustomInputField(
-                    initialValue: registroEmp.empComentarioEjecutivo,
                     onChangedValue: (value) =>
                         registroEmp.empComentarioEjecutivo = value,
                     minLines: 4,
                     maxLines: null,
                     keyboardType: TextInputType.multiline,
                     labelText:
-                        'Comentario Ejecutivo de antecedendes de la empresa',
+                        'Comentario ejecutivo de antecedendes de la empresa',
                     hintText:
-                        'Comentario Ejecutivo de antecedendes de la empresa',
-                    validatorValue: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'El nombre es obligatorio';
-                      }
-                      return '';
-                    },
+                        'Comentario ejecutivo de antecedendes de la empresa',
                   ),
                 ],
               ),
@@ -615,7 +416,6 @@ class FormEmpresa extends StatelessWidget {
                 child: const Text('Guardar BD'),
                 onPressed: () async {
                   if (!empresaForm.isValidForm()) return;
-
                   await empresasService.createEmpresa(empresaForm.empresa);
                 }),
           ],
