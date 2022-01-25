@@ -10,7 +10,9 @@ class CustomInputField extends StatelessWidget {
   final bool obscureText;
   final int? minLines;
   final int? maxLines;
-
+  final String? initialValue;
+  final Function(String) onChangedValue;
+  final String Function(String?)? validatorValue;
   // final String formProperty;
   //final Map<String, String> formValues;
 
@@ -25,6 +27,9 @@ class CustomInputField extends StatelessWidget {
     this.obscureText = false,
     this.minLines,
     this.maxLines,
+    required this.initialValue,
+    required this.onChangedValue,
+    required this.validatorValue,
     //required this.formProperty,
     //required this.formValues,
   }) : super(key: key);
@@ -34,19 +39,14 @@ class CustomInputField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
       child: TextFormField(
-        initialValue: '',
+        initialValue: initialValue,
+        onChanged: onChangedValue,
         textCapitalization: TextCapitalization.words,
         keyboardType: keyboardType,
         obscureText: obscureText,
         minLines: minLines,
         maxLines: maxLines,
-        // onChanged: (value) => formValues[formProperty] = value,
-        validator: (value) {
-          if (value == null) {
-            return 'Este campo es requerido';
-          }
-          return value.length < 3 ? 'Mínimo de 3 letras' : null;
-        },
+        validator: validatorValue,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
           labelText: hintText,

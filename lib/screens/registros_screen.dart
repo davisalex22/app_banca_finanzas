@@ -18,7 +18,7 @@ class RegistrosScreen extends StatelessWidget {
       body: Column(
         children: [
           const MainHeader(titlePage: 'Registros'),
-          CustomCardType2(),
+          const CustomCardType2(),
           Expanded(
             child: ListView(
               children: [

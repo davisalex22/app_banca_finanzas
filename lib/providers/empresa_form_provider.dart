@@ -5,7 +5,6 @@ class EmpresaFormProvider extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   Empresa empresa;
-
   EmpresaFormProvider(this.empresa);
 
   bool isValidForm() {

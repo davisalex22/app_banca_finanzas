@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
         home: const SplashScreen(),
         // initialRoute: AppRoutes.initialRoute,
         routes: AppRoutes.routes,
+        scaffoldMessengerKey: NotificationsService.messengerKey,
         // onGenerateRoute: AppRoutes.onGenerateRoute,
         theme: AppTheme.lightTheme);
   }
