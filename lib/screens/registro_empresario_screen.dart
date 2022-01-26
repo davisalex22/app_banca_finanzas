@@ -438,19 +438,6 @@ class FormEmpresario extends StatelessWidget {
               ),
             ),
             */
-            const Padding(
-              padding: EdgeInsets.all(10.0),
-              child: CustomAlert(
-                  titleAlert: 'Información',
-                  contentAlert: 'Información guardada con éxito'),
-            ),
-            ElevatedButton(
-                child: const Text('Guardar BD'),
-                onPressed: () async {
-                  if (!empresarioForm.isValidForm()) return;
-                  await empresariosService
-                      .createEmpresario(empresarioForm.empresario);
-                }),
           ],
         ),
       ),

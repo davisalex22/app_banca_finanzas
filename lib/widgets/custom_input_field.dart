@@ -10,6 +10,7 @@ class CustomInputField extends StatelessWidget {
   final bool obscureText;
   final int? minLines;
   final int? maxLines;
+  final String? initialValue;
   final Function(String) onChangedValue;
   // final String formProperty;
   //final Map<String, String> formValues;
@@ -26,6 +27,7 @@ class CustomInputField extends StatelessWidget {
     this.minLines,
     this.maxLines,
     required this.onChangedValue,
+    this.initialValue,
     //required this.formProperty,
     //required this.formValues,
   }) : super(key: key);
@@ -35,6 +37,7 @@ class CustomInputField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
       child: TextFormField(
+        initialValue: initialValue,
         onChanged: onChangedValue,
         textCapitalization: TextCapitalization.words,
         keyboardType: keyboardType,

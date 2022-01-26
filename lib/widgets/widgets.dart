@@ -8,3 +8,5 @@ export 'package:app_banca_finanzas/widgets/custom_alert.dart';
 export 'package:app_banca_finanzas/widgets/bottom_navigation_bar.dart';
 export 'package:app_banca_finanzas/widgets/auth_background.dart';
 export 'package:app_banca_finanzas/widgets/card_container.dart';
+export 'package:app_banca_finanzas/widgets/custom_card_type_3.dart';
+export 'package:app_banca_finanzas/widgets/custom_card_type_4.dart';

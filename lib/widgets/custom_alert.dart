@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 class CustomAlert extends StatelessWidget {
   final String titleAlert;
   final String contentAlert;
+  final Function()? onPressedValue;
   const CustomAlert({
     Key? key,
     required this.titleAlert,
     required this.contentAlert,
+    required this.onPressedValue,
   }) : super(key: key);
   void displayDialogIOS(BuildContext context) {
     showCupertinoDialog(
@@ -22,6 +24,7 @@ class CustomAlert extends StatelessWidget {
             TextButton(
                 child: const Text('Cerrar'),
                 onPressed: () => Navigator.of(context).pop()),
+            TextButton(child: const Text('Guardar'), onPressed: onPressedValue),
           ],
         );
       },
@@ -43,6 +46,7 @@ class CustomAlert extends StatelessWidget {
             TextButton(
                 child: const Text('Cerrar'),
                 onPressed: () => Navigator.of(context).pop()),
+            TextButton(child: const Text('Guardar'), onPressed: onPressedValue),
           ],
         );
       },

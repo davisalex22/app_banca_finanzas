@@ -30,14 +30,14 @@ class HomeScreen extends StatelessWidget {
                 iconCard: Icons.arrow_forward_ios,
                 titleCard: 'Registrar Empresario',
                 logoCard: 'assets/images/logo_empresario.png',
-                routePage: '/registroEmpresario',
+                routePage: '/empresario',
               ),
               SizedBox(height: 20.0),
               CustomCardType1(
                 iconCard: Icons.arrow_forward_ios,
                 titleCard: 'Registrar Empresa',
                 logoCard: 'assets/images/logo_empresa.png',
-                routePage: '/registroEmpresa',
+                routePage: '/empresa',
               ),
               SizedBox(height: 20.0),
               CustomCardType1(
