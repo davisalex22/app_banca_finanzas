@@ -6,440 +6,661 @@ import 'package:provider/provider.dart';
 
 class RegistroEmpresarioScreen extends StatelessWidget {
   const RegistroEmpresarioScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    final empresariosService = Provider.of<EmpresariosService>(context);
+    final empresarioService = Provider.of<EmpresariosService>(context);
 
-    return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(0.0),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            elevation: 0, // hides leading widget
-          )),
-      body: ChangeNotifierProvider(
-          create: (_) =>
-              EmpresarioFormProvider(empresariosService.selectedEmpresario),
-          child: FormEmpresario(
-            empresariosService: empresariosService,
-          )),
-      bottomNavigationBar: const CustomNavigationBar(),
+    return ChangeNotifierProvider(
+      create: (_) =>
+          EmpresarioFormProvider(empresarioService.selectedEmpresario),
+      child: _EmpresarioScreenBody(empresarioService: empresarioService),
     );
   }
 }
 
-class FormEmpresario extends StatelessWidget {
-  const FormEmpresario({
+class _EmpresarioScreenBody extends StatelessWidget {
+  const _EmpresarioScreenBody({
     Key? key,
-    required this.empresariosService,
+    required this.empresarioService,
   }) : super(key: key);
-  final EmpresariosService empresariosService;
+
+  final EmpresariosService empresarioService;
+
+  @override
+  Widget build(BuildContext context) {
+    final empresarioForm = Provider.of<EmpresarioFormProvider>(context);
+
+    return Scaffold(
+      body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: Column(
+          children: [
+            _EmpresarioForm(),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CustomAlert(
+                titleAlert: 'Información',
+                contentAlert: '¿Desea guardar los cambios?',
+                onPressedValue: empresarioService.isSaving
+                    ? null
+                    : () async {
+                        const text = 'Información guardada correctamente';
+                        const snackBar = SnackBar(
+                          content: Text(text),
+                          duration: Duration(seconds: 2),
+                        );
+
+                        if (!empresarioForm.isValidForm()) return;
+
+                        // final String? imageUrl = await productService.uploadImage();
+
+                        // if (imageUrl != null) productForm.product.picture = imageUrl;
+                        Navigator.of(context).pop();
+
+                        await empresarioService
+                            .saveOrCreateProduct(empresarioForm.empresario);
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _EmpresarioForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final empresarioForm = Provider.of<EmpresarioFormProvider>(context);
     final registroEmp = empresarioForm.empresario;
-    return SingleChildScrollView(
-      child: Form(
-        key: empresarioForm.formKey,
-        child: Column(
-          children: [
-            const MainHeader(
-              titlePage: 'Registrar empresario',
+
+    return Form(
+      key: empresarioForm.formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: Column(
+        children: [
+          const MainHeader(
+            titlePage: 'Registrar empresario',
+          ),
+          CustomCardType2(
+            titleCard: '1. Generales',
+            column1: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.empresarioNombre,
+                  onChangedValue: (value) =>
+                      registroEmp.empresarioNombre = value,
+                  labelText: 'Nombre',
+                  hintText: 'Nombre',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.empresarioDireccion,
+                  onChangedValue: (value) =>
+                      registroEmp.empresarioDireccion = value,
+                  labelText: 'Dirección',
+                  hintText: 'Dirección',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.empresarioTelefono,
+                  onChangedValue: (value) =>
+                      registroEmp.empresarioTelefono = value,
+                  labelText: 'Teléfono',
+                  hintText: 'Teléfono',
+                ),
+              ],
             ),
-            /*
-            CustomCardType2(
-              titleCard: '1. Generales',
-              column1: Column(
-                children: const [
-                  CustomInputField(
-                    labelText: 'Nombre',
-                    hintText: 'Nombre',
-                  ),
-                  CustomInputField(
-                    labelText: 'Dirección',
-                    hintText: 'Dirección',
-                  ),
-                  CustomInputField(
-                    labelText: 'Teléfono',
-                    hintText: 'Teléfono',
-                  ),
-                ],
-              ),
+          ),
+          CustomCardType2(
+            titleCard: '2. Antecedentes del empresarioriorio',
+            subTitleCard1: '2.1 El empresarioriorio',
+            column1: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.empresarioOriginario,
+                  onChangedValue: (value) =>
+                      registroEmp.empresarioOriginario = value,
+                  labelText: 'Originario',
+                  hintText: 'Originario',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.empresarioLugar,
+                  onChangedValue: (value) =>
+                      registroEmp.empresarioLugar = value,
+                  labelText: 'Lugar',
+                  hintText: 'Lugar',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.empresarioEdad,
+                  onChangedValue: (value) => registroEmp.empresarioEdad = value,
+                  keyboardType: TextInputType.number,
+                  labelText: 'Edad',
+                  hintText: 'Edad',
+                ),
+                // CustomDropDownButtom(
+                //   hintText: 'Estado civil',
+                //   labelText: 'Estado civil',
+                //   formValues: formValues,
+                //   listMenu: const [
+                //     "Solotero/a",
+                //     "Casado/a",
+                //     "Divorciado/a",
+                //     "Viudo/a"
+                //   ],
+                // ),
+                CustomInputField(
+                  initialValue: registroEmp.empresarioOcupacion,
+                  onChangedValue: (value) =>
+                      registroEmp.empresarioOcupacion = value,
+                  labelText: 'Ocupación',
+                  hintText: 'Ocupación',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.empresarioEscolaridad,
+                  onChangedValue: (value) =>
+                      registroEmp.empresarioEscolaridad = value,
+                  labelText: 'Escolaridad',
+                  hintText: 'Escolaridad',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.empresarioEstadoSalud,
+                  onChangedValue: (value) =>
+                      registroEmp.empresarioEstadoSalud = value,
+                  labelText: 'Estado de salud',
+                  hintText: 'Estado de salud',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.empresarioComentario,
+                  onChangedValue: (value) =>
+                      registroEmp.empresarioComentario = value,
+                  minLines: 3,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  labelText: 'Comentarios del Empresario',
+                  hintText: 'Comentarios del Empresariorio',
+                ),
+              ],
             ),
-            CustomCardType2(
-              titleCard: '2. Antecedentes del empresarioriorio',
-              subTitleCard1: '2.1 El empresarioriorio',
-              column1: Column(
-                children: [
-                  const CustomInputField(
-                    labelText: 'Originario',
-                    hintText: 'Originario',
-                  ),
-                  const CustomInputField(
-                    labelText: 'Lugar',
-                    hintText: 'Lugar',
-                  ),
-                  const CustomInputField(
-                    keyboardType: TextInputType.number,
-                    labelText: 'Edad',
-                    hintText: 'Edad',
-                  ),
-                  CustomDropDownButtom(
-                    hintText: 'Estado civil',
-                    labelText: 'Estado civil',
-                    formValues: formValues,
-                    listMenu: const [
-                      "Solotero/a",
-                      "Casado/a",
-                      "Divorciado/a",
-                      "Viudo/a"
-                    ],
-                  ),
-                  const CustomInputField(
-                    labelText: 'Ocupación',
-                    hintText: 'Ocupación',
-                  ),
-                  const CustomInputField(
-                    labelText: 'Escolaridad',
-                    hintText: 'Escolaridad',
-                  ),
-                  const CustomInputField(
-                    labelText: 'Estado de salud',
-                    hintText: 'Estado de salud',
-                  ),
-                  const CustomInputField(
-                    minLines: 3,
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    labelText: 'Comentarios del Empresarioriorio',
-                    hintText: 'Comentarios del Empresarioriorio',
-                  ),
-                ],
-              ),
-              subTitleCard2: '2.2 Los padres',
-              column2: Column(
-                children: const [
-                  CustomInputField(
-                    labelText: 'Nombres',
-                    hintText: 'Nombres',
-                  ),
-                  CustomInputField(
-                    labelText: 'Originarios',
-                    hintText: 'Originarios',
-                  ),
-                  CustomInputField(
-                    labelText: 'Viven',
-                    hintText: 'Viven',
-                  ),
-                  CustomInputField(
-                    labelText: 'Lugar',
-                    hintText: 'Lugar',
-                  ),
-                  CustomInputField(
-                    keyboardType: TextInputType.number,
-                    labelText: 'Edad',
-                    hintText: 'Edad',
-                  ),
-                  CustomInputField(
-                    labelText: 'Ocupación',
-                    hintText: 'Ocupación',
-                  ),
-                  CustomInputField(
-                    labelText: 'Escolaridad',
-                    hintText: 'Estado de salud',
-                  ),
-                  CustomInputField(
-                    minLines: 3,
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    labelText: 'Comentarios de los padres',
-                    hintText: 'Comentarios de los padres',
-                  ),
-                ],
-              ),
-              subTitleCard3: '2.3 Número de hermanos nacidos',
-              column3: Column(
-                children: const [
-                  CustomInputField(
-                    labelText: 'Nombres',
-                    hintText: 'Nombres',
-                  ),
-                  CustomInputField(
-                    keyboardType: TextInputType.number,
-                    labelText: 'Edad',
-                    hintText: 'Edad',
-                  ),
-                  CustomInputField(
-                    labelText: 'Ocupación',
-                    hintText: 'Ocupación',
-                  ),
-                  CustomInputField(
-                    labelText: 'Lugar dentro de sus hermanos',
-                    hintText: 'Lugar dentro de sus hermanos',
-                  ),
-                  SizedBox(height: 10),
-                ],
-              ),
+            subTitleCard2: '2.2 Los padres',
+            column2: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.emprPadresNombres,
+                  onChangedValue: (value) =>
+                      registroEmp.emprPadresNombres = value,
+                  labelText: 'Nombres',
+                  hintText: 'Nombres',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprPadresOriginarios,
+                  onChangedValue: (value) =>
+                      registroEmp.emprPadresOriginarios = value,
+                  labelText: 'Originarios',
+                  hintText: 'Originarios',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprPadresViven,
+                  onChangedValue: (value) =>
+                      registroEmp.emprPadresViven = value,
+                  labelText: 'Viven',
+                  hintText: 'Viven',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprPadresLugar,
+                  onChangedValue: (value) =>
+                      registroEmp.emprPadresLugar = value,
+                  labelText: 'Lugar',
+                  hintText: 'Lugar',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprPadresEdad,
+                  onChangedValue: (value) => registroEmp.emprPadresEdad = value,
+                  keyboardType: TextInputType.number,
+                  labelText: 'Edad',
+                  hintText: 'Edad',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprPadresOcupacion,
+                  onChangedValue: (value) =>
+                      registroEmp.emprPadresOcupacion = value,
+                  labelText: 'Ocupación',
+                  hintText: 'Ocupación',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprPadresEscolaridad,
+                  onChangedValue: (value) =>
+                      registroEmp.emprPadresEscolaridad = value,
+                  labelText: 'Escolaridad',
+                  hintText: 'Escolaridad',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprPadresEstadoSalud,
+                  onChangedValue: (value) =>
+                      registroEmp.emprPadresEstadoSalud = value,
+                  labelText: 'Escolaridad',
+                  hintText: 'Escolaridad',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprPadresComentario,
+                  onChangedValue: (value) =>
+                      registroEmp.emprPadresComentario = value,
+                  minLines: 3,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  labelText: 'Comentarios de los padres',
+                  hintText: 'Comentarios de los padres',
+                ),
+              ],
             ),
-            CustomCardType2(
-              titleCard: '3. Antecedentes de la pareja',
-              subTitleCard1: '3.1 La pareja',
-              column1: Column(
-                children: const [
-                  CustomInputField(
-                    labelText: 'Nombre',
-                    hintText: 'Nombre',
-                  ),
-                  CustomInputField(
-                    labelText: 'Originaria',
-                    hintText: 'Originaria',
-                  ),
-                  CustomInputField(
-                    labelText: 'Vive',
-                    hintText: 'Vive',
-                  ),
-                  CustomInputField(
-                    labelText: 'En que Lugar',
-                    hintText: 'En que Lugar',
-                  ),
-                  CustomInputField(
-                    keyboardType: TextInputType.number,
-                    labelText: 'Edad',
-                    hintText: 'Edad',
-                  ),
-                  CustomInputField(
-                    labelText: 'Estado de salud',
-                    hintText: 'Estado de salud',
-                  ),
-                  CustomInputField(
-                    labelText: 'Ocupación',
-                    hintText: 'Ocupación',
-                  ),
-                  CustomInputField(
-                    labelText: 'Escolaridad',
-                    hintText: 'Escolaridad',
-                  ),
-                  CustomInputField(
-                    minLines: 3,
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    labelText: 'Comentarios de la pareja',
-                    hintText: 'Comentarios de la pareja',
-                  ),
-                ],
-              ),
-              subTitleCard2: '3.2 Los suegros',
-              column2: Column(
-                children: const [
-                  CustomInputField(
-                    labelText: 'Nombre',
-                    hintText: 'Nombre',
-                  ),
-                  CustomInputField(
-                    labelText: 'Originarios',
-                    hintText: 'Originarios',
-                  ),
-                  CustomInputField(
-                    labelText: 'Viven',
-                    hintText: 'Viven',
-                  ),
-                  CustomInputField(
-                    labelText: 'En que Lugar',
-                    hintText: 'En que Lugar',
-                  ),
-                  CustomInputField(
-                    keyboardType: TextInputType.number,
-                    labelText: 'Edad',
-                    hintText: 'Edad',
-                  ),
-                  CustomInputField(
-                    labelText: 'Estado de salud',
-                    hintText: 'Estado de salud',
-                  ),
-                  CustomInputField(
-                    labelText: 'Ocupación',
-                    hintText: 'Ocupación',
-                  ),
-                  CustomInputField(
-                    labelText: 'Escolaridad',
-                    hintText: 'Escolaridad',
-                  ),
-                  CustomInputField(
-                    minLines: 3,
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    labelText: 'Comentarios de los suegros',
-                    hintText: 'Comentarios de los suegros',
-                  ),
-                ],
-              ),
-              subTitleCard3: '3.3 Número de cuñados',
-              column3: Column(
-                children: const [
-                  CustomInputField(
-                    labelText: 'Nombres',
-                    hintText: 'Nombres',
-                  ),
-                  CustomInputField(
-                    keyboardType: TextInputType.number,
-                    labelText: 'Edad',
-                    hintText: 'Edad',
-                  ),
-                  CustomInputField(
-                    labelText: 'Ocupación',
-                    hintText: 'Ocupación',
-                  ),
-                  CustomInputField(
-                    labelText: 'Lugar dentro de sus hermanos',
-                    hintText: 'Lugar dentro de sus hermanos',
-                  ),
-                  SizedBox(height: 8),
-                ],
-              ),
+            subTitleCard3: '2.3 Número de hermanos nacidos',
+            column3: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.emprHermanosNombres,
+                  onChangedValue: (value) =>
+                      registroEmp.emprHermanosNombres = value,
+                  labelText: 'Nombres',
+                  hintText: 'Nombres',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprHermanosEdad,
+                  onChangedValue: (value) =>
+                      registroEmp.emprHermanosEdad = value,
+                  labelText: 'Edad',
+                  hintText: 'Edad',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprHermanosOcupacion,
+                  onChangedValue: (value) =>
+                      registroEmp.emprHermanosOcupacion = value,
+                  labelText: 'Ocupación',
+                  hintText: 'Ocupación',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprHermanosLugarHermanos,
+                  onChangedValue: (value) =>
+                      registroEmp.emprHermanosLugarHermanos = value,
+                  labelText: 'Lugar dentro de sus hermanos',
+                  hintText: 'Lugar dentro de sus hermanos',
+                ),
+                const SizedBox(height: 10),
+              ],
             ),
-            CustomCardType2(
-              titleCard: '4. El matrimonio',
-              subTitleCard1: '4.1 Años de Casado',
-              column1: Column(
-                children: const [
-                  CustomInputField(
-                    keyboardType: TextInputType.number,
-                    labelText: 'Años de Casado',
-                    hintText: 'Años de Casado',
-                  ),
-                ],
-              ),
-              subTitleCard2: '4.2 Situación afectiva del matrimonio',
-              column2: Column(
-                children: const [
-                  CustomInputField(
-                    labelText: 'Situación afectiva del matrimonio',
-                    hintText: 'Situación afectiva del matrimonio',
-                  ),
-                ],
-              ),
-              subTitleCard3: '4.3 Hijos',
-              column3: Column(
-                children: const [
-                  CustomInputField(
-                    keyboardType: TextInputType.number,
-                    labelText: 'Número de hijos',
-                    hintText: 'Número de hijos',
-                  ),
-                  CustomInputField(
-                    labelText: 'Edad',
-                    hintText: 'Edad',
-                  ),
-                  CustomInputField(
-                    labelText: 'Ocupación',
-                    hintText: 'Ocupación',
-                  ),
-                  CustomInputField(
-                    labelText: 'Escolaridad',
-                    hintText: 'Escolaridad',
-                  ),
-                  CustomInputField(
-                    labelText: 'Estado de salud',
-                    hintText: 'Estado de salud',
-                  ),
-                  SizedBox(height: 8),
-                ],
-              ),
+          ),
+          CustomCardType2(
+            titleCard: '3. Antecedentes de la pareja',
+            subTitleCard1: '3.1 La pareja',
+            column1: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.emprParejaNombre,
+                  onChangedValue: (value) =>
+                      registroEmp.emprParejaNombre = value,
+                  labelText: 'Nombre',
+                  hintText: 'Nombre',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprParejaOriginaria,
+                  onChangedValue: (value) =>
+                      registroEmp.emprParejaOriginaria = value,
+                  labelText: 'Originaria',
+                  hintText: 'Originaria',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprParejaVive,
+                  onChangedValue: (value) => registroEmp.emprParejaVive = value,
+                  labelText: 'Vive',
+                  hintText: 'Vive',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprParejaLugar,
+                  onChangedValue: (value) =>
+                      registroEmp.emprParejaLugar = value,
+                  labelText: 'En que Lugar',
+                  hintText: 'En que Lugar',
+                ),
+                CustomInputField(
+                  initialValue: '${registroEmp.emprParejaEdad}',
+                  onChangedValue: (value) {
+                    if (int.tryParse(value) == null) {
+                      registroEmp.emprParejaEdad = 0;
+                    } else {
+                      registroEmp.emprParejaEdad = int.parse(value);
+                    }
+                  },
+                  keyboardType: TextInputType.number,
+                  labelText: 'Edad',
+                  hintText: 'Edad',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprParejaEstadoSalud,
+                  onChangedValue: (value) =>
+                      registroEmp.emprParejaEstadoSalud = value,
+                  labelText: 'Estado de salud',
+                  hintText: 'Estado de salud',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprParejaOcupacion,
+                  onChangedValue: (value) =>
+                      registroEmp.emprParejaOcupacion = value,
+                  labelText: 'Ocupación',
+                  hintText: 'Ocupación',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprParejaEscolaridad,
+                  onChangedValue: (value) =>
+                      registroEmp.emprParejaEscolaridad = value,
+                  labelText: 'Escolaridad',
+                  hintText: 'Escolaridad',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprParejaComentario,
+                  onChangedValue: (value) =>
+                      registroEmp.emprParejaComentario = value,
+                  minLines: 3,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  labelText: 'Comentarios de la pareja',
+                  hintText: 'Comentarios de la pareja',
+                ),
+              ],
             ),
-            CustomCardType2(
-              titleCard: '5. Filosofía Y/O Carácter',
-              subTitleCard1: '5.1 Hobbies,Color,Personas',
-              column1: Column(
-                children: const [
-                  CustomInputField(
-                    labelText: 'Hobbies,Color,Personas',
-                    hintText: 'Hobbies,Color,Personas',
-                  ),
-                ],
-              ),
-              subTitleCard2: '5.2 Comentarios',
-              column2: Column(
-                children: const [
-                  CustomInputField(
-                    minLines: 3,
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    labelText: 'Comentarios',
-                    hintText: 'Comentarios',
-                  ),
-                  SizedBox(height: 8),
-                ],
-              ),
+            subTitleCard2: '3.2 Los suegros',
+            column2: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.emprSuegrosNombre,
+                  onChangedValue: (value) =>
+                      registroEmp.emprSuegrosNombre = value,
+                  labelText: 'Nombre',
+                  hintText: 'Nombre',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprSuegrosOriginarios,
+                  onChangedValue: (value) =>
+                      registroEmp.emprSuegrosOriginarios = value,
+                  labelText: 'Originarios',
+                  hintText: 'Originarios',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprSuegrosViven,
+                  onChangedValue: (value) =>
+                      registroEmp.emprSuegrosViven = value,
+                  labelText: 'Viven',
+                  hintText: 'Viven',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprSuegrosLugar,
+                  onChangedValue: (value) =>
+                      registroEmp.emprSuegrosLugar = value,
+                  labelText: 'En que Lugar',
+                  hintText: 'En que Lugar',
+                ),
+                CustomInputField(
+                  initialValue: '${registroEmp.emprSuegrosEdad}',
+                  onChangedValue: (value) =>
+                      registroEmp.emprSuegrosEdad = value,
+                  keyboardType: TextInputType.number,
+                  labelText: 'Edad',
+                  hintText: 'Edad',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprSuegrosEstadoSalud,
+                  onChangedValue: (value) =>
+                      registroEmp.emprSuegrosEstadoSalud = value,
+                  labelText: 'Estado de salud',
+                  hintText: 'Estado de salud',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprSuegrosOcupacion,
+                  onChangedValue: (value) =>
+                      registroEmp.emprSuegrosOcupacion = value,
+                  labelText: 'Ocupación',
+                  hintText: 'Ocupación',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprSuegrosEscolaridad,
+                  onChangedValue: (value) =>
+                      registroEmp.emprSuegrosEscolaridad = value,
+                  labelText: 'Escolaridad',
+                  hintText: 'Escolaridad',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprSuegrosComentario,
+                  onChangedValue: (value) =>
+                      registroEmp.emprSuegrosComentario = value,
+                  minLines: 3,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  labelText: 'Comentarios de los suegros',
+                  hintText: 'Comentarios de los suegros',
+                ),
+              ],
             ),
-            CustomCardType2(
-              titleCard: '6. Metas personales',
-              subTitleCard1: '5.1 Hobbies,Color,Personas',
-              column1: Column(
-                children: const [
-                  CustomInputField(
-                    labelText: 'Hobbies,Color,Personas',
-                    hintText: 'Hobbies,Color,Personas',
-                  ),
-                ],
-              ),
-              subTitleCard2: '5.2 Comentarios',
-              column2: Column(
-                children: const [
-                  CustomInputField(
-                    minLines: 3,
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    labelText: 'Comentarios',
-                    hintText: 'Comentarios',
-                  ),
-                  SizedBox(height: 8),
-                ],
-              ),
+            subTitleCard3: '3.3 Número de cuñados',
+            column3: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.emprCuniadosNombre,
+                  onChangedValue: (value) =>
+                      registroEmp.emprCuniadosNombre = value,
+                  labelText: 'Nombres',
+                  hintText: 'Nombres',
+                ),
+                CustomInputField(
+                  initialValue: '${registroEmp.emprCuniadosEdad}',
+                  onChangedValue: (value) =>
+                      registroEmp.emprCuniadosEdad = value,
+                  keyboardType: TextInputType.number,
+                  labelText: 'Edad',
+                  hintText: 'Edad',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprCuniadosOcupacion,
+                  onChangedValue: (value) =>
+                      registroEmp.emprCuniadosOcupacion = value,
+                  labelText: 'Ocupación',
+                  hintText: 'Ocupación',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprCuniadosLugarHermanos,
+                  onChangedValue: (value) =>
+                      registroEmp.emprCuniadosLugarHermanos = value,
+                  labelText: 'Lugar dentro de sus hermanos',
+                  hintText: 'Lugar dentro de sus hermanos',
+                ),
+                const SizedBox(height: 8),
+              ],
             ),
-            CustomCardType2(
-              titleCard: '7. Administración del tiempo',
-              subTitleCard1: '5.1 Hobbies,Color,Personas',
-              column1: Column(
-                children: const [
-                  CustomInputField(
-                    labelText: 'Hobbies,Color,Personas',
-                    hintText: 'Hobbies,Color,Personas',
-                  ),
-                ],
-              ),
-              subTitleCard2: '5.2 Comentarios',
-              column2: Column(
-                children: const [
-                  CustomInputField(
-                    minLines: 3,
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    labelText: 'Comentarios',
-                    hintText: 'Comentarios',
-                  ),
-                  SizedBox(height: 8),
-                ],
-              ),
+          ),
+          CustomCardType2(
+            titleCard: '4. El matrimonio',
+            subTitleCard1: '4.1 Años de Casado',
+            column1: Column(
+              children: [
+                CustomInputField(
+                  initialValue: '${registroEmp.emprMatrimonioAniosCasado}',
+                  onChangedValue: (value) {
+                    if (int.tryParse(value) == null) {
+                      registroEmp.emprMatrimonioAniosCasado = 0;
+                    } else {
+                      registroEmp.emprMatrimonioAniosCasado = int.parse(value);
+                    }
+                  },
+                  keyboardType: TextInputType.number,
+                  labelText: 'Años de Casado',
+                  hintText: 'Años de Casado',
+                ),
+              ],
             ),
-            CustomCardType2(
-              titleCard: '7. Comentario Ejecutivo de antecedendes generales',
-              column1: Column(
-                children: const [
-                  CustomInputField(
-                    minLines: 4,
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    labelText: 'Comentario Ejecutivo de antecedendes generales',
-                    hintText: 'Comentario Ejecutivo de antecedendes generales',
-                  ),
-                ],
-              ),
+            subTitleCard2: '4.2 Situación afectiva del matrimonio',
+            column2: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.emprMatrimonioSituacionAfectiva,
+                  onChangedValue: (value) =>
+                      registroEmp.emprMatrimonioSituacionAfectiva = value,
+                  labelText: 'Situación afectiva del matrimonio',
+                  hintText: 'Situación afectiva del matrimonio',
+                ),
+              ],
             ),
-            */
-          ],
-        ),
+            subTitleCard3: '4.3 Hijos',
+            column3: Column(
+              children: [
+                CustomInputField(
+                  initialValue: '${registroEmp.emprMatrimonioHNumeroHijos}',
+                  onChangedValue: (value) {
+                    if (int.tryParse(value) == null) {
+                      registroEmp.emprMatrimonioHNumeroHijos = 0;
+                    } else {
+                      registroEmp.emprMatrimonioHNumeroHijos = int.parse(value);
+                    }
+                  },
+                  keyboardType: TextInputType.number,
+                  labelText: 'Número de hijos',
+                  hintText: 'Número de hijos',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprMatrimonioHEdad,
+                  onChangedValue: (value) =>
+                      registroEmp.emprMatrimonioHEdad = value,
+                  labelText: 'Edad',
+                  hintText: 'Edad',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprMatrimonioHOcupacion,
+                  onChangedValue: (value) =>
+                      registroEmp.emprMatrimonioHOcupacion = value,
+                  labelText: 'Ocupación',
+                  hintText: 'Ocupación',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprMatrimonioHEscolaridad,
+                  onChangedValue: (value) =>
+                      registroEmp.emprMatrimonioHEscolaridad = value,
+                  labelText: 'Escolaridad',
+                  hintText: 'Escolaridad',
+                ),
+                CustomInputField(
+                  initialValue: registroEmp.emprMatrimonioHEstadoSalud,
+                  onChangedValue: (value) =>
+                      registroEmp.emprMatrimonioHEstadoSalud = value,
+                  labelText: 'Estado de salud',
+                  hintText: 'Estado de salud',
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
+          ),
+          CustomCardType2(
+            titleCard: '5. Filosofía Y/O Carácter',
+            subTitleCard1: '5.1 Hobbies,Color,Personas',
+            column1: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.emprFilosofiaHobbies,
+                  onChangedValue: (value) =>
+                      registroEmp.emprFilosofiaHobbies = value,
+                  labelText: 'Hobbies,Color,Personas',
+                  hintText: 'Hobbies,Color,Personas',
+                ),
+              ],
+            ),
+            subTitleCard2: '5.2 Comentarios',
+            column2: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.emprFilosofiaComentario,
+                  onChangedValue: (value) =>
+                      registroEmp.emprFilosofiaComentario = value,
+                  minLines: 3,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  labelText: 'Comentarios',
+                  hintText: 'Comentarios',
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
+          ),
+          CustomCardType2(
+            titleCard: '6. Metas personales',
+            subTitleCard1: '6.1 Metas personales',
+            column1: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.emprMetasProfesionales,
+                  onChangedValue: (value) =>
+                      registroEmp.emprMetasProfesionales = value,
+                  labelText: 'Hobbies,Color,Personas',
+                  hintText: 'Hobbies,Color,Personas',
+                ),
+              ],
+            ),
+            subTitleCard2: '6.2 Metas Afectivas',
+            column2: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.emprMetasAfectivas,
+                  onChangedValue: (value) =>
+                      registroEmp.emprMetasAfectivas = value,
+                  labelText: 'Metas Afectivas',
+                  hintText: 'Metas Afectivas',
+                ),
+              ],
+            ),
+          ),
+          CustomCardType2(
+            titleCard: '7. Administración del tiempo',
+            subTitleCard1: '7.1 Día',
+            column1: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.emprAdmTiempoDia,
+                  onChangedValue: (value) =>
+                      registroEmp.emprAdmTiempoDia = value,
+                  labelText: 'Hobbies,Color,Personas',
+                  hintText: 'Hobbies,Color,Personas',
+                ),
+              ],
+            ),
+            subTitleCard2: '7.5 Comentarios',
+            column2: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.emprAdmTiempoComentario,
+                  onChangedValue: (value) =>
+                      registroEmp.emprAdmTiempoComentario = value,
+                  minLines: 3,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  labelText: 'Comentarios',
+                  hintText: 'Comentarios',
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
+          ),
+          CustomCardType2(
+            titleCard: '8. Comentario Ejecutivo de antecedendes generales',
+            column1: Column(
+              children: [
+                CustomInputField(
+                  initialValue: registroEmp.empresarioComentarioEjecutivo,
+                  onChangedValue: (value) =>
+                      registroEmp.empresarioComentarioEjecutivo = value,
+                  minLines: 4,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  labelText: 'Comentario Ejecutivo de antecedendes generales',
+                  hintText: 'Comentario Ejecutivo de antecedendes generales',
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

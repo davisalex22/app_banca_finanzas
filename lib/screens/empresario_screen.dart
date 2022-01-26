@@ -48,7 +48,7 @@ class EmpresarioScreen extends StatelessWidget {
         icon: const Icon(Icons.add),
         onPressed: () {
           empresariosService.selectedEmpresario = Empresario();
-          Navigator.pushNamed(context, '/registroEmpresa');
+          Navigator.pushNamed(context, '/registroEmpresario');
         },
       ),
     );

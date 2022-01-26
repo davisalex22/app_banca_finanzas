@@ -45,6 +45,7 @@ class Empresario {
     this.emprParejaNombre,
     this.emprParejaOcupacion,
     this.emprParejaOriginaria,
+    this.emprParejaEdad,
     this.emprParejaVive,
     this.emprSuegrosComentario,
     this.emprSuegrosEdad,
@@ -112,6 +113,7 @@ class Empresario {
   String? emprParejaLugar;
   String? emprParejaNombre;
   String? emprParejaOcupacion;
+  int? emprParejaEdad;
   String? emprParejaOriginaria;
   String? emprParejaVive;
   String? emprSuegrosComentario;
@@ -188,6 +190,7 @@ class Empresario {
         emprParejaNombre: json["empr_pareja_nombre"],
         emprParejaOcupacion: json["empr_pareja_ocupacion"],
         emprParejaOriginaria: json["empr_pareja_originaria"],
+        emprParejaEdad: json["empr_pareja_edad"].toInt(),
         emprParejaVive: json["empr_pareja_vive"],
         emprSuegrosComentario: json["empr_suegros_comentario"],
         emprSuegrosEdad: json["empr_suegros_edad"],
@@ -257,6 +260,7 @@ class Empresario {
         "empr_pareja_ocupacion": emprParejaOcupacion,
         "empr_pareja_originaria": emprParejaOriginaria,
         "empr_pareja_vive": emprParejaVive,
+        "empr_pareja_edad": emprParejaEdad,
         "empr_suegros_comentario": emprSuegrosComentario,
         "empr_suegros_edad": emprSuegrosEdad,
         "empr_suegros_escolaridad": emprSuegrosEscolaridad,
@@ -324,6 +328,7 @@ class Empresario {
         emprParejaNombre: emprParejaNombre,
         emprParejaOcupacion: emprParejaOcupacion,
         emprParejaOriginaria: emprParejaOriginaria,
+        emprParejaEdad: emprParejaEdad,
         emprParejaVive: emprParejaVive,
         emprSuegrosComentario: emprSuegrosComentario,
         emprSuegrosEdad: emprSuegrosEdad,

@@ -26,7 +26,7 @@ class EmpresariosService extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    final url = Uri.https(_baseUrl, 'RegistroEmpresarios.json');
+    final url = Uri.https(_baseUrl, 'RegistrosEmpresarios.json');
     final resp = await http.get(url);
 
     final Map<String, dynamic> empresariosMap = json.decode(resp.body);
@@ -49,7 +49,7 @@ class EmpresariosService extends ChangeNotifier {
 
     if (empresario.id == null) {
       // Es necesario crear
-      await createEmpresa(empresario);
+      await createEmpresario(empresario);
     } else {
       // Actualizar
       await updateEmpresa(empresario);
@@ -72,8 +72,8 @@ class EmpresariosService extends ChangeNotifier {
     return empresario.id!;
   }
 
-  Future<String> createEmpresa(Empresario empresario) async {
-    final url = Uri.https(_baseUrl, 'RegistrosEmpresas.json');
+  Future<String> createEmpresario(Empresario empresario) async {
+    final url = Uri.https(_baseUrl, 'RegistrosEmpresarios.json');
 
     final resp = await http.post(url, body: empresario.toJson());
     final decodedData = json.decode(resp.body);
