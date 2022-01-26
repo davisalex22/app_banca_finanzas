@@ -35,8 +35,8 @@ class Empresa {
     this.id,
   });
 
-  int? empCalculosVentasActivos;
-  int? empCalculosVentasEmpleados;
+  String? empCalculosVentasActivos;
+  String? empCalculosVentasEmpleados;
   String? empCobMercadoInternacional;
   String? empCobMercadoLocal;
   String? empCobMercadoRegional;
@@ -45,21 +45,21 @@ class Empresa {
   String? empEstLegalPersonaFisica;
   String? empEstLegalPersonaMoral;
   String? empEstatusFiscal;
-  int? empTamNumEmpAdministrativos;
+  String? empTamNumEmpAdministrativos;
   String? empTamNumEmpComentarios;
-  int? empTamNumEmpOperativos;
-  int? empTamNumEmpOtros;
-  int? empTamNumEmpTotal;
-  int? empValActivosBienes;
-  int? empValActivosOtros;
-  int? empValActivosTerreno;
-  int? empVentasDiarias;
-  int? empVentasMensuales;
-  int? empVentasSemanales;
+  String? empTamNumEmpOperativos;
+  String? empTamNumEmpOtros;
+  String? empTamNumEmpTotal;
+  String? empValActivosBienes;
+  String? empValActivosOtros;
+  String? empValActivosTerreno;
+  String? empVentasDiarias;
+  String? empVentasMensuales;
+  String? empVentasSemanales;
   String? empVisionCortoPlazo;
   String? empVisionLargoPlazo;
-  int? empresaAniosInicio;
-  int? empresaAniosAntiguedad;
+  String? empresaAniosInicio;
+  String? empresaAniosAntiguedad;
   String? empresaDireccion;
   String? empresaDomicilioFiscal;
   String? empresaNombre;
@@ -72,8 +72,9 @@ class Empresa {
   String toJson() => json.encode(toMap());
 
   factory Empresa.fromMap(Map<String, dynamic> json) => Empresa(
-        empCalculosVentasActivos: json["emp_calculos_ventasActivos"],
-        empCalculosVentasEmpleados: json["emp_calculos_ventasEmpleados"],
+        empCalculosVentasActivos: json["emp_calculos_ventasActivos"].toString(),
+        empCalculosVentasEmpleados:
+            json["emp_calculos_ventasEmpleados"].toString(),
         empCobMercadoInternacional: json["emp_cobMercado_internacional"],
         empCobMercadoLocal: json["emp_cobMercado_local"],
         empCobMercadoRegional: json["emp_cobMercado_regional"],
@@ -83,21 +84,21 @@ class Empresa {
         empEstLegalPersonaMoral: json["emp_estLegal_personaMoral"],
         empEstatusFiscal: json["emp_estatusFiscal"],
         empTamNumEmpAdministrativos:
-            json["emp_tam_numEmp_administrativos"].toInt(),
+            json["emp_tam_numEmp_administrativos"].toString(),
         empTamNumEmpComentarios: json["emp_tam_numEmp_comentarios"],
-        empTamNumEmpOperativos: json["emp_tam_numEmp_operativos"].toInt(),
-        empTamNumEmpOtros: json["emp_tam_numEmp_otros"].toInt(),
-        empTamNumEmpTotal: json["emp_tam_numEmp_total"].toInt(),
-        empValActivosBienes: json["emp_valActivos_bienes"].toInt(),
-        empValActivosOtros: json["emp_valActivos_otros"].toInt(),
-        empValActivosTerreno: json["emp_valActivos_terreno"].toInt(),
-        empVentasDiarias: json["emp_ventas_diarias"].toInt(),
-        empVentasMensuales: json["emp_ventas_mensuales"].toInt(),
-        empVentasSemanales: json["emp_ventas_semanales"].toInt(),
+        empTamNumEmpOperativos: json["emp_tam_numEmp_operativos"].toString(),
+        empTamNumEmpOtros: json["emp_tam_numEmp_otros"].toString(),
+        empTamNumEmpTotal: json["emp_tam_numEmp_total"].toString(),
+        empValActivosBienes: json["emp_valActivos_bienes"].toString(),
+        empValActivosOtros: json["emp_valActivos_otros"].toString(),
+        empValActivosTerreno: json["emp_valActivos_terreno"].toString(),
+        empVentasDiarias: json["emp_ventas_diarias"].toString(),
+        empVentasMensuales: json["emp_ventas_mensuales"].toString(),
+        empVentasSemanales: json["emp_ventas_semanales"].toString(),
         empVisionCortoPlazo: json["emp_vision_cortoPlazo"],
         empVisionLargoPlazo: json["emp_vision_largoPlazo"],
-        empresaAniosAntiguedad: json["empresa_aniosAntiguedad"].toInt(),
-        empresaAniosInicio: json["empresa_aniosInicio"].toInt(),
+        empresaAniosAntiguedad: json["empresa_aniosAntiguedad"].toString(),
+        empresaAniosInicio: json["empresa_aniosInicio"].toString(),
         empresaDireccion: json["empresa_direccion"],
         empresaDomicilioFiscal: json["empresa_domicilioFiscal"],
         empresaNombre: json["empresa_nombre"],

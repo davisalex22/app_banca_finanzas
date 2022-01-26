@@ -21,7 +21,8 @@ class LoginScreen extends StatelessWidget {
               child: Column(
             children: [
               const SizedBox(height: 10),
-              Text('Login', style: Theme.of(context).textTheme.headline4),
+              Text('Iniciar sesión',
+                  style: Theme.of(context).textTheme.headline4),
               const SizedBox(height: 30),
               ChangeNotifierProvider(
                   create: (_) => LoginFormProvider(), child: _LoginForm())
@@ -35,7 +36,7 @@ class LoginScreen extends StatelessWidget {
                 overlayColor: MaterialStateProperty.all(Colors.indigo),
                 shape: MaterialStateProperty.all(const StadiumBorder())),
             child: const Text(
-              'Crear una nueva cuenta',
+              'Crear nueva cuenta',
               style: TextStyle(fontSize: 18, color: Colors.black87),
             ),
           ),
@@ -60,7 +61,7 @@ class _LoginForm extends StatelessWidget {
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecorations.authInputDecoration(
-                hintText: 'john.doe@gmail.com',
+                hintText: 'example@example.com',
                 labelText: 'Correo electrónico',
                 prefixIcon: Icons.alternate_email_rounded),
             onChanged: (value) => loginForm.email = value,
@@ -71,7 +72,7 @@ class _LoginForm extends StatelessWidget {
 
               return regExp.hasMatch(value ?? '')
                   ? null
-                  : 'El valor ingresado no luce como un correo';
+                  : 'El valor ingresado no es un correo';
             },
           ),
           const SizedBox(height: 30),
@@ -87,7 +88,7 @@ class _LoginForm extends StatelessWidget {
             validator: (value) {
               return (value != null && value.length >= 6)
                   ? null
-                  : 'La contraseña debe de ser de 6 caracteres';
+                  : 'La contraseña debe de ser de al menos 6 caractéres';
             },
           ),
           const SizedBox(height: 30),

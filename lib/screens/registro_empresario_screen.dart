@@ -2,7 +2,10 @@ import 'package:app_banca_finanzas/providers/empresario_form_provider.dart';
 import 'package:app_banca_finanzas/services/services.dart';
 import 'package:app_banca_finanzas/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class RegistroEmpresarioScreen extends StatelessWidget {
   const RegistroEmpresarioScreen({Key? key}) : super(key: key);
@@ -44,22 +47,26 @@ class _EmpresarioScreenBody extends StatelessWidget {
                 onPressedValue: empresarioService.isSaving
                     ? null
                     : () async {
-                        const text = 'Información guardada correctamente';
-                        const snackBar = SnackBar(
-                          content: Text(text),
-                          duration: Duration(seconds: 2),
-                        );
-
-                        if (!empresarioForm.isValidForm()) return;
-
-                        // final String? imageUrl = await productService.uploadImage();
-
-                        // if (imageUrl != null) productForm.product.picture = imageUrl;
-                        Navigator.of(context).pop();
-
-                        await empresarioService
-                            .saveOrCreateEmpresario(empresarioForm.empresario);
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        if (empresarioForm.isValidForm()) {
+                          Navigator.of(context).pop();
+                          await empresarioService.saveOrCreateEmpresario(
+                              empresarioForm.empresario);
+                          showTopSnackBar(
+                            context,
+                            const CustomSnackBar.success(
+                              message: "Información guardada correctamente",
+                            ),
+                          );
+                          Navigator.of(context).pop();
+                        } else {
+                          Navigator.of(context).pop();
+                          showTopSnackBar(
+                            context,
+                            const CustomSnackBar.error(
+                              message: "Faltan campos por llenar",
+                            ),
+                          );
+                        }
                       },
               ),
             ),
@@ -85,7 +92,7 @@ class _EmpresarioForm extends StatelessWidget {
             titlePage: 'Registrar empresario',
           ),
           CustomCardType2(
-            titleCard: '1. Generales',
+            titleCard: 'Generales',
             column1: Column(
               children: [
                 CustomInputField(
@@ -94,7 +101,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.empresarioNombre = value,
                   labelText: 'Nombre',
                   hintText: 'Nombre',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresarioDireccion,
@@ -102,7 +109,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.empresarioDireccion = value,
                   labelText: 'Dirección',
                   hintText: 'Dirección',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresarioTelefono,
@@ -110,14 +117,14 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.empresarioTelefono = value,
                   labelText: 'Teléfono',
                   hintText: 'Teléfono',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
               ],
             ),
           ),
           CustomCardType2(
-            titleCard: '2. Antecedentes del empresarioriorio',
-            subTitleCard1: '2.1 El empresarioriorio',
+            titleCard: 'Antecedentes del empresario',
+            subTitleCard1: 'El empresario',
             column1: Column(
               children: [
                 CustomInputField(
@@ -126,7 +133,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.empresarioOriginario = value,
                   labelText: 'Originario',
                   hintText: 'Originario',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresarioLugar,
@@ -134,34 +141,46 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.empresarioLugar = value,
                   labelText: 'Lugar',
                   hintText: 'Lugar',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresarioEdad,
                   onChangedValue: (value) => registroEmp.empresarioEdad = value,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   labelText: 'Edad',
                   hintText: 'Edad',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
-                // CustomDropDownButtom(
-                //   hintText: 'Estado civil',
-                //   labelText: 'Estado civil',
-                //   formValues: formValues,
-                //   listMenu: const [
-                //     "Solotero/a",
-                //     "Casado/a",
-                //     "Divorciado/a",
-                //     "Viudo/a"
-                //   ],
-                // ),
+                DropdownSearch<String>(
+                  validator: (v) => v == null ? "required field" : null,
+                  dropdownSearchDecoration: const InputDecoration(
+                    hintText: "Estado civil",
+                    labelText: "Estado civil",
+                    contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                    border: OutlineInputBorder(),
+                  ),
+                  mode: Mode.MENU,
+                  showSelectedItems: true,
+                  onChanged: (value) =>
+                      registroEmp.empresarioEstadoCivil = value,
+                  items: const [
+                    "Soltero/a",
+                    "Casado/a",
+                    "Divorciado/a",
+                    "Viudo/a"
+                  ],
+                  showClearButton: false,
+                  clearButtonSplashRadius: 20,
+                  selectedItem: "Soltero/a",
+                ),
                 CustomInputField(
                   initialValue: registroEmp.empresarioOcupacion,
                   onChangedValue: (value) =>
                       registroEmp.empresarioOcupacion = value,
                   labelText: 'Ocupación',
                   hintText: 'Ocupación',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresarioEscolaridad,
@@ -169,7 +188,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.empresarioEscolaridad = value,
                   labelText: 'Escolaridad',
                   hintText: 'Escolaridad',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresarioEstadoSalud,
@@ -177,7 +196,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.empresarioEstadoSalud = value,
                   labelText: 'Estado de salud',
                   hintText: 'Estado de salud',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresarioComentario,
@@ -186,13 +205,13 @@ class _EmpresarioForm extends StatelessWidget {
                   minLines: 3,
                   maxLines: null,
                   keyboardType: TextInputType.multiline,
-                  labelText: 'Comentarios del Empresario',
-                  hintText: 'Comentarios del Empresariorio',
-                  validatorValue: true,
+                  labelText: 'Comentarios del empresario',
+                  hintText: 'Comentarios del empresario',
+                  valueNullable: false,
                 ),
               ],
             ),
-            subTitleCard2: '2.2 Los padres',
+            subTitleCard2: 'Los padres',
             column2: Column(
               children: [
                 CustomInputField(
@@ -201,7 +220,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprPadresNombres = value,
                   labelText: 'Nombres',
                   hintText: 'Nombres',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprPadresOriginarios,
@@ -209,7 +228,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprPadresOriginarios = value,
                   labelText: 'Originarios',
                   hintText: 'Originarios',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprPadresViven,
@@ -217,7 +236,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprPadresViven = value,
                   labelText: 'Viven',
                   hintText: 'Viven',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprPadresLugar,
@@ -225,7 +244,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprPadresLugar = value,
                   labelText: 'Lugar',
                   hintText: 'Lugar',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprPadresEdad,
@@ -233,7 +252,7 @@ class _EmpresarioForm extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   labelText: 'Edad',
                   hintText: 'Edad',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprPadresOcupacion,
@@ -241,7 +260,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprPadresOcupacion = value,
                   labelText: 'Ocupación',
                   hintText: 'Ocupación',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprPadresEscolaridad,
@@ -249,15 +268,15 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprPadresEscolaridad = value,
                   labelText: 'Escolaridad',
                   hintText: 'Escolaridad',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprPadresEstadoSalud,
                   onChangedValue: (value) =>
                       registroEmp.emprPadresEstadoSalud = value,
-                  labelText: 'Escolaridad',
-                  hintText: 'Escolaridad',
-                  validatorValue: true,
+                  labelText: 'Estado de salud',
+                  hintText: 'Estado de salud',
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprPadresComentario,
@@ -268,11 +287,11 @@ class _EmpresarioForm extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   labelText: 'Comentarios de los padres',
                   hintText: 'Comentarios de los padres',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
               ],
             ),
-            subTitleCard3: '2.3 Número de hermanos nacidos',
+            subTitleCard3: 'Número de hermanos nacidos',
             column3: Column(
               children: [
                 CustomInputField(
@@ -281,7 +300,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprHermanosNombres = value,
                   labelText: 'Nombres',
                   hintText: 'Nombres',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprHermanosEdad,
@@ -289,7 +308,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprHermanosEdad = value,
                   labelText: 'Edad',
                   hintText: 'Edad',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprHermanosOcupacion,
@@ -297,7 +316,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprHermanosOcupacion = value,
                   labelText: 'Ocupación',
                   hintText: 'Ocupación',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprHermanosLugarHermanos,
@@ -305,15 +324,14 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprHermanosLugarHermanos = value,
                   labelText: 'Lugar dentro de sus hermanos',
                   hintText: 'Lugar dentro de sus hermanos',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 const SizedBox(height: 10),
               ],
             ),
           ),
           CustomCardType2(
-            titleCard: '3. Antecedentes de la pareja',
-            subTitleCard1: '3.1 La pareja',
+            titleCard: 'Antecedentes de la pareja',
             column1: Column(
               children: [
                 CustomInputField(
@@ -322,7 +340,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprParejaNombre = value,
                   labelText: 'Nombre',
                   hintText: 'Nombre',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprParejaOriginaria,
@@ -330,14 +348,14 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprParejaOriginaria = value,
                   labelText: 'Originaria',
                   hintText: 'Originaria',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprParejaVive,
                   onChangedValue: (value) => registroEmp.emprParejaVive = value,
                   labelText: 'Vive',
                   hintText: 'Vive',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprParejaLugar,
@@ -345,21 +363,16 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprParejaLugar = value,
                   labelText: 'En que Lugar',
                   hintText: 'En que Lugar',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
-                  initialValue: '${registroEmp.emprParejaEdad}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.emprParejaEdad = 0;
-                    } else {
-                      registroEmp.emprParejaEdad = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.emprParejaEdad,
+                  onChangedValue: (value) => registroEmp.emprParejaEdad = value,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   labelText: 'Edad',
                   hintText: 'Edad',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprParejaEstadoSalud,
@@ -367,7 +380,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprParejaEstadoSalud = value,
                   labelText: 'Estado de salud',
                   hintText: 'Estado de salud',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprParejaOcupacion,
@@ -375,7 +388,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprParejaOcupacion = value,
                   labelText: 'Ocupación',
                   hintText: 'Ocupación',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprParejaEscolaridad,
@@ -383,7 +396,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprParejaEscolaridad = value,
                   labelText: 'Escolaridad',
                   hintText: 'Escolaridad',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprParejaComentario,
@@ -394,11 +407,11 @@ class _EmpresarioForm extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   labelText: 'Comentarios de la pareja',
                   hintText: 'Comentarios de la pareja',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
               ],
             ),
-            subTitleCard2: '3.2 Los suegros',
+            subTitleCard2: 'Los suegros',
             column2: Column(
               children: [
                 CustomInputField(
@@ -407,7 +420,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprSuegrosNombre = value,
                   labelText: 'Nombre',
                   hintText: 'Nombre',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprSuegrosOriginarios,
@@ -415,7 +428,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprSuegrosOriginarios = value,
                   labelText: 'Originarios',
                   hintText: 'Originarios',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprSuegrosViven,
@@ -423,7 +436,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprSuegrosViven = value,
                   labelText: 'Viven',
                   hintText: 'Viven',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprSuegrosLugar,
@@ -431,16 +444,16 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprSuegrosLugar = value,
                   labelText: 'En que Lugar',
                   hintText: 'En que Lugar',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
-                  initialValue: '${registroEmp.emprSuegrosEdad}',
+                  initialValue: registroEmp.emprSuegrosEdad,
                   onChangedValue: (value) =>
                       registroEmp.emprSuegrosEdad = value,
                   keyboardType: TextInputType.number,
                   labelText: 'Edad',
                   hintText: 'Edad',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprSuegrosEstadoSalud,
@@ -448,7 +461,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprSuegrosEstadoSalud = value,
                   labelText: 'Estado de salud',
                   hintText: 'Estado de salud',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprSuegrosOcupacion,
@@ -456,7 +469,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprSuegrosOcupacion = value,
                   labelText: 'Ocupación',
                   hintText: 'Ocupación',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprSuegrosEscolaridad,
@@ -464,7 +477,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprSuegrosEscolaridad = value,
                   labelText: 'Escolaridad',
                   hintText: 'Escolaridad',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprSuegrosComentario,
@@ -475,11 +488,11 @@ class _EmpresarioForm extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   labelText: 'Comentarios de los suegros',
                   hintText: 'Comentarios de los suegros',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
               ],
             ),
-            subTitleCard3: '3.3 Número de cuñados',
+            subTitleCard3: 'Número de cuñados',
             column3: Column(
               children: [
                 CustomInputField(
@@ -488,16 +501,16 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprCuniadosNombre = value,
                   labelText: 'Nombres',
                   hintText: 'Nombres',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
-                  initialValue: '${registroEmp.emprCuniadosEdad}',
+                  initialValue: registroEmp.emprCuniadosEdad,
                   onChangedValue: (value) =>
                       registroEmp.emprCuniadosEdad = value,
                   keyboardType: TextInputType.number,
                   labelText: 'Edad',
                   hintText: 'Edad',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprCuniadosOcupacion,
@@ -505,7 +518,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprCuniadosOcupacion = value,
                   labelText: 'Ocupación',
                   hintText: 'Ocupación',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprCuniadosLugarHermanos,
@@ -513,34 +526,29 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprCuniadosLugarHermanos = value,
                   labelText: 'Lugar dentro de sus hermanos',
                   hintText: 'Lugar dentro de sus hermanos',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 const SizedBox(height: 8),
               ],
             ),
           ),
           CustomCardType2(
-            titleCard: '4. El matrimonio',
-            subTitleCard1: '4.1 Años de Casado',
+            titleCard: 'El matrimonio',
+            subTitleCard1: 'Años de Casado',
             column1: Column(
               children: [
                 CustomInputField(
-                  initialValue: '${registroEmp.emprMatrimonioAniosCasado}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.emprMatrimonioAniosCasado = 0;
-                    } else {
-                      registroEmp.emprMatrimonioAniosCasado = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.emprMatrimonioAniosCasado,
+                  onChangedValue: (value) =>
+                      registroEmp.emprMatrimonioAniosCasado = value,
                   keyboardType: TextInputType.number,
                   labelText: 'Años de Casado',
                   hintText: 'Años de Casado',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
               ],
             ),
-            subTitleCard2: '4.2 Situación afectiva del matrimonio',
+            subTitleCard2: 'Situación afectiva del matrimonio',
             column2: Column(
               children: [
                 CustomInputField(
@@ -549,26 +557,21 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprMatrimonioSituacionAfectiva = value,
                   labelText: 'Situación afectiva del matrimonio',
                   hintText: 'Situación afectiva del matrimonio',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
               ],
             ),
-            subTitleCard3: '4.3 Hijos',
+            subTitleCard3: 'Hijos',
             column3: Column(
               children: [
                 CustomInputField(
-                  initialValue: '${registroEmp.emprMatrimonioHNumeroHijos}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.emprMatrimonioHNumeroHijos = 0;
-                    } else {
-                      registroEmp.emprMatrimonioHNumeroHijos = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.emprMatrimonioHNumeroHijos,
+                  onChangedValue: (value) =>
+                      registroEmp.emprMatrimonioHNumeroHijos = value,
                   keyboardType: TextInputType.number,
                   labelText: 'Número de hijos',
                   hintText: 'Número de hijos',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprMatrimonioHEdad,
@@ -576,7 +579,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprMatrimonioHEdad = value,
                   labelText: 'Edad',
                   hintText: 'Edad',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprMatrimonioHOcupacion,
@@ -584,7 +587,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprMatrimonioHOcupacion = value,
                   labelText: 'Ocupación',
                   hintText: 'Ocupación',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprMatrimonioHEscolaridad,
@@ -592,7 +595,7 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprMatrimonioHEscolaridad = value,
                   labelText: 'Escolaridad',
                   hintText: 'Escolaridad',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.emprMatrimonioHEstadoSalud,
@@ -600,28 +603,28 @@ class _EmpresarioForm extends StatelessWidget {
                       registroEmp.emprMatrimonioHEstadoSalud = value,
                   labelText: 'Estado de salud',
                   hintText: 'Estado de salud',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 const SizedBox(height: 8),
               ],
             ),
           ),
           CustomCardType2(
-            titleCard: '5. Filosofía Y/O Carácter',
-            subTitleCard1: '5.1 Hobbies,Color,Personas',
+            titleCard: 'Filosofía Y/O Carácter',
+            subTitleCard1: 'Hobbies,Color,Personas',
             column1: Column(
               children: [
                 CustomInputField(
                   initialValue: registroEmp.emprFilosofiaHobbies,
                   onChangedValue: (value) =>
                       registroEmp.emprFilosofiaHobbies = value,
-                  labelText: 'Hobbies,Color,Personas',
-                  hintText: 'Hobbies,Color,Personas',
-                  validatorValue: true,
+                  labelText: 'Hobbies, Color, Personas',
+                  hintText: 'Hobbies, Color, Personas',
+                  valueNullable: false,
                 ),
               ],
             ),
-            subTitleCard2: '5.2 Comentarios',
+            subTitleCard2: 'Comentarios',
             column2: Column(
               children: [
                 CustomInputField(
@@ -633,57 +636,57 @@ class _EmpresarioForm extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   labelText: 'Comentarios',
                   hintText: 'Comentarios',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 const SizedBox(height: 8),
               ],
             ),
           ),
           CustomCardType2(
-            titleCard: '6. Metas personales',
-            subTitleCard1: '6.1 Metas personales',
+            titleCard: 'Metas personales',
+            subTitleCard1: 'Metas personales',
             column1: Column(
               children: [
                 CustomInputField(
                   initialValue: registroEmp.emprMetasProfesionales,
                   onChangedValue: (value) =>
                       registroEmp.emprMetasProfesionales = value,
-                  labelText: 'Hobbies,Color,Personas',
-                  hintText: 'Hobbies,Color,Personas',
-                  validatorValue: true,
+                  labelText: 'Hobbies, Color, Personas',
+                  hintText: 'Hobbies, Color, Personas',
+                  valueNullable: true,
                 ),
               ],
             ),
-            subTitleCard2: '6.2 Metas Afectivas',
+            subTitleCard2: 'Metas afectivas',
             column2: Column(
               children: [
                 CustomInputField(
                   initialValue: registroEmp.emprMetasAfectivas,
                   onChangedValue: (value) =>
                       registroEmp.emprMetasAfectivas = value,
-                  labelText: 'Metas Afectivas',
-                  hintText: 'Metas Afectivas',
-                  validatorValue: true,
+                  labelText: 'Metas afectivas',
+                  hintText: 'Metas afectivas',
+                  valueNullable: false,
                 ),
               ],
             ),
           ),
           CustomCardType2(
-            titleCard: '7. Administración del tiempo',
-            subTitleCard1: '7.1 Día',
+            titleCard: 'Administración del tiempo',
+            subTitleCard1: 'Día',
             column1: Column(
               children: [
                 CustomInputField(
                   initialValue: registroEmp.emprAdmTiempoDia,
                   onChangedValue: (value) =>
                       registroEmp.emprAdmTiempoDia = value,
-                  labelText: 'Hobbies,Color,Personas',
-                  hintText: 'Hobbies,Color,Personas',
-                  validatorValue: true,
+                  labelText: 'Hobbies, Color, Personas',
+                  hintText: 'Hobbies, Color, Personas',
+                  valueNullable: false,
                 ),
               ],
             ),
-            subTitleCard2: '7.5 Comentarios',
+            subTitleCard2: 'Comentarios',
             column2: Column(
               children: [
                 CustomInputField(
@@ -695,14 +698,14 @@ class _EmpresarioForm extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   labelText: 'Comentarios',
                   hintText: 'Comentarios',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 const SizedBox(height: 8),
               ],
             ),
           ),
           CustomCardType2(
-            titleCard: '8. Comentario Ejecutivo de antecedendes generales',
+            titleCard: 'Comentario ejecutivo de antecedendes generales',
             column1: Column(
               children: [
                 CustomInputField(
@@ -712,9 +715,9 @@ class _EmpresarioForm extends StatelessWidget {
                   minLines: 4,
                   maxLines: null,
                   keyboardType: TextInputType.multiline,
-                  labelText: 'Comentario Ejecutivo de antecedendes generales',
-                  hintText: 'Comentario Ejecutivo de antecedendes generales',
-                  validatorValue: true,
+                  labelText: 'Comentario ejecutivo de antecedendes generales',
+                  hintText: 'Comentario ejecutivo de antecedendes generales',
+                  valueNullable: false,
                 ),
               ],
             ),

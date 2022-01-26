@@ -14,7 +14,7 @@ class CustomInputField extends StatelessWidget {
   final String? initialValue;
   final Function(String) onChangedValue;
   final List<TextInputFormatter>? inputFormatters;
-  final bool validatorValue;
+  final bool valueNullable;
 
   const CustomInputField({
     Key? key,
@@ -30,7 +30,7 @@ class CustomInputField extends StatelessWidget {
     required this.onChangedValue,
     this.initialValue,
     this.inputFormatters,
-    required this.validatorValue,
+    required this.valueNullable,
   }) : super(key: key);
 
   @override
@@ -47,9 +47,9 @@ class CustomInputField extends StatelessWidget {
         maxLines: maxLines,
         inputFormatters: inputFormatters,
         validator: (value) {
-          if (validatorValue == true) {
+          if (valueNullable == true) {
             if (value == null || value.isEmpty) {
-              return 'El campo $hintText es obligatorio';
+              return 'Este campo es obligatorio';
             }
           }
         },

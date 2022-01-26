@@ -26,7 +26,7 @@ class EmpresarioScreen extends StatelessWidget {
             elevation: 0, // hides leading widget
           )),
       body: Column(children: [
-        const MainHeader(titlePage: 'Registro de Empresarios'),
+        const MainHeader(titlePage: 'Listado de empresarios'),
         Expanded(
           child: ListView.builder(
               itemCount: empresariosService.empresarios.length,

@@ -23,7 +23,7 @@ class EmpresaScreen extends StatelessWidget {
             elevation: 0, // hides leading widget
           )),
       body: Column(children: [
-        const MainHeader(titlePage: 'Empresas Registradas'),
+        const MainHeader(titlePage: 'Listado de empresas'),
         Expanded(
           child: ListView.builder(
               itemCount: empresasService.empresas.length,

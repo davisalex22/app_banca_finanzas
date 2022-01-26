@@ -90,9 +90,9 @@ class Empresario {
   String? emprMatrimonioHEscolaridad;
   String? emprMatrimonioHEstadoCivil;
   String? emprMatrimonioHEstadoSalud;
-  int? emprMatrimonioHNumeroHijos;
+  String? emprMatrimonioHNumeroHijos;
   String? emprMatrimonioHOcupacion;
-  int? emprMatrimonioAniosCasado;
+  String? emprMatrimonioAniosCasado;
   String? emprMatrimonioSituacionAfectiva;
   String? emprMetasAfectivas;
   String? emprMetasComentario;
@@ -113,7 +113,7 @@ class Empresario {
   String? emprParejaLugar;
   String? emprParejaNombre;
   String? emprParejaOcupacion;
-  int? emprParejaEdad;
+  String? emprParejaEdad;
   String? emprParejaOriginaria;
   String? emprParejaVive;
   String? emprSuegrosComentario;
@@ -165,9 +165,10 @@ class Empresario {
         emprMatrimonioHEstadoCivil: json["empr_matrimonioH_estadoCivil"],
         emprMatrimonioHEstadoSalud: json["empr_matrimonioH_estadoSalud"],
         emprMatrimonioHNumeroHijos:
-            json["empr_matrimonioH_numeroHijos"].toInt(),
+            json["empr_matrimonioH_numeroHijos"].toString(),
         emprMatrimonioHOcupacion: json["empr_matrimonioH_ocupacion"],
-        emprMatrimonioAniosCasado: json["empr_matrimonio_aniosCasado"].toInt(),
+        emprMatrimonioAniosCasado:
+            json["empr_matrimonio_aniosCasado"].toString(),
         emprMatrimonioSituacionAfectiva:
             json["empr_matrimonio_situacionAfectiva"],
         emprMetasAfectivas: json["empr_metas_afectivas"],
@@ -190,7 +191,7 @@ class Empresario {
         emprParejaNombre: json["empr_pareja_nombre"],
         emprParejaOcupacion: json["empr_pareja_ocupacion"],
         emprParejaOriginaria: json["empr_pareja_originaria"],
-        emprParejaEdad: json["empr_pareja_edad"].toInt(),
+        emprParejaEdad: json["empr_pareja_edad"].toString(),
         emprParejaVive: json["empr_pareja_vive"],
         emprSuegrosComentario: json["empr_suegros_comentario"],
         emprSuegrosEdad: json["empr_suegros_edad"],

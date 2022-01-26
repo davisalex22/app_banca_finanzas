@@ -6,7 +6,6 @@ import 'package:app_banca_finanzas/services/services.dart';
 import 'package:app_banca_finanzas/widgets/widgets.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 
 class RegistroEmpresaScreen extends StatelessWidget {
   const RegistroEmpresaScreen({Key? key}) : super(key: key);
@@ -65,12 +64,13 @@ class _EmpresaScreenBody extends StatelessWidget {
                               message: "Información guardada correctamente",
                             ),
                           );
+                          Navigator.of(context).pop();
                         } else {
                           Navigator.of(context).pop();
                           showTopSnackBar(
                             context,
                             const CustomSnackBar.error(
-                              message: "Faltan campos por llenar",
+                              message: "Faltan completar la información",
                             ),
                           );
                         }
@@ -104,61 +104,7 @@ class _EmpresaForm extends StatelessWidget {
             titleCard: 'Seleccione Empresario',
             column1: Column(
               children: [
-                ///Menu Mode with no searchBox
-                DropdownSearch<String>(
-                  validator: (v) => v == null ? "required field" : null,
-                  dropdownSearchDecoration: InputDecoration(
-                    hintText: "Select a country",
-                    labelText: "Menu mode *",
-                    contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
-                    border: OutlineInputBorder(),
-                  ),
-                  mode: Mode.MENU,
-                  showSelectedItems: true,
-                  items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
-                  showClearButton: true,
-                  onChanged: print,
-                  popupItemDisabled: (String? s) => s?.startsWith('I') ?? false,
-                  clearButtonSplashRadius: 20,
-                  selectedItem: "Tunisia",
-                  onBeforeChange: (a, b) {
-                    if (b == null) {
-                      AlertDialog alert = AlertDialog(
-                        title: Text("Are you sure..."),
-                        content: Text("...you want to clear the selection"),
-                        actions: [
-                          TextButton(
-                            child: Text("OK"),
-                            onPressed: () {
-                              Navigator.of(context).pop(true);
-                            },
-                          ),
-                          TextButton(
-                            child: Text("NOT OK"),
-                            onPressed: () {
-                              Navigator.of(context).pop(false);
-                            },
-                          ),
-                        ],
-                      );
-
-                      return showDialog<bool>(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return alert;
-                          });
-                    }
-
-                    return Future.value(true);
-                  },
-                ),
                 Divider(),
-
-                ///Menu Mode with no searchBox
-
-                ///Menu Mode with overriden icon and dropdown buttons
-
-                ///BottomSheet Mode with no searchBox
                 DropdownSearch<String>(
                   mode: Mode.BOTTOM_SHEET,
                   items: [
@@ -216,7 +162,7 @@ class _EmpresaForm extends StatelessWidget {
             ),
           ),
           CustomCardType2(
-            titleCard: '1. Información general',
+            titleCard: 'Información general',
             column1: Column(
               children: [
                 CustomInputField(
@@ -224,7 +170,7 @@ class _EmpresaForm extends StatelessWidget {
                   onChangedValue: (value) => registroEmp.empresaNombre = value,
                   labelText: 'Nombre',
                   hintText: 'Nombre',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresaDireccion,
@@ -232,7 +178,7 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empresaDireccion = value,
                   labelText: 'Dirección',
                   hintText: 'Dirección',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresaTelefono,
@@ -240,71 +186,59 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empresaTelefono = value,
                   labelText: 'Correo, teléfono, etc',
                   hintText: 'Contactos',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresaRfc,
                   onChangedValue: (value) => registroEmp.empresaRfc = value,
                   labelText: 'R.F.C',
                   hintText: 'R.F.C',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresaDomicilioFiscal,
                   onChangedValue: (value) =>
                       registroEmp.empresaDomicilioFiscal = value,
                   labelText: 'Domicilio fiscal',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
               ],
             ),
           ),
           CustomCardType2(
-            titleCard: '2. Antigüedad de la Empresa',
-            subTitleCard1: 'Año de inicio de la empresa',
+            titleCard: 'Antiguedad de la empresa',
             column1: Column(
               children: [
                 CustomInputField(
-                  initialValue: '${registroEmp.empresaAniosInicio}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.empresaAniosInicio = 0;
-                    } else {
-                      registroEmp.empresaAniosInicio = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.empresaAniosInicio,
+                  onChangedValue: (value) =>
+                      registroEmp.empresaAniosInicio = value,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
-                  labelText: 'Año de inicio la Empresa',
-                  hintText: 'Año de inicio la Empresa',
-                  validatorValue: true,
+                  labelText: 'Año de inicio la empresa',
+                  hintText: 'Año de inicio la empresa',
+                  valueNullable: true,
                 ),
               ],
             ),
-            subTitleCard2: 'Años de la empresa',
             column2: Column(
               children: [
                 CustomInputField(
-                  initialValue: '${registroEmp.empresaAniosAntiguedad}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.empresaAniosAntiguedad = 0;
-                    } else {
-                      registroEmp.empresaAniosAntiguedad = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.empresaAniosAntiguedad,
+                  onChangedValue: (value) =>
+                      registroEmp.empresaAniosAntiguedad = value,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
-                  labelText: 'Años de la Empresa',
-                  hintText: 'Años de la Empresa',
-                  validatorValue: true,
+                  labelText: 'Años de la empresa',
+                  hintText: 'Años de la empresa',
+                  valueNullable: true,
                 ),
                 const SizedBox(height: 10)
               ],
             ),
           ),
           CustomCardType2(
-            titleCard: '3. Estatus legal de la Empresa',
+            titleCard: 'Estatus legal de la empresa',
             column1: Column(
               children: [
                 CustomInputField(
@@ -313,7 +247,7 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empEstLegalPersonaFisica = value,
                   labelText: 'Persona física',
                   hintText: 'Persona física',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
               ],
             ),
@@ -325,7 +259,7 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empEstLegalPersonaMoral = value,
                   labelText: 'Persona moral',
                   hintText: 'Persona moral',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
               ],
             ),
@@ -337,14 +271,14 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empEstLegalNoRegistrada = value,
                   labelText: 'Persona no registrada',
                   hintText: 'Persona no registrada',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 const SizedBox(height: 10),
               ],
             ),
           ),
           CustomCardType2(
-            titleCard: '4. Estatus fiscal de la Empresa',
+            titleCard: 'Estatus fiscal de la empresa',
             column1: Column(
               children: [
                 CustomInputField(
@@ -354,223 +288,169 @@ class _EmpresaForm extends StatelessWidget {
                   minLines: 3,
                   maxLines: null,
                   keyboardType: TextInputType.multiline,
-                  labelText: 'Estatus fiscal de la Empresa',
-                  hintText: 'Estatus fiscal de la Empresa',
-                  validatorValue: true,
+                  labelText: 'Estatus fiscal de la empresa',
+                  hintText: 'Estatus fiscal de la empresa',
+                  valueNullable: true,
                 ),
               ],
             ),
           ),
           CustomCardType2(
-            titleCard: '5. Tamaño de la Empresa',
-            subTitleCard1: '5.1 Número de empleados',
+            titleCard: 'Tamaño de la empresa',
+            subTitleCard1: 'Número de empleados',
             column1: Column(
               children: [
                 CustomInputField(
-                  initialValue: '${registroEmp.empTamNumEmpOperativos}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.empTamNumEmpOperativos = 0;
-                    } else {
-                      registroEmp.empTamNumEmpOperativos = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.empTamNumEmpOperativos,
+                  onChangedValue: (value) =>
+                      registroEmp.empTamNumEmpOperativos = value,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   labelText: 'Operativos',
                   hintText: 'Operativos',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
-                  initialValue: '${registroEmp.empTamNumEmpAdministrativos}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.empTamNumEmpAdministrativos = 0;
-                    } else {
-                      registroEmp.empTamNumEmpAdministrativos =
-                          int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.empTamNumEmpAdministrativos,
+                  onChangedValue: (value) =>
+                      registroEmp.empTamNumEmpAdministrativos = value,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   labelText: 'Administrativos',
                   hintText: 'Administrativos',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
-                  initialValue: '${registroEmp.empTamNumEmpOtros}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.empTamNumEmpOtros = 0;
-                    } else {
-                      registroEmp.empTamNumEmpOtros = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.empTamNumEmpOtros,
+                  onChangedValue: (value) =>
+                      registroEmp.empTamNumEmpOtros = value,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   labelText: 'Otros',
                   hintText: 'Otros',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
-                  initialValue: '${registroEmp.empTamNumEmpTotal}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.empTamNumEmpTotal = 0;
-                    } else {
-                      registroEmp.empTamNumEmpTotal = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.empTamNumEmpTotal,
+                  onChangedValue: (value) =>
+                      registroEmp.empTamNumEmpTotal = value,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   labelText: 'Total',
                   hintText: 'Total',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
-                  initialValue: registroEmp.empTamNumEmpComentarios,
-                  onChangedValue: (value) =>
-                      registroEmp.empTamNumEmpComentarios = value,
-                  minLines: 3,
-                  maxLines: null,
-                  keyboardType: TextInputType.multiline,
-                  labelText: 'Comentarios',
-                  hintText: 'Comentarios',
-                  validatorValue: true,
-                ),
+                    initialValue: registroEmp.empTamNumEmpComentarios,
+                    onChangedValue: (value) =>
+                        registroEmp.empTamNumEmpComentarios = value,
+                    minLines: 3,
+                    maxLines: null,
+                    keyboardType: TextInputType.multiline,
+                    labelText: 'Comentarios',
+                    hintText: 'Comentarios',
+                    valueNullable: false),
               ],
             ),
-            subTitleCard2: '5.2 Ventas',
+            subTitleCard2: 'Ventas',
             column2: Column(
               children: [
                 CustomInputField(
-                  initialValue: '${registroEmp.empVentasDiarias}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.empVentasDiarias = 0;
-                    } else {
-                      registroEmp.empVentasDiarias = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.empVentasDiarias,
+                  onChangedValue: (value) =>
+                      registroEmp.empVentasDiarias = value,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  keyboardType: TextInputType.number,
                   labelText: 'Diarias',
                   hintText: 'Diarias',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
-                  initialValue: '${registroEmp.empVentasSemanales}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.empVentasSemanales = 0;
-                    } else {
-                      registroEmp.empVentasSemanales = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.empVentasSemanales,
+                  onChangedValue: (value) =>
+                      registroEmp.empVentasSemanales = value,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  keyboardType: TextInputType.number,
                   labelText: 'Semanales',
                   hintText: 'Semanales',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
-                  initialValue: '${registroEmp.empVentasMensuales}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.empVentasMensuales = 0;
-                    } else {
-                      registroEmp.empVentasMensuales = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.empVentasMensuales,
+                  onChangedValue: (value) =>
+                      registroEmp.empVentasMensuales = value,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  keyboardType: TextInputType.number,
                   labelText: 'Mensuales',
-                  hintText: 'Mensusales',
-                  validatorValue: true,
+                  hintText: 'Mensuales',
+                  valueNullable: true,
                 ),
               ],
             ),
-            subTitleCard3: '5.3 Valor de los activos',
+            subTitleCard3: 'Valor de los activos',
             column3: Column(
               children: [
                 CustomInputField(
-                  initialValue: '${registroEmp.empValActivosTerreno}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.empValActivosTerreno = 0;
-                    } else {
-                      registroEmp.empValActivosTerreno = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.empValActivosTerreno,
+                  onChangedValue: (value) =>
+                      registroEmp.empValActivosTerreno = value,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  keyboardType: TextInputType.number,
                   labelText: 'Terreno',
                   hintText: 'Terreno',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
-                  initialValue: '${registroEmp.empValActivosBienes}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.empValActivosBienes = 0;
-                    } else {
-                      registroEmp.empValActivosBienes = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.empValActivosBienes,
+                  onChangedValue: (value) =>
+                      registroEmp.empValActivosBienes = value,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   labelText: 'Bienes',
                   hintText: 'Bienes',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
                 CustomInputField(
-                  initialValue: '${registroEmp.empValActivosOtros}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.empValActivosOtros = 0;
-                    } else {
-                      registroEmp.empValActivosOtros = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.empValActivosOtros,
+                  onChangedValue: (value) =>
+                      registroEmp.empValActivosOtros = value,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  keyboardType: TextInputType.number,
                   labelText: 'Otros',
                   hintText: 'Otros',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
               ],
             ),
-            subTitleCard4: '5.4 Calculos',
+            subTitleCard4: 'Cálculos',
             column4: Column(
               children: [
                 CustomInputField(
-                  initialValue: '${registroEmp.empCalculosVentasActivos}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.empCalculosVentasActivos = 0;
-                    } else {
-                      registroEmp.empCalculosVentasActivos = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.empCalculosVentasActivos,
+                  onChangedValue: (value) =>
+                      registroEmp.empresaAniosInicio = value,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  labelText: 'Ventas / Empleados',
-                  hintText: 'Ventas / Empleados',
-                  validatorValue: true,
+                  keyboardType: TextInputType.number,
+                  labelText: 'Ventas / Empleado',
+                  hintText: 'Ventas / Empleado',
+                  valueNullable: true,
                 ),
                 CustomInputField(
-                  initialValue: '${registroEmp.empCalculosVentasActivos}',
-                  onChangedValue: (value) {
-                    if (int.tryParse(value) == null) {
-                      registroEmp.empCalculosVentasActivos = 0;
-                    } else {
-                      registroEmp.empCalculosVentasActivos = int.parse(value);
-                    }
-                  },
+                  initialValue: registroEmp.empCalculosVentasActivos,
+                  onChangedValue: (value) =>
+                      registroEmp.empresaAniosInicio = value,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
-                  labelText: 'Ventas / Activos',
-                  hintText: 'Ventas / Activos',
-                  validatorValue: true,
+                  labelText: 'Ventas / Activo',
+                  hintText: 'Ventas / Activo',
+                  valueNullable: true,
                 ),
                 const SizedBox(height: 10),
               ],
             ),
           ),
           CustomCardType2(
-            titleCard: '6. Cobertura de mercado de la empresa',
+            titleCard: 'Cobertura de mercado de la empresa',
             column1: Column(
               children: [
                 CustomInputField(
@@ -579,7 +459,7 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empCobMercadoLocal = value,
                   labelText: 'Local',
                   hintText: 'Local',
-                  validatorValue: true,
+                  valueNullable: true,
                 ),
               ],
             ),
@@ -591,7 +471,7 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empCobMercadoRegional = value,
                   labelText: 'Regional',
                   hintText: 'Regional',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
               ],
             ),
@@ -603,14 +483,14 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empCobMercadoInternacional = value,
                   labelText: 'Internacional',
                   hintText: 'Internacional',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 const SizedBox(height: 10),
               ],
             ),
           ),
           CustomCardType2(
-            titleCard: '7. Visión de la empresa',
+            titleCard: 'Visión de la empresa',
             column1: Column(
               children: [
                 CustomInputField(
@@ -622,7 +502,7 @@ class _EmpresaForm extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   labelText: 'Corto plazo',
                   hintText: 'Corto plazo',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
               ],
             ),
@@ -637,14 +517,14 @@ class _EmpresaForm extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   labelText: 'Largo plazo',
                   hintText: 'Largo plazo',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
                 const SizedBox(height: 10),
               ],
             ),
           ),
           CustomCardType2(
-            titleCard: '8. Comentario ejecutivo de antecedendes de la empresa',
+            titleCard: 'Comentario ejecutivo de antecedendes de la empresa',
             column1: Column(
               children: [
                 CustomInputField(
@@ -658,7 +538,7 @@ class _EmpresaForm extends StatelessWidget {
                       'Comentario ejecutivo de antecedendes de la empresa',
                   hintText:
                       'Comentario ejecutivo de antecedendes de la empresa',
-                  validatorValue: true,
+                  valueNullable: false,
                 ),
               ],
             ),
