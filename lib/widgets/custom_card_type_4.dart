@@ -34,7 +34,7 @@ class CustomCardType4 extends StatelessWidget {
                       maxWidth: 100,
                       maxHeight: 100,
                     ),
-                    child: Image.asset('assets/images/logo_empresa.png',
+                    child: Image.asset('assets/images/empresario.png',
                         fit: BoxFit.cover),
                   ),
                   title: Padding(

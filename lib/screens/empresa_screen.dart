@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:app_banca_finanzas/models/models.dart';
 import 'package:app_banca_finanzas/screens/screens.dart';
-
 import 'package:app_banca_finanzas/services/services.dart';
 import 'package:app_banca_finanzas/widgets/widgets.dart';
 
@@ -13,7 +11,6 @@ class EmpresaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final empresasService = Provider.of<EmpresasService>(context);
-    final authService = Provider.of<AuthService>(context, listen: false);
 
     if (empresasService.isLoading) return const HomeScreen();
 
@@ -26,7 +23,7 @@ class EmpresaScreen extends StatelessWidget {
             elevation: 0, // hides leading widget
           )),
       body: Column(children: [
-        const MainHeader(titlePage: 'Registro de Empresas'),
+        const MainHeader(titlePage: 'Empresas Registradas'),
         Expanded(
           child: ListView.builder(
               itemCount: empresasService.empresas.length,

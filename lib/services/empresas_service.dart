@@ -30,7 +30,7 @@ class EmpresasService extends ChangeNotifier {
     final resp = await http.get(url);
 
     final Map<String, dynamic> empresasMap = json.decode(resp.body);
-    print(empresasMap);
+    //print(empresasMap);
     empresasMap.forEach((key, value) {
       final tempEmpresa = Empresa.fromMap(value);
       tempEmpresa.id = key;
@@ -64,7 +64,7 @@ class EmpresasService extends ChangeNotifier {
     final resp = await http.put(url, body: empresa.toJson());
     final decodeData = resp.body;
 
-    print(decodeData);
+    //print(decodeData);
     final index = empresas.indexWhere((element) => element.id == empresa.id);
     empresas[index] = empresa;
 
@@ -77,7 +77,7 @@ class EmpresasService extends ChangeNotifier {
     final resp = await http.post(url, body: empresa.toJson());
     final decodedData = json.decode(resp.body);
 
-    print(decodedData);
+    // print(decodedData);
     empresa.id = decodedData['name'];
 
     // empresas.add(empresa);

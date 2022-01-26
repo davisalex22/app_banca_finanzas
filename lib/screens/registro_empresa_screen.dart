@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:app_banca_finanzas/providers/empresa_form_provider.dart';
 import 'package:app_banca_finanzas/services/services.dart';
 import 'package:app_banca_finanzas/widgets/widgets.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 
 class RegistroEmpresaScreen extends StatelessWidget {
   const RegistroEmpresaScreen({Key? key}) : super(key: key);
@@ -31,6 +35,13 @@ class _EmpresaScreenBody extends StatelessWidget {
     final empresaForm = Provider.of<EmpresaFormProvider>(context);
 
     return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(0.0),
+          child: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.transparent,
+            elevation: 0, // hides leading widget
+          )),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
@@ -44,22 +55,29 @@ class _EmpresaScreenBody extends StatelessWidget {
                 onPressedValue: empresaService.isSaving
                     ? null
                     : () async {
-                        const text = 'Información guardada correctamente';
-                        const snackBar = SnackBar(
-                          content: Text(text),
-                          duration: Duration(seconds: 2),
-                        );
-
-                        if (!empresaForm.isValidForm()) return;
+                        if (empresaForm.isValidForm()) {
+                          Navigator.of(context).pop();
+                          await empresaService
+                              .saveOrCreateProduct(empresaForm.empresa);
+                          showTopSnackBar(
+                            context,
+                            const CustomSnackBar.success(
+                              message: "Información guardada correctamente",
+                            ),
+                          );
+                        } else {
+                          Navigator.of(context).pop();
+                          showTopSnackBar(
+                            context,
+                            const CustomSnackBar.error(
+                              message: "Faltan campos por llenar",
+                            ),
+                          );
+                        }
 
                         // final String? imageUrl = await productService.uploadImage();
 
                         // if (imageUrl != null) productForm.product.picture = imageUrl;
-                        Navigator.of(context).pop();
-
-                        await empresaService
-                            .saveOrCreateProduct(empresaForm.empresa);
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
               ),
             ),
@@ -83,6 +101,121 @@ class _EmpresaForm extends StatelessWidget {
         children: [
           const MainHeader(titlePage: 'Registro de Empresa'),
           CustomCardType2(
+            titleCard: 'Seleccione Empresario',
+            column1: Column(
+              children: [
+                ///Menu Mode with no searchBox
+                DropdownSearch<String>(
+                  validator: (v) => v == null ? "required field" : null,
+                  dropdownSearchDecoration: InputDecoration(
+                    hintText: "Select a country",
+                    labelText: "Menu mode *",
+                    contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                    border: OutlineInputBorder(),
+                  ),
+                  mode: Mode.MENU,
+                  showSelectedItems: true,
+                  items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                  showClearButton: true,
+                  onChanged: print,
+                  popupItemDisabled: (String? s) => s?.startsWith('I') ?? false,
+                  clearButtonSplashRadius: 20,
+                  selectedItem: "Tunisia",
+                  onBeforeChange: (a, b) {
+                    if (b == null) {
+                      AlertDialog alert = AlertDialog(
+                        title: Text("Are you sure..."),
+                        content: Text("...you want to clear the selection"),
+                        actions: [
+                          TextButton(
+                            child: Text("OK"),
+                            onPressed: () {
+                              Navigator.of(context).pop(true);
+                            },
+                          ),
+                          TextButton(
+                            child: Text("NOT OK"),
+                            onPressed: () {
+                              Navigator.of(context).pop(false);
+                            },
+                          ),
+                        ],
+                      );
+
+                      return showDialog<bool>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return alert;
+                          });
+                    }
+
+                    return Future.value(true);
+                  },
+                ),
+                Divider(),
+
+                ///Menu Mode with no searchBox
+
+                ///Menu Mode with overriden icon and dropdown buttons
+
+                ///BottomSheet Mode with no searchBox
+                DropdownSearch<String>(
+                  mode: Mode.BOTTOM_SHEET,
+                  items: [
+                    "Brazil",
+                    "Italia",
+                    "Tunisia",
+                    'Canada',
+                    'Zraoua',
+                    'France',
+                    'Belgique'
+                  ],
+                  dropdownSearchDecoration: InputDecoration(
+                    labelText: "Custom BottomShet mode",
+                    contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                    border: OutlineInputBorder(),
+                  ),
+                  onChanged: print,
+                  selectedItem: "Brazil",
+                  showSearchBox: true,
+                  searchFieldProps: TextFieldProps(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      contentPadding: EdgeInsets.fromLTRB(12, 12, 8, 0),
+                      labelText: "Search a country1",
+                    ),
+                  ),
+                  popupTitle: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColorDark,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Country',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  popupShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24),
+                      topRight: Radius.circular(24),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          CustomCardType2(
             titleCard: '1. Información general',
             column1: Column(
               children: [
@@ -91,6 +224,7 @@ class _EmpresaForm extends StatelessWidget {
                   onChangedValue: (value) => registroEmp.empresaNombre = value,
                   labelText: 'Nombre',
                   hintText: 'Nombre',
+                  validatorValue: true,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresaDireccion,
@@ -98,6 +232,7 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empresaDireccion = value,
                   labelText: 'Dirección',
                   hintText: 'Dirección',
+                  validatorValue: true,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresaTelefono,
@@ -105,25 +240,49 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empresaTelefono = value,
                   labelText: 'Correo, teléfono, etc',
                   hintText: 'Contactos',
+                  validatorValue: true,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresaRfc,
                   onChangedValue: (value) => registroEmp.empresaRfc = value,
                   labelText: 'R.F.C',
                   hintText: 'R.F.C',
+                  validatorValue: true,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresaDomicilioFiscal,
                   onChangedValue: (value) =>
                       registroEmp.empresaDomicilioFiscal = value,
                   labelText: 'Domicilio fiscal',
+                  validatorValue: true,
                 ),
               ],
             ),
           ),
           CustomCardType2(
             titleCard: '2. Antigüedad de la Empresa',
+            subTitleCard1: 'Año de inicio de la empresa',
             column1: Column(
+              children: [
+                CustomInputField(
+                  initialValue: '${registroEmp.empresaAniosInicio}',
+                  onChangedValue: (value) {
+                    if (int.tryParse(value) == null) {
+                      registroEmp.empresaAniosInicio = 0;
+                    } else {
+                      registroEmp.empresaAniosInicio = int.parse(value);
+                    }
+                  },
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  keyboardType: TextInputType.number,
+                  labelText: 'Año de inicio la Empresa',
+                  hintText: 'Año de inicio la Empresa',
+                  validatorValue: true,
+                ),
+              ],
+            ),
+            subTitleCard2: 'Años de la empresa',
+            column2: Column(
               children: [
                 CustomInputField(
                   initialValue: '${registroEmp.empresaAniosAntiguedad}',
@@ -134,10 +293,13 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empresaAniosAntiguedad = int.parse(value);
                     }
                   },
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   labelText: 'Años de la Empresa',
                   hintText: 'Años de la Empresa',
+                  validatorValue: true,
                 ),
+                const SizedBox(height: 10)
               ],
             ),
           ),
@@ -151,6 +313,7 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empEstLegalPersonaFisica = value,
                   labelText: 'Persona física',
                   hintText: 'Persona física',
+                  validatorValue: true,
                 ),
               ],
             ),
@@ -162,6 +325,7 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empEstLegalPersonaMoral = value,
                   labelText: 'Persona moral',
                   hintText: 'Persona moral',
+                  validatorValue: true,
                 ),
               ],
             ),
@@ -173,6 +337,7 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empEstLegalNoRegistrada = value,
                   labelText: 'Persona no registrada',
                   hintText: 'Persona no registrada',
+                  validatorValue: true,
                 ),
                 const SizedBox(height: 10),
               ],
@@ -191,6 +356,7 @@ class _EmpresaForm extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   labelText: 'Estatus fiscal de la Empresa',
                   hintText: 'Estatus fiscal de la Empresa',
+                  validatorValue: true,
                 ),
               ],
             ),
@@ -209,9 +375,11 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empTamNumEmpOperativos = int.parse(value);
                     }
                   },
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   labelText: 'Operativos',
                   hintText: 'Operativos',
+                  validatorValue: true,
                 ),
                 CustomInputField(
                   initialValue: '${registroEmp.empTamNumEmpAdministrativos}',
@@ -223,9 +391,11 @@ class _EmpresaForm extends StatelessWidget {
                           int.parse(value);
                     }
                   },
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   labelText: 'Administrativos',
                   hintText: 'Administrativos',
+                  validatorValue: true,
                 ),
                 CustomInputField(
                   initialValue: '${registroEmp.empTamNumEmpOtros}',
@@ -236,9 +406,11 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empTamNumEmpOtros = int.parse(value);
                     }
                   },
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   labelText: 'Otros',
                   hintText: 'Otros',
+                  validatorValue: true,
                 ),
                 CustomInputField(
                   initialValue: '${registroEmp.empTamNumEmpTotal}',
@@ -249,9 +421,11 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empTamNumEmpTotal = int.parse(value);
                     }
                   },
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   labelText: 'Total',
                   hintText: 'Total',
+                  validatorValue: true,
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empTamNumEmpComentarios,
@@ -262,6 +436,7 @@ class _EmpresaForm extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   labelText: 'Comentarios',
                   hintText: 'Comentarios',
+                  validatorValue: true,
                 ),
               ],
             ),
@@ -277,8 +452,10 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empVentasDiarias = int.parse(value);
                     }
                   },
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   labelText: 'Diarias',
                   hintText: 'Diarias',
+                  validatorValue: true,
                 ),
                 CustomInputField(
                   initialValue: '${registroEmp.empVentasSemanales}',
@@ -291,6 +468,7 @@ class _EmpresaForm extends StatelessWidget {
                   },
                   labelText: 'Semanales',
                   hintText: 'Semanales',
+                  validatorValue: true,
                 ),
                 CustomInputField(
                   initialValue: '${registroEmp.empVentasMensuales}',
@@ -301,8 +479,10 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empVentasMensuales = int.parse(value);
                     }
                   },
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   labelText: 'Mensuales',
                   hintText: 'Mensusales',
+                  validatorValue: true,
                 ),
               ],
             ),
@@ -318,8 +498,10 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empValActivosTerreno = int.parse(value);
                     }
                   },
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   labelText: 'Terreno',
                   hintText: 'Terreno',
+                  validatorValue: true,
                 ),
                 CustomInputField(
                   initialValue: '${registroEmp.empValActivosBienes}',
@@ -330,9 +512,11 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empValActivosBienes = int.parse(value);
                     }
                   },
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   labelText: 'Bienes',
                   hintText: 'Bienes',
+                  validatorValue: true,
                 ),
                 CustomInputField(
                   initialValue: '${registroEmp.empValActivosOtros}',
@@ -343,8 +527,10 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empValActivosOtros = int.parse(value);
                     }
                   },
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   labelText: 'Otros',
                   hintText: 'Otros',
+                  validatorValue: true,
                 ),
               ],
             ),
@@ -360,8 +546,10 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empCalculosVentasActivos = int.parse(value);
                     }
                   },
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   labelText: 'Ventas / Empleados',
                   hintText: 'Ventas / Empleados',
+                  validatorValue: true,
                 ),
                 CustomInputField(
                   initialValue: '${registroEmp.empCalculosVentasActivos}',
@@ -375,6 +563,7 @@ class _EmpresaForm extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   labelText: 'Ventas / Activos',
                   hintText: 'Ventas / Activos',
+                  validatorValue: true,
                 ),
                 const SizedBox(height: 10),
               ],
@@ -390,6 +579,7 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empCobMercadoLocal = value,
                   labelText: 'Local',
                   hintText: 'Local',
+                  validatorValue: true,
                 ),
               ],
             ),
@@ -401,6 +591,7 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empCobMercadoRegional = value,
                   labelText: 'Regional',
                   hintText: 'Regional',
+                  validatorValue: true,
                 ),
               ],
             ),
@@ -412,6 +603,7 @@ class _EmpresaForm extends StatelessWidget {
                       registroEmp.empCobMercadoInternacional = value,
                   labelText: 'Internacional',
                   hintText: 'Internacional',
+                  validatorValue: true,
                 ),
                 const SizedBox(height: 10),
               ],
@@ -430,6 +622,7 @@ class _EmpresaForm extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   labelText: 'Corto plazo',
                   hintText: 'Corto plazo',
+                  validatorValue: true,
                 ),
               ],
             ),
@@ -444,6 +637,7 @@ class _EmpresaForm extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   labelText: 'Largo plazo',
                   hintText: 'Largo plazo',
+                  validatorValue: true,
                 ),
                 const SizedBox(height: 10),
               ],
@@ -464,6 +658,7 @@ class _EmpresaForm extends StatelessWidget {
                       'Comentario ejecutivo de antecedendes de la empresa',
                   hintText:
                       'Comentario ejecutivo de antecedendes de la empresa',
+                  validatorValue: true,
                 ),
               ],
             ),

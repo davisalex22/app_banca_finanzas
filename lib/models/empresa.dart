@@ -26,6 +26,7 @@ class Empresa {
     this.empVisionCortoPlazo,
     this.empVisionLargoPlazo,
     this.empresaAniosAntiguedad,
+    this.empresaAniosInicio,
     this.empresaDireccion,
     this.empresaDomicilioFiscal,
     this.empresaNombre,
@@ -57,6 +58,7 @@ class Empresa {
   int? empVentasSemanales;
   String? empVisionCortoPlazo;
   String? empVisionLargoPlazo;
+  int? empresaAniosInicio;
   int? empresaAniosAntiguedad;
   String? empresaDireccion;
   String? empresaDomicilioFiscal;
@@ -94,7 +96,8 @@ class Empresa {
         empVentasSemanales: json["emp_ventas_semanales"].toInt(),
         empVisionCortoPlazo: json["emp_vision_cortoPlazo"],
         empVisionLargoPlazo: json["emp_vision_largoPlazo"],
-        empresaAniosAntiguedad: json["empresa_aniosAntiguedad"],
+        empresaAniosAntiguedad: json["empresa_aniosAntiguedad"].toInt(),
+        empresaAniosInicio: json["empresa_aniosInicio"].toInt(),
         empresaDireccion: json["empresa_direccion"],
         empresaDomicilioFiscal: json["empresa_domicilioFiscal"],
         empresaNombre: json["empresa_nombre"],
@@ -127,6 +130,7 @@ class Empresa {
         "emp_vision_cortoPlazo": empVisionCortoPlazo,
         "emp_vision_largoPlazo": empVisionLargoPlazo,
         "empresa_aniosAntiguedad": empresaAniosAntiguedad,
+        "empresa_aniosInicio": empresaAniosInicio,
         "empresa_direccion": empresaDireccion,
         "empresa_domicilioFiscal": empresaDomicilioFiscal,
         "empresa_nombre": empresaNombre,
@@ -158,6 +162,7 @@ class Empresa {
         empVentasSemanales: empVentasSemanales,
         empVisionCortoPlazo: empVisionCortoPlazo,
         empVisionLargoPlazo: empVisionLargoPlazo,
+        empresaAniosInicio: empresaAniosInicio,
         empresaAniosAntiguedad: empresaAniosAntiguedad,
         empresaDireccion: empresaDireccion,
         empresaDomicilioFiscal: empresaDomicilioFiscal,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomInputField extends StatelessWidget {
   final String? hintText;
@@ -12,8 +13,8 @@ class CustomInputField extends StatelessWidget {
   final int? maxLines;
   final String? initialValue;
   final Function(String) onChangedValue;
-  // final String formProperty;
-  //final Map<String, String> formValues;
+  final List<TextInputFormatter>? inputFormatters;
+  final bool validatorValue;
 
   const CustomInputField({
     Key? key,
@@ -28,8 +29,8 @@ class CustomInputField extends StatelessWidget {
     this.maxLines,
     required this.onChangedValue,
     this.initialValue,
-    //required this.formProperty,
-    //required this.formValues,
+    this.inputFormatters,
+    required this.validatorValue,
   }) : super(key: key);
 
   @override
@@ -44,6 +45,14 @@ class CustomInputField extends StatelessWidget {
         obscureText: obscureText,
         minLines: minLines,
         maxLines: maxLines,
+        inputFormatters: inputFormatters,
+        validator: (value) {
+          if (validatorValue == true) {
+            if (value == null || value.isEmpty) {
+              return 'El campo $hintText es obligatorio';
+            }
+          }
+        },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
           labelText: hintText,

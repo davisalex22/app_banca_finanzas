@@ -43,7 +43,7 @@ class EmpresariosService extends ChangeNotifier {
     return empresarios;
   }
 
-  Future saveOrCreateProduct(Empresario empresario) async {
+  Future saveOrCreateEmpresario(Empresario empresario) async {
     isSaving = true;
     notifyListeners();
 
@@ -52,15 +52,16 @@ class EmpresariosService extends ChangeNotifier {
       await createEmpresario(empresario);
     } else {
       // Actualizar
-      await updateEmpresa(empresario);
+      await updateEmpresario(empresario);
     }
 
     isSaving = false;
     notifyListeners();
   }
 
-  Future<String> updateEmpresa(Empresario empresario) async {
-    final url = Uri.https(_baseUrl, 'RegistrosEmpresas/${empresario.id}.json');
+  Future<String> updateEmpresario(Empresario empresario) async {
+    final url =
+        Uri.https(_baseUrl, 'RegistrosEmpresarios/${empresario.id}.json');
     final resp = await http.put(url, body: empresario.toJson());
     final decodeData = resp.body;
 
