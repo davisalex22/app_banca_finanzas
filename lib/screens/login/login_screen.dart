@@ -81,14 +81,14 @@ class _LoginForm extends StatelessWidget {
             obscureText: true,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecorations.authInputDecoration(
-                hintText: '*****',
+                hintText: '**********',
                 labelText: 'Contraseña',
                 prefixIcon: Icons.lock_outline),
             onChanged: (value) => loginForm.password = value,
             validator: (value) {
               return (value != null && value.length >= 6)
                   ? null
-                  : 'La contraseña debe de ser de al menos 6 caractéres';
+                  : 'La contraseña debe contener al menos 6 caractéres';
             },
           ),
           const SizedBox(height: 30),

@@ -50,7 +50,7 @@ class _EmpresaScreenBody extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: CustomAlert(
                 titleAlert: 'Información',
-                contentAlert: '¿Desea guardar los cambios?',
+                contentAlert: '¿Deseas guardar los cambios?',
                 onPressedValue: empresaService.isSaving
                     ? null
                     : () async {
@@ -426,9 +426,9 @@ class _EmpresaForm extends StatelessWidget {
             column4: Column(
               children: [
                 CustomInputField(
-                  initialValue: registroEmp.empCalculosVentasActivos,
+                  initialValue: registroEmp.empCalculosVentasEmpleados,
                   onChangedValue: (value) =>
-                      registroEmp.empresaAniosInicio = value,
+                      registroEmp.empCalculosVentasEmpleados = value,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   labelText: 'Ventas / Empleado',
@@ -438,7 +438,7 @@ class _EmpresaForm extends StatelessWidget {
                 CustomInputField(
                   initialValue: registroEmp.empCalculosVentasActivos,
                   onChangedValue: (value) =>
-                      registroEmp.empresaAniosInicio = value,
+                      registroEmp.empCalculosVentasActivos = value,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   labelText: 'Ventas / Activo',

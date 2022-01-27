@@ -26,25 +26,20 @@ class HomeScreen extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const <Widget>[
-              CustomCardType1(
+              CustomCardType5(
                 iconCard: Icons.arrow_forward_ios,
-                titleCard: 'Registrar Empresario',
-                logoCard: 'assets/images/logo_empresario.png',
+                titleCard: 'Empresarios',
+                logoCard:
+                    'https://img.freepik.com/foto-gratis/empresario-sonriente-anteojos-sentado-junto-mesa-cafeteria-computadora-portatil-mientras-usa-telefono-inteligente-escribe-algo_171337-5589.jpg?size=626&ext=jpg',
                 routePage: '/empresario',
               ),
               SizedBox(height: 20.0),
-              CustomCardType1(
+              CustomCardType5(
                 iconCard: Icons.arrow_forward_ios,
-                titleCard: 'Registrar Empresa',
-                logoCard: 'assets/images/logo_empresa.png',
+                titleCard: 'Empresas',
+                logoCard:
+                    'https://www.automotivesupplynews.com.mx/wp-content/uploads/2017/10/tipos-de-empresas.jpg',
                 routePage: '/empresa',
-              ),
-              SizedBox(height: 20.0),
-              CustomCardType1(
-                iconCard: Icons.arrow_forward_ios,
-                titleCard: 'Registros',
-                logoCard: 'assets/images/logo_registros.png',
-                routePage: '/registros',
               ),
             ],
           ),

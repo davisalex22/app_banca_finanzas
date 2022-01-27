@@ -31,7 +31,7 @@ class EmpresaScreen extends StatelessWidget {
                     onTap: () {
                       empresasService.selectedEmpresa =
                           empresasService.empresas[index].copy();
-                      Navigator.pushNamed(context, '/registroEmpresa');
+                      Navigator.pushNamed(context, '/infoEmpresa');
                     },
                     child: CustomCardType3(
                       empresa: empresasService.empresas[index],

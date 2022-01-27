@@ -14,8 +14,6 @@ class AppRoutes {
         const RegistroEmpresarioScreen(),
     '/empresa': (BuildContext context) => const EmpresaScreen(),
     '/registroEmpresa': (BuildContext context) => const RegistroEmpresaScreen(),
-    '/registroEmpresario': (BuildContext context) =>
-        const RegistroEmpresarioScreen(),
-    '/registros': (BuildContext context) => const RegistrosScreen(),
+    '/infoEmpresa': (BuildContext context) => const InfoEmpresaScreen(),
   };
 }

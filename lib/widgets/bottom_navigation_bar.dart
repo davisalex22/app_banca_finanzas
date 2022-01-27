@@ -27,12 +27,6 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       unselectedFontSize: 14,
       onTap: (index) {
         setState(() => _paginaActual = index);
-        if (_paginaActual == 0) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const RegistrosScreen()),
-          );
-        }
         if (_paginaActual == 1) {
           Navigator.push(
             context,

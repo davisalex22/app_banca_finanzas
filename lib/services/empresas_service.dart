@@ -43,6 +43,14 @@ class EmpresasService extends ChangeNotifier {
     return empresas;
   }
 
+  Future deleteEmpresa(Empresa empresa) async {
+    final url = Uri.https(_baseUrl, 'RegistrosEmpresas/${empresa.id}.json');
+    final resp = await http.delete(url);
+    final decodeData = resp.body;
+
+    print("eliminado");
+  }
+
   Future saveOrCreateProduct(Empresa empresa) async {
     isSaving = true;
     notifyListeners();
