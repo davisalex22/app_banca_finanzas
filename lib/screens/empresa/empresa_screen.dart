@@ -45,7 +45,7 @@ class EmpresaScreen extends StatelessWidget {
         icon: const Icon(Icons.add),
         onPressed: () {
           empresasService.selectedEmpresa = Empresa();
-          Navigator.pushNamed(context, '/registroEmpresa');
+          Navigator.pushNamed(context, '/formEmpresa');
         },
       ),
     );

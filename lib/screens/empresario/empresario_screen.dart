@@ -34,7 +34,7 @@ class EmpresarioScreen extends StatelessWidget {
                     onTap: () {
                       empresariosService.selectedEmpresario =
                           empresariosService.empresarios[index].copy();
-                      Navigator.pushNamed(context, '/registroEmpresario');
+                      Navigator.pushNamed(context, '/formEmpresario');
                     },
                     child: CustomCardType4(
                       empresario: empresariosService.empresarios[index],
@@ -48,7 +48,7 @@ class EmpresarioScreen extends StatelessWidget {
         icon: const Icon(Icons.add),
         onPressed: () {
           empresariosService.selectedEmpresario = Empresario();
-          Navigator.pushNamed(context, '/registroEmpresario');
+          Navigator.pushNamed(context, '/formEmpresario');
         },
       ),
     );
