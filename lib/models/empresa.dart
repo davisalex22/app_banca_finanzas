@@ -31,6 +31,7 @@ class Empresa {
     this.empresaDomicilioFiscal,
     this.empresaNombre,
     this.empresaRfc,
+    this.empresaDuenio,
     this.empresaTelefono,
     this.id,
   });
@@ -64,6 +65,7 @@ class Empresa {
   String? empresaDomicilioFiscal;
   String? empresaNombre;
   String? empresaRfc;
+  String? empresaDuenio;
   String? empresaTelefono;
   String? id;
 
@@ -104,6 +106,7 @@ class Empresa {
         empresaNombre: json["empresa_nombre"],
         empresaRfc: json["empresa_rfc"],
         empresaTelefono: json["empresa_telefono"],
+        empresaDuenio: json["empresa_duenio"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -137,6 +140,7 @@ class Empresa {
         "empresa_nombre": empresaNombre,
         "empresa_rfc": empresaRfc,
         "empresa_telefono": empresaTelefono,
+        "empresa_duenio": empresaDuenio,
       };
 
   Empresa copy() => Empresa(
@@ -169,6 +173,7 @@ class Empresa {
         empresaDomicilioFiscal: empresaDomicilioFiscal,
         empresaNombre: empresaNombre,
         empresaRfc: empresaRfc,
+        empresaDuenio: empresaDuenio,
         empresaTelefono: empresaTelefono,
         id: id,
       );

@@ -105,14 +105,15 @@ class _EmpresaForm extends StatelessWidget {
         children: [
           const MainHeader(titlePage: 'Registro de Empresa'),
           CustomCardType2(
-            titleCard: 'Seleccione Empresario',
+            titleCard: 'Seleccione empresario',
             column1: Column(
               children: [
                 DropDownSearchList(
-                  labelTextInput: 'Seleccione Empresario',
-                  labelTextSearch: 'Buscar Empresario',
+                  labelTextInput: 'Seleccione empresario',
+                  labelTextSearch: 'Buscar empresario',
                   titleSearch: 'Empresarios',
                   listOptions: nombresEmpresarios,
+                  onChangedValue: (value) => registroEmp.empresaDuenio = value,
                 ),
               ],
             ),

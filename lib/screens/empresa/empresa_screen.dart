@@ -44,11 +44,31 @@ class EmpresaScreen extends StatelessWidget {
         label: const Text('Empresa'),
         icon: const Icon(Icons.add),
         onPressed: () {
-          empresasService.selectedEmpresa = Empresa();
-          Navigator.pushNamed(context, '/formEmpresa');
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              switch (value) {
+                case TextMenu.settings:
+                  empresasService.selectedEmpresa = Empresa();
+                  Navigator.pushNamed(context, '/formEmpresa');
+                  break;
+              }
+            },
+            itemBuilder: (context) => TextMenu.items
+                .map((item) => PopupMenuItem<String>(
+                      value: item,
+                      child: Text(item),
+                    ))
+                .toList(),
+          );
         },
       ),
       bottomNavigationBar: const CustomNavigationBar(),
     );
   }
+}
+
+class TextMenu {
+  static const items = <String>[settings, share];
+  static const String settings = 'Settings';
+  static const String share = 'Settings';
 }

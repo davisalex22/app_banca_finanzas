@@ -18,5 +18,6 @@ class AppRoutes {
     '/formSubMercado': (BuildContext context) =>
         const RegistroSubMercadoScreen(),
     '/infoEmpresa': (BuildContext context) => const InfoEmpresaScreen(),
+    '/infoEmpresario': (BuildContext context) => const InfoEmpresarioScreen(),
   };
 }

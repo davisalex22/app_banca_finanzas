@@ -64,12 +64,18 @@ class EmpresariosService extends ChangeNotifier {
     final resp = await http.put(url, body: empresario.toJson());
     final decodeData = resp.body;
 
-    print(decodeData);
     final index =
         empresarios.indexWhere((element) => element.id == empresario.id);
     empresarios[index] = empresario;
 
     return empresario.id!;
+  }
+
+  Future deleteEmpresario(Empresario empresario) async {
+    final url =
+        Uri.https(_baseUrl, 'RegistrosEmpresarios/${empresario.id}.json');
+    final resp = await http.delete(url);
+    final decodeData = resp.body;
   }
 
   Future<String> createEmpresario(Empresario empresario) async {
@@ -78,7 +84,6 @@ class EmpresariosService extends ChangeNotifier {
     final resp = await http.post(url, body: empresario.toJson());
     final decodedData = json.decode(resp.body);
 
-    print(decodedData);
     empresario.id = decodedData['name'];
 
     // empresas.add(empresa);

@@ -7,3 +7,4 @@ export 'package:app_banca_finanzas/screens/login/register_screen.dart';
 export 'package:app_banca_finanzas/screens/empresa/form_empresa_screen.dart';
 export 'package:app_banca_finanzas/screens/empresario/empresario_screen.dart';
 export 'package:app_banca_finanzas/screens/empresa/info_empresa.dart';
+export 'package:app_banca_finanzas/screens/empresario/info_empresario.dart';
