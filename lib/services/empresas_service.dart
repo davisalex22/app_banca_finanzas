@@ -91,41 +91,41 @@ class EmpresasService extends ChangeNotifier {
     return '';
   }
 
-  // void updateSelectedProductImage(String path) {
-  //   selectedE.picture = path;
-  //   newPictureFile = File.fromUri(Uri(path: path));
+  void updateSelectedProductImage(String path) {
+    selectedEmpresa.picture = path;
+    newPictureFile = File.fromUri(Uri(path: path));
 
-  //   notifyListeners();
-  // }
+    notifyListeners();
+  }
 
-  // Future<String?> uploadImage() async {
-  //   if (newPictureFile == null) return null;
+  Future<String?> uploadImage() async {
+    if (newPictureFile == null) return null;
 
-  //   isSaving = true;
-  //   notifyListeners();
+    isSaving = true;
+    notifyListeners();
 
-  //   final url = Uri.parse(
-  //       'https://api.cloudinary.com/v1_1/dx0pryfzn/image/upload?upload_preset=autwc6pa');
+    final url = Uri.parse(
+        'https://api.cloudinary.com/v1_1/do5rrdvvv/image/upload?upload_preset=tzjq8shc');
 
-  //   final imageUploadRequest = http.MultipartRequest('POST', url);
+    final imageUploadRequest = http.MultipartRequest('POST', url);
 
-  //   final file =
-  //       await http.MultipartFile.fromPath('file', newPictureFile!.path);
+    final file =
+        await http.MultipartFile.fromPath('file', newPictureFile!.path);
 
-  //   imageUploadRequest.files.add(file);
+    imageUploadRequest.files.add(file);
 
-  //   final streamResponse = await imageUploadRequest.send();
-  //   final resp = await http.Response.fromStream(streamResponse);
+    final streamResponse = await imageUploadRequest.send();
+    final resp = await http.Response.fromStream(streamResponse);
 
-  //   if (resp.statusCode != 200 && resp.statusCode != 201) {
-  //     // print('algo salio mal');
-  //     // print(resp.body);
-  //     return null;
-  //   }
+    if (resp.statusCode != 200 && resp.statusCode != 201) {
+      // print('algo salio mal');
+      // print(resp.body);
+      return null;
+    }
 
-  //   newPictureFile = null;
+    newPictureFile = null;
 
-  //   final decodedData = json.decode(resp.body);
-  //   return decodedData['secure_url'];
-  // }
+    final decodedData = json.decode(resp.body);
+    return decodedData['secure_url'];
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:app_banca_finanzas/providers/empresa_form_provider.dart';
 import 'package:app_banca_finanzas/services/services.dart';
@@ -56,6 +57,11 @@ class _EmpresaScreenBody extends StatelessWidget {
                     : () async {
                         if (empresaForm.isValidForm()) {
                           Navigator.of(context).pop();
+                          final String? imageUrl =
+                              await empresaService.uploadImage();
+                          if (imageUrl != null) {
+                            empresaForm.empresa.picture = imageUrl;
+                          }
                           await empresaService
                               .saveOrCreateProduct(empresaForm.empresa);
                           showTopSnackBar(
@@ -75,8 +81,6 @@ class _EmpresaScreenBody extends StatelessWidget {
                           );
                         }
 
-                        // final String? imageUrl = await productService.uploadImage();
-
                         // if (imageUrl != null) productForm.product.picture = imageUrl;
                       },
               ),
@@ -95,6 +99,7 @@ class _EmpresaForm extends StatelessWidget {
     final empresaForm = Provider.of<EmpresaFormProvider>(context);
     final registroEmp = empresaForm.empresa;
     final empresariosService = Provider.of<EmpresariosService>(context);
+    final empresaService = Provider.of<EmpresasService>(context);
     final List<String> nombresEmpresarios = empresariosService.empresarios
         .map((e) => e.empresarioNombre.toString())
         .toList();
@@ -496,6 +501,55 @@ class _EmpresaForm extends StatelessWidget {
                   hintText:
                       'Comentario ejecutivo de antecedendes de la empresa',
                   valueNullable: false,
+                ),
+              ],
+            ),
+          ),
+          CustomCardType2(
+            titleCard: 'Organigrama de la empresa',
+            column1: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      onPressed: () async {
+                        final picker = ImagePicker();
+                        final PickedFile? pickedFile = await picker.getImage(
+                            source: ImageSource.camera, imageQuality: 100);
+
+                        if (pickedFile == null) {
+                          print('No seleccionó nada');
+                          return;
+                        }
+
+                        empresaService
+                            .updateSelectedProductImage(pickedFile.path);
+                      },
+                      icon: const Icon(Icons.camera_alt_outlined,
+                          size: 40, color: Colors.black),
+                    ),
+                    IconButton(
+                      onPressed: () async {
+                        final picker = ImagePicker();
+                        final PickedFile? pickedFile = await picker.getImage(
+                            source: ImageSource.gallery, imageQuality: 100);
+
+                        if (pickedFile == null) {
+                          // print('No seleccionó nada');
+                          return;
+                        }
+
+                        empresaService
+                            .updateSelectedProductImage(pickedFile.path);
+                      },
+                      icon: const Icon(Icons.photo_size_select_large_rounded,
+                          size: 40, color: Colors.black),
+                    ),
+                  ],
+                ),
+                OrganigramaImage(
+                  url: empresaForm.empresa.picture,
                 ),
               ],
             ),

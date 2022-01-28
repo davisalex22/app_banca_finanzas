@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                   iconCard: Icons.arrow_forward_ios,
                   titleCard: 'Subsistema',
                   logoCard:
-                      'https://www.automotivesupplynews.com.mx/wp-content/uploads/2017/10/tipos-de-empresas.jpg',
+                      'https://www.macmillandictionaryblog.com/wp-content/uploads/2017/08/enterprise-1024x625.jpg',
                   routePage: '/subMercado',
                 ),
               ],

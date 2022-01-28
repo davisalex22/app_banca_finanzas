@@ -36,6 +36,7 @@ class MainHeader extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: Text(titlePage,
+              textAlign: TextAlign.center,
               style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,

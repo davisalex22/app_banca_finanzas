@@ -1,40 +1,40 @@
 import 'dart:convert';
 
 class Empresa {
-  Empresa({
-    this.empCalculosVentasActivos,
-    this.empCalculosVentasEmpleados,
-    this.empCobMercadoInternacional,
-    this.empCobMercadoLocal,
-    this.empCobMercadoRegional,
-    this.empComentarioEjecutivo,
-    this.empEstLegalNoRegistrada,
-    this.empEstLegalPersonaFisica,
-    this.empEstLegalPersonaMoral,
-    this.empEstatusFiscal,
-    this.empTamNumEmpAdministrativos,
-    this.empTamNumEmpComentarios,
-    this.empTamNumEmpOperativos,
-    this.empTamNumEmpOtros,
-    this.empTamNumEmpTotal,
-    this.empValActivosBienes,
-    this.empValActivosOtros,
-    this.empValActivosTerreno,
-    this.empVentasDiarias,
-    this.empVentasMensuales,
-    this.empVentasSemanales,
-    this.empVisionCortoPlazo,
-    this.empVisionLargoPlazo,
-    this.empresaAniosAntiguedad,
-    this.empresaAniosInicio,
-    this.empresaDireccion,
-    this.empresaDomicilioFiscal,
-    this.empresaNombre,
-    this.empresaRfc,
-    this.empresaDuenio,
-    this.empresaTelefono,
-    this.id,
-  });
+  Empresa(
+      {this.empCalculosVentasActivos,
+      this.empCalculosVentasEmpleados,
+      this.empCobMercadoInternacional,
+      this.empCobMercadoLocal,
+      this.empCobMercadoRegional,
+      this.empComentarioEjecutivo,
+      this.empEstLegalNoRegistrada,
+      this.empEstLegalPersonaFisica,
+      this.empEstLegalPersonaMoral,
+      this.empEstatusFiscal,
+      this.empTamNumEmpAdministrativos,
+      this.empTamNumEmpComentarios,
+      this.empTamNumEmpOperativos,
+      this.empTamNumEmpOtros,
+      this.empTamNumEmpTotal,
+      this.empValActivosBienes,
+      this.empValActivosOtros,
+      this.empValActivosTerreno,
+      this.empVentasDiarias,
+      this.empVentasMensuales,
+      this.empVentasSemanales,
+      this.empVisionCortoPlazo,
+      this.empVisionLargoPlazo,
+      this.empresaAniosAntiguedad,
+      this.empresaAniosInicio,
+      this.empresaDireccion,
+      this.empresaDomicilioFiscal,
+      this.empresaNombre,
+      this.empresaRfc,
+      this.empresaDuenio,
+      this.empresaTelefono,
+      this.id,
+      this.picture});
 
   String? empCalculosVentasActivos;
   String? empCalculosVentasEmpleados;
@@ -68,6 +68,7 @@ class Empresa {
   String? empresaDuenio;
   String? empresaTelefono;
   String? id;
+  String? picture;
 
   factory Empresa.fromJson(String str) => Empresa.fromMap(json.decode(str));
 
@@ -107,6 +108,7 @@ class Empresa {
         empresaRfc: json["empresa_rfc"],
         empresaTelefono: json["empresa_telefono"],
         empresaDuenio: json["empresa_duenio"],
+        picture: json["picture"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -141,6 +143,7 @@ class Empresa {
         "empresa_rfc": empresaRfc,
         "empresa_telefono": empresaTelefono,
         "empresa_duenio": empresaDuenio,
+        "picture": picture,
       };
 
   Empresa copy() => Empresa(
@@ -176,5 +179,6 @@ class Empresa {
         empresaDuenio: empresaDuenio,
         empresaTelefono: empresaTelefono,
         id: id,
+        picture: picture,
       );
 }

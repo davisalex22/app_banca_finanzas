@@ -326,6 +326,17 @@ class InfoEmpresaScreen extends StatelessWidget {
                       titleCategory: 'Comentario ejecutivo',
                       dataRow: const [],
                     ),
+                    const LineDivider(),
+                    const Text(
+                      'Organigrama',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    OrganigramaImage(
+                      url: value.picture,
+                    ),
                   ],
                 ),
               ),
