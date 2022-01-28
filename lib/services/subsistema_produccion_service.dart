@@ -1,14 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:app_banca_finanzas/models/subsistema_produccion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:app_banca_finanzas/models/models.dart';
 
-class EmpresasService extends ChangeNotifier {
+class SubProduccionService extends ChangeNotifier {
   final String _baseUrl = 'app-banca-finanzas-default-rtdb.firebaseio.com';
-  final List<Empresa> empresas = [];
-  late Empresa selectedEmpresa;
+  final List<SubsistemaProduccion> subSistemasProduccionList = [];
+  late SubsistemaProduccion selectedsubProduccion;
 
   final storage = const FlutterSecureStorage();
 
@@ -17,75 +18,70 @@ class EmpresasService extends ChangeNotifier {
   bool isLoading = true;
   bool isSaving = false;
 
-  EmpresasService() {
-    loadEmpresas();
+  SubProduccionService() {
+    loadsubSistemasProduccionList();
   }
 
-  Future loadEmpresas() async {
+  Future loadsubSistemasProduccionList() async {
     isLoading = true;
     notifyListeners();
 
-    final url = Uri.https(_baseUrl, 'RegistrosEmpresas.json');
+    final url = Uri.https(_baseUrl, 'RegistrossubSistemasProduccionList.json');
     final resp = await http.get(url);
 
-    final Map<String, dynamic> empresasMap = json.decode(resp.body);
-    //print(empresasMap);
-    empresasMap.forEach((key, value) {
-      final tempEmpresa = Empresa.fromMap(value);
-      tempEmpresa.id = key;
-      empresas.add(tempEmpresa);
+    final Map<String, dynamic> subSistemasProduccionListMap =
+        json.decode(resp.body);
+    print(subSistemasProduccionListMap);
+    subSistemasProduccionListMap.forEach((key, value) {
+      final tempsub = SubsistemaProduccion.fromMap(value);
+      tempsub.id = key;
+      subSistemasProduccionList.add(tempsub);
     });
 
     isLoading = false;
     notifyListeners();
 
-    return empresas;
+    return subSistemasProduccionList;
   }
 
-  Future deleteEmpresa(Empresa empresa) async {
-    final url = Uri.https(_baseUrl, 'RegistrosEmpresas/${empresa.id}.json');
-    final resp = await http.delete(url);
-    final decodeData = resp.body;
-
-    print("eliminado");
-  }
-
-  Future saveOrCreateProduct(Empresa empresa) async {
+  Future saveOrCreateSubProduccion(SubsistemaProduccion subProduccion) async {
     isSaving = true;
     notifyListeners();
 
-    if (empresa.id == null) {
+    if (subProduccion.id == null) {
       // Es necesario crear
-      await createEmpresa(empresa);
+      await createSubProduccion(subProduccion);
     } else {
       // Actualizar
-      await updateEmpresa(empresa);
+      await updatesubProduccion(subProduccion);
     }
 
     isSaving = false;
     notifyListeners();
   }
 
-  Future<String> updateEmpresa(Empresa empresa) async {
-    final url = Uri.https(_baseUrl, 'RegistrosEmpresas/${empresa.id}.json');
-    final resp = await http.put(url, body: empresa.toJson());
+  Future<String> updatesubProduccion(SubsistemaProduccion subProduccion) async {
+    final url =
+        Uri.https(_baseUrl, 'SubsistemasProduccion/${subProduccion.id}.json');
+    final resp = await http.put(url, body: subProduccion.toJson());
     final decodeData = resp.body;
 
-    //print(decodeData);
-    final index = empresas.indexWhere((element) => element.id == empresa.id);
-    empresas[index] = empresa;
+    print(decodeData);
+    final index = subSistemasProduccionList
+        .indexWhere((element) => element.id == subProduccion.id);
+    subSistemasProduccionList[index] = subProduccion;
 
-    return empresa.id!;
+    return subProduccion.id!;
   }
 
-  Future<String> createEmpresa(Empresa empresa) async {
-    final url = Uri.https(_baseUrl, 'RegistrosEmpresas.json');
+  Future<String> createSubProduccion(SubsistemaProduccion subProduccion) async {
+    final url = Uri.https(_baseUrl, 'SubsistemasProduccion.json');
 
-    final resp = await http.post(url, body: empresa.toJson());
+    final resp = await http.post(url, body: subProduccion.toJson());
     final decodedData = json.decode(resp.body);
 
-    // print(decodedData);
-    empresa.id = decodedData['name'];
+    print(decodedData);
+    subProduccion.id = decodedData['name'];
 
     // empresas.add(empresa);
 

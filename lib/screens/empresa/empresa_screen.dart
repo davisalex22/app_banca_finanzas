@@ -48,6 +48,7 @@ class EmpresaScreen extends StatelessWidget {
           Navigator.pushNamed(context, '/formEmpresa');
         },
       ),
+      bottomNavigationBar: const CustomNavigationBar(),
     );
   }
 }

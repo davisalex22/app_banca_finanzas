@@ -39,7 +39,7 @@ class _EmpresaScreenBody extends StatelessWidget {
           child: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: Colors.transparent,
-            elevation: 0, // hides leading widget
+            elevation: 0,
           )),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -84,6 +84,7 @@ class _EmpresaScreenBody extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const CustomNavigationBar(),
     );
   }
 }
@@ -93,7 +94,10 @@ class _EmpresaForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final empresaForm = Provider.of<EmpresaFormProvider>(context);
     final registroEmp = empresaForm.empresa;
-
+    final empresariosService = Provider.of<EmpresariosService>(context);
+    final List<String> nombresEmpresarios = empresariosService.empresarios
+        .map((e) => e.empresarioNombre.toString())
+        .toList();
     return Form(
       key: empresaForm.formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -104,59 +108,11 @@ class _EmpresaForm extends StatelessWidget {
             titleCard: 'Seleccione Empresario',
             column1: Column(
               children: [
-                Divider(),
-                DropdownSearch<String>(
-                  mode: Mode.BOTTOM_SHEET,
-                  items: [
-                    "Brazil",
-                    "Italia",
-                    "Tunisia",
-                    'Canada',
-                    'Zraoua',
-                    'France',
-                    'Belgique'
-                  ],
-                  dropdownSearchDecoration: InputDecoration(
-                    labelText: "Custom BottomShet mode",
-                    contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
-                    border: OutlineInputBorder(),
-                  ),
-                  onChanged: print,
-                  selectedItem: "Brazil",
-                  showSearchBox: true,
-                  searchFieldProps: TextFieldProps(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.fromLTRB(12, 12, 8, 0),
-                      labelText: "Search a country1",
-                    ),
-                  ),
-                  popupTitle: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColorDark,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Country',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  popupShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(24),
-                      topRight: Radius.circular(24),
-                    ),
-                  ),
+                DropDownSearchList(
+                  labelTextInput: 'Seleccione Empresario',
+                  labelTextSearch: 'Buscar Empresario',
+                  titleSearch: 'Empresarios',
+                  listOptions: nombresEmpresarios,
                 ),
               ],
             ),

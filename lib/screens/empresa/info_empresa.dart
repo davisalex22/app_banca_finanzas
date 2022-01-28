@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:app_banca_finanzas/models/models.dart';
 import 'package:app_banca_finanzas/screens/screens.dart';
 import 'package:app_banca_finanzas/services/services.dart';
 import 'package:app_banca_finanzas/widgets/widgets.dart';
@@ -14,228 +13,332 @@ class InfoEmpresaScreen extends StatelessWidget {
     final value = empresasService.selectedEmpresa;
 
     if (empresasService.isLoading) return const HomeScreen();
-    var valor = true;
-    //print(value.empCalculosVentasActivos?.isEmpty);
+
+    const textStyleColumTitle = TextStyle(fontWeight: FontWeight.bold);
     return Scaffold(
-        appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(0.0),
-            child: AppBar(
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.black),
-                onPressed: () => Navigator.of(context).pop(),
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(0.0),
+          child: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            actions: [],
+          )),
+      body: SingleChildScrollView(
+        child: Column(children: [
+          MainHeader(
+            titlePage: 'Información de la empresa \n${value.empresaNombre}',
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton.icon(
+                icon: const Icon(Icons.edit),
+                label: const Text(
+                  'Editar',
+                  style: TextStyle(fontSize: 16),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/formEmpresa');
+                },
               ),
-              actions: [],
-            )),
-        body: Container(
-            padding:
-                const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 0),
-            child: Column(children: [
-              Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                elevation: 0,
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10, right: 10, top: 40, bottom: 30),
-                          child: Column(children: [
-                            Text('${value.empresaNombre}',
-                                style: const TextStyle(
-                                    fontSize: 25.0,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold)),
-                            const SizedBox(
-                              height: 25,
-                            ),
-                            ButtonBar(
-                              alignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                TextButton(
-                                  //icon: Icon(Icons.add, size: 18),
-                                  onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, '/registroEmpresa');
-                                  },
-                                  child: const Text('EDITAR'),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    empresasService.deleteEmpresa(value);
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text('ELIMINAR'),
-                                ),
-                              ],
-                            ),
-                          ]),
-                        ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.55,
-                            width: MediaQuery.of(context).size.width,
-                            child: SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                child: Padding(
-                                    padding: EdgeInsets.all(15),
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Section("General"),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Subtitle("Teléfono"),
-                                              Subtitle("Dirección"),
-                                              Subtitle("R.F.C")
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Info(value.empresaTelefono),
-                                              Info(value.empresaDireccion),
-                                              Info(value.empresaRfc),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Subtitle("Domicilio fiscal"),
-                                              Subtitle("Antiguedad"),
-                                              //Subtitle("Año de inicio"),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Info(
-                                                  value.empresaDomicilioFiscal),
-                                              Info(
-                                                  value.empresaAniosAntiguedad),
-                                            ],
-                                          ),
-                                          Section("Estado legal"),
-                                          //
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Subtitle("Persona fisica"),
-                                              Subtitle("Persona moral"),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Info(value
-                                                  .empEstLegalPersonaFisica),
-                                              Info(value
-                                                  .empEstLegalPersonaMoral),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Subtitle("Persona no registrada"),
-                                              Subtitle("Estado fiscal"),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Info(value
-                                                  .empEstLegalNoRegistrada),
-                                              Info(value.empEstatusFiscal),
-                                            ],
-                                          ),
-
-                                          //
-                                          Section("Tamaño"),
-                                          Title("Empleados"),
-                                          Subtitle("Operativos"),
-                                          Info(value.empTamNumEmpOperativos),
-                                          Subtitle("Administrativos"),
-                                          Info(value
-                                              .empTamNumEmpAdministrativos),
-                                          Subtitle("Otros"),
-                                          Info(value.empTamNumEmpOtros),
-                                          Subtitle("Total"),
-                                          Info(value.empTamNumEmpTotal),
-                                          Subtitle("Comentario"),
-                                          Info(value.empTamNumEmpComentarios),
-                                          //
-                                          Title("Ventas"),
-                                          Subtitle("Diarias"),
-                                          Info(value.empVentasDiarias),
-                                          Subtitle("Semanales"),
-                                          Info(value.empVentasSemanales),
-                                          Subtitle("Mensuales"),
-                                          Info(value.empVentasMensuales),
-                                          //
-                                          Title("Activos"),
-                                          Subtitle("Terreno"),
-
-                                          Info(value.empValActivosTerreno),
-                                          Subtitle("Bienes"),
-                                          Info(value.empValActivosBienes),
-                                          Subtitle("Otros"),
-                                          Info(value.empValActivosOtros),
-
-                                          //Info(value.empresaAniosInicio),
-
-                                          Title("Cálculos"),
-                                          Subtitle("Ventas/empleados"),
-                                          Info(
-                                              value.empCalculosVentasEmpleados),
-                                          Subtitle("Ventas/activo"),
-                                          Info(value.empCalculosVentasActivos),
-                                          Section("Cobertura de mercado"),
-
-                                          Subtitle("Local"),
-
-                                          Info(value.empCobMercadoLocal),
-                                          Subtitle("Regional"),
-                                          Info(value.empCobMercadoRegional),
-                                          Subtitle("Internacional"),
-                                          Info(
-                                              value.empCobMercadoInternacional),
-                                          //
-                                          Section("Vision"),
-                                          Subtitle("Corto Plazo"),
-                                          Info(value.empVisionCortoPlazo),
-                                          Subtitle("Largo plazo"),
-                                          Info(value.empVisionLargoPlazo),
-                                          Title("Comentario de antecedentes"),
-                                          Info(value.empComentarioEjecutivo),
-                                        ])))),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.delete),
+                label: const Text(
+                  'Eliminar',
+                  style: TextStyle(fontSize: 16),
+                ),
+                onPressed: () {
+                  empresasService.deleteEmpresa(value);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+          CustomCardType2(
+            column1: Column(
+              children: [
+                CardInformationTable(
+                  columnVar1: 'Nombre',
+                  columnVar2: value.empresaNombre.toString(),
+                  titleCategory: 'Generales',
+                  dataRow: [
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Dirección',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(Text(value.empresaDireccion.toString())),
                       ],
-                    )),
-              )
-            ])));
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'R.F.C',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(Text(value.empresaRfc.toString())),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Dirección',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(Text(value.empresaDireccion.toString())),
+                      ],
+                    ),
+                  ],
+                ),
+                const LineDivider(),
+                CardInformationTable(
+                  columnVar1: 'Años de Antigüedad',
+                  columnVar2: value.empresaAniosAntiguedad.toString(),
+                  titleCategory: 'Antigüedad de la Empresa',
+                  dataRow: [
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Año de Inicio de la Empresa',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(Text(value.empresaAniosInicio.toString())),
+                      ],
+                    ),
+                  ],
+                ),
+                const LineDivider(),
+                CardInformationTable(
+                  columnVar1: 'Persona Física',
+                  columnVar2: value.empEstLegalPersonaFisica.toString(),
+                  titleCategory: 'Estatus legal de la Empresa',
+                  dataRow: [
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Persona Moral',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(
+                            Text(value.empEstLegalPersonaMoral.toString())),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Persona\n no registrada',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(
+                            Text(value.empEstLegalNoRegistrada.toString())),
+                      ],
+                    ),
+                  ],
+                ),
+                const LineDivider(),
+                CardInformationTable(
+                  columnVar1: 'Estatus Fiscal',
+                  columnVar2: value.empEstatusFiscal.toString(),
+                  titleCategory: 'Estatus Fiscal de la Empresa',
+                  dataRow: const [],
+                ),
+                const LineDivider(),
+                CardInformationTable(
+                  columnVar1: 'Empleados \nOperativos',
+                  columnVar2: value.empTamNumEmpOperativos.toString(),
+                  titleCategory: 'Tamaño de la Empresa',
+                  dataRow: [
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Empleados\nAdministrativos',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(
+                            Text(value.empTamNumEmpAdministrativos.toString())),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Empleados\nOtros',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(Text(value.empTamNumEmpOtros.toString())),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Empleados \nTotal',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(Text(value.empTamNumEmpTotal.toString())),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Empleados \nComentario',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(
+                            Text(value.empTamNumEmpComentarios.toString())),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Ventas Diarias',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(Text(value.empVentasDiarias.toString())),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Ventas Semanales',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(Text(value.empVentasSemanales.toString())),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Ventas Mensuales',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(Text(value.empVentasSemanales.toString())),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Valor Terreno',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(Text(value.empValActivosTerreno.toString())),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Valor Bienes',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(Text(value.empValActivosBienes.toString())),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Valor Otros',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(Text(value.empValActivosOtros.toString())),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Calculo\nVentas/Empleados',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(
+                            Text(value.empCalculosVentasEmpleados.toString())),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Calculo\nVentas/Activos',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(
+                            Text(value.empCalculosVentasActivos.toString())),
+                      ],
+                    ),
+                  ],
+                ),
+                const LineDivider(),
+                CardInformationTable(
+                  columnVar1: 'Local',
+                  columnVar2: value.empCobMercadoLocal.toString(),
+                  titleCategory: 'Cobertura de Mercado',
+                  dataRow: [
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Cobertura\nRegional',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(Text(value.empCobMercadoRegional.toString())),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Cobertura\nInternacional',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(
+                            Text(value.empCobMercadoInternacional.toString())),
+                      ],
+                    ),
+                  ],
+                ),
+                const LineDivider(),
+                CardInformationTable(
+                  columnVar1: 'Corto Plazo',
+                  columnVar2: value.empVisionCortoPlazo.toString(),
+                  titleCategory: 'Visión de la Empresa',
+                  dataRow: [
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Largo Plazo',
+                          style: textStyleColumTitle,
+                        )),
+                        DataCell(Text(value.empVisionLargoPlazo.toString())),
+                      ],
+                    ),
+                  ],
+                ),
+                const LineDivider(),
+                CardInformationTable(
+                  columnVar1: 'Comentario Ejecutivo',
+                  columnVar2: value.empComentarioEjecutivo.toString(),
+                  titleCategory: 'Comentario Ejecutivo',
+                  dataRow: const [],
+                ),
+              ],
+            ),
+          ),
+        ]),
+      ),
+      bottomNavigationBar: const CustomNavigationBar(),
+    );
   }
 }
 
-Widget Title(str) => Text('$str',
-    style: const TextStyle(
-        fontSize: 18.0, color: Colors.black, fontWeight: FontWeight.bold));
+class LineDivider extends StatelessWidget {
+  const LineDivider({
+    Key? key,
+  }) : super(key: key);
 
-Widget Section(str) => Text('$str',
-    style: const TextStyle(
-        fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold));
-
-Widget Subtitle(str) => Text('$str',
-    style: const TextStyle(
-        fontSize: 15.0, color: Colors.black, fontWeight: FontWeight.bold));
-
-Widget Info(str) =>
-    Text('$str', style: const TextStyle(fontSize: 15.0, color: Colors.black));
+  @override
+  Widget build(BuildContext context) {
+    return const Divider(
+      color: Colors.black,
+      height: 20,
+      thickness: 2,
+      indent: 2,
+      endIndent: 2,
+    );
+  }
+}

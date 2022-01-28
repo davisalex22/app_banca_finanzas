@@ -1,14 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:app_banca_finanzas/models/subsistema_mercado.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:app_banca_finanzas/models/models.dart';
 
-class EmpresasService extends ChangeNotifier {
+class SubMercadoService extends ChangeNotifier {
   final String _baseUrl = 'app-banca-finanzas-default-rtdb.firebaseio.com';
-  final List<Empresa> empresas = [];
-  late Empresa selectedEmpresa;
+  final List<SubsistemaMercado> subSistemasMercadosList = [];
+  late SubsistemaMercado selectedsubMercado;
 
   final storage = const FlutterSecureStorage();
 
@@ -17,75 +18,69 @@ class EmpresasService extends ChangeNotifier {
   bool isLoading = true;
   bool isSaving = false;
 
-  EmpresasService() {
-    loadEmpresas();
+  SubMercadoService() {
+    loadsubSistemasMercadosList();
   }
 
-  Future loadEmpresas() async {
+  Future loadsubSistemasMercadosList() async {
     isLoading = true;
     notifyListeners();
 
-    final url = Uri.https(_baseUrl, 'RegistrosEmpresas.json');
+    final url = Uri.https(_baseUrl, 'SubistemasMercado.json');
     final resp = await http.get(url);
 
-    final Map<String, dynamic> empresasMap = json.decode(resp.body);
-    //print(empresasMap);
-    empresasMap.forEach((key, value) {
-      final tempEmpresa = Empresa.fromMap(value);
-      tempEmpresa.id = key;
-      empresas.add(tempEmpresa);
+    final Map<String, dynamic> subSistemasMercadosListMap =
+        json.decode(resp.body);
+    print(subSistemasMercadosListMap);
+    subSistemasMercadosListMap.forEach((key, value) {
+      final tempsub = SubsistemaMercado.fromMap(value);
+      tempsub.id = key;
+      subSistemasMercadosList.add(tempsub);
     });
 
     isLoading = false;
     notifyListeners();
 
-    return empresas;
+    return subSistemasMercadosList;
   }
 
-  Future deleteEmpresa(Empresa empresa) async {
-    final url = Uri.https(_baseUrl, 'RegistrosEmpresas/${empresa.id}.json');
-    final resp = await http.delete(url);
-    final decodeData = resp.body;
-
-    print("eliminado");
-  }
-
-  Future saveOrCreateProduct(Empresa empresa) async {
+  Future saveOrCreateSubMercado(SubsistemaMercado subMercado) async {
     isSaving = true;
     notifyListeners();
 
-    if (empresa.id == null) {
+    if (subMercado.id == null) {
       // Es necesario crear
-      await createEmpresa(empresa);
+      await createSubMercado(subMercado);
     } else {
       // Actualizar
-      await updateEmpresa(empresa);
+      await updatesubMercado(subMercado);
     }
 
     isSaving = false;
     notifyListeners();
   }
 
-  Future<String> updateEmpresa(Empresa empresa) async {
-    final url = Uri.https(_baseUrl, 'RegistrosEmpresas/${empresa.id}.json');
-    final resp = await http.put(url, body: empresa.toJson());
+  Future<String> updatesubMercado(SubsistemaMercado subMercado) async {
+    final url = Uri.https(_baseUrl, 'SubistemasMercado/${subMercado.id}.json');
+    final resp = await http.put(url, body: subMercado.toJson());
     final decodeData = resp.body;
 
-    //print(decodeData);
-    final index = empresas.indexWhere((element) => element.id == empresa.id);
-    empresas[index] = empresa;
+    print(decodeData);
+    final index = subSistemasMercadosList
+        .indexWhere((element) => element.id == subMercado.id);
+    subSistemasMercadosList[index] = subMercado;
 
-    return empresa.id!;
+    return subMercado.id!;
   }
 
-  Future<String> createEmpresa(Empresa empresa) async {
-    final url = Uri.https(_baseUrl, 'RegistrosEmpresas.json');
+  Future<String> createSubMercado(SubsistemaMercado subMercado) async {
+    final url = Uri.https(_baseUrl, 'RegistrossubSistemasMercadosList.json');
 
-    final resp = await http.post(url, body: empresa.toJson());
+    final resp = await http.post(url, body: subMercado.toJson());
     final decodedData = json.decode(resp.body);
 
-    // print(decodedData);
-    empresa.id = decodedData['name'];
+    print(decodedData);
+    subMercado.id = decodedData['name'];
 
     // empresas.add(empresa);
 

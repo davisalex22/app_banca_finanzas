@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-class SubsitemaProduccion {
-  SubsitemaProduccion({
+class SubsistemaProduccion {
+  SubsistemaProduccion({
     this.prodCalEstandar,
     this.prodCalMejoras,
     this.prodCalTecnologia,
@@ -117,13 +117,13 @@ class SubsitemaProduccion {
   String? prodUbiMedioAmbiente;
   String? id;
 
-  factory SubsitemaProduccion.fromJson(String str) =>
-      SubsitemaProduccion.fromMap(json.decode(str));
+  factory SubsistemaProduccion.fromJson(String str) =>
+      SubsistemaProduccion.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory SubsitemaProduccion.fromMap(Map<String, dynamic> json) =>
-      SubsitemaProduccion(
+  factory SubsistemaProduccion.fromMap(Map<String, dynamic> json) =>
+      SubsistemaProduccion(
         prodCalEstandar: json["prod_cal_estandar"],
         prodCalMejoras: json["prod_cal_mejoras"],
         prodCalTecnologia: json["prod_cal_tecnologia"],
@@ -238,7 +238,7 @@ class SubsitemaProduccion {
         "prod_ubi_materiaPrima": prodUbiMateriaPrima,
         "prod_ubi_medioAmbiente": prodUbiMedioAmbiente,
       };
-  SubsitemaProduccion copy() => SubsitemaProduccion(
+  SubsistemaProduccion copy() => SubsistemaProduccion(
         prodCalEstandar: prodCalEstandar,
         prodCalMejoras: prodCalMejoras,
         prodCalTecnologia: prodCalTecnologia,
