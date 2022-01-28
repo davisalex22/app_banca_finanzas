@@ -1,5 +1,4 @@
 import 'package:app_banca_finanzas/screens/screens.dart';
-import 'package:app_banca_finanzas/screens/subsistema_mercado/form_sub_mercado_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -15,9 +14,11 @@ class AppRoutes {
         const RegistroEmpresarioScreen(),
     '/empresa': (BuildContext context) => const EmpresaScreen(),
     '/formEmpresa': (BuildContext context) => const RegistroEmpresaScreen(),
-    '/formSubMercado': (BuildContext context) =>
-        const RegistroSubMercadoScreen(),
     '/infoEmpresa': (BuildContext context) => const InfoEmpresaScreen(),
     '/infoEmpresario': (BuildContext context) => const InfoEmpresarioScreen(),
+    '/formSubMercado': (BuildContext context) =>
+        const RegistroSubMercadoScreen(),
+    '/subMercado': (BuildContext context) => const SubsistemaMercadoScreen(),
+    '/infoSubMercado': (BuildContext context) => const InfoSubsistemaMScreen(),
   };
 }

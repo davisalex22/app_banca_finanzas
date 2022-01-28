@@ -93,7 +93,7 @@ class InfoEmpresarioScreen extends StatelessWidget {
                     ),
                     const LineDivider(),
                     CardInformationTable(
-                      titleCategory: 'Antecedentes',
+                      titleCategory: 'Precedentes',
                       columnVar1: 'Origen',
                       columnVar2: value.empresarioOriginario.toString(),
                       dataRow: [
@@ -575,7 +575,7 @@ class InfoEmpresarioScreen extends StatelessWidget {
                     ),
                     const LineDivider(),
                     CardInformationTable(
-                      columnVar1: 'Hobies, color, personas',
+                      columnVar1: 'Hobies, color,\npersonas',
                       columnVar2: value.emprFilosofiaHobbies.toString(),
                       titleCategory: 'Filosofía\nCarácter',
                       dataRow: [
@@ -631,7 +631,7 @@ class InfoEmpresarioScreen extends StatelessWidget {
                     CardInformationTable(
                       columnVar1: 'Día',
                       columnVar2: value.emprAdmTiempoDia.toString(),
-                      titleCategory: 'Administración\ntiempo',
+                      titleCategory: 'Gestión\ntiempo',
                       dataRow: [
                         DataRow(
                           cells: <DataCell>[

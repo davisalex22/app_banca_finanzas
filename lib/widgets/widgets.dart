@@ -14,3 +14,5 @@ export 'package:app_banca_finanzas/widgets/custom_card_type_5.dart';
 export 'package:dropdown_search/dropdown_search.dart';
 export 'package:app_banca_finanzas/widgets/card_information_table.dart';
 export 'package:app_banca_finanzas/widgets/drop_down_search.dart';
+export 'package:app_banca_finanzas/widgets/custom_card_subMercado.dart';
+export 'package:app_banca_finanzas/widgets/card_table_subsistemas.dart';

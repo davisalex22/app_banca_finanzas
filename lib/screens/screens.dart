@@ -8,3 +8,6 @@ export 'package:app_banca_finanzas/screens/empresa/form_empresa_screen.dart';
 export 'package:app_banca_finanzas/screens/empresario/empresario_screen.dart';
 export 'package:app_banca_finanzas/screens/empresa/info_empresa.dart';
 export 'package:app_banca_finanzas/screens/empresario/info_empresario.dart';
+export 'package:app_banca_finanzas/screens/subsistema_mercado/subsistema_mercado_screen.dart';
+export 'package:app_banca_finanzas/screens/subsistema_mercado/info_subsistema_mercado.dart';
+export 'package:app_banca_finanzas/screens/subsistema_mercado/form_sub_mercado_screen.dart';
