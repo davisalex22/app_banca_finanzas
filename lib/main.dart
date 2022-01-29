@@ -19,6 +19,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => EmpresasService()),
         ChangeNotifierProvider(create: (_) => EmpresariosService()),
         ChangeNotifierProvider(create: (_) => SubMercadoService()),
+        ChangeNotifierProvider(create: (_) => SubProduccionService()),
       ],
       child: const MyApp(),
     );

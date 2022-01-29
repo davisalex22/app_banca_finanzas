@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:app_banca_finanzas/models/subsistema_mercado.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -11,8 +10,6 @@ class SubMercadoService extends ChangeNotifier {
   late SubsistemaMercado selectedsubMercado;
 
   final storage = const FlutterSecureStorage();
-
-  File? newPictureFile;
 
   bool isLoading = true;
   bool isSaving = false;
@@ -30,7 +27,7 @@ class SubMercadoService extends ChangeNotifier {
 
     final Map<String, dynamic> subSistemasMercadosListMap =
         json.decode(resp.body);
-    print(subSistemasMercadosListMap);
+
     subSistemasMercadosListMap.forEach((key, value) {
       final tempsub = SubsistemaMercado.fromMap(value);
       tempsub.id = key;
@@ -65,7 +62,6 @@ class SubMercadoService extends ChangeNotifier {
     final resp = await http.put(url, body: subMercado.toJson());
     final decodeData = resp.body;
 
-    print(decodeData);
     final index = subSistemasMercadosList
         .indexWhere((element) => element.id == subMercado.id);
     subSistemasMercadosList[index] = subMercado;
@@ -79,7 +75,6 @@ class SubMercadoService extends ChangeNotifier {
     final resp = await http.post(url, body: subMercado.toJson());
     final decodedData = json.decode(resp.body);
 
-    print(decodedData);
     subMercado.id = decodedData['name'];
 
     // empresas.add(empresa);

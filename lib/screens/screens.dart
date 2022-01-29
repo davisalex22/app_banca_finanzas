@@ -11,3 +11,6 @@ export 'package:app_banca_finanzas/screens/empresario/info_empresario.dart';
 export 'package:app_banca_finanzas/screens/subsistema_mercado/subsistema_mercado_screen.dart';
 export 'package:app_banca_finanzas/screens/subsistema_mercado/info_subsistema_mercado.dart';
 export 'package:app_banca_finanzas/screens/subsistema_mercado/form_sub_mercado_screen.dart';
+export 'package:app_banca_finanzas/screens/subsistema_produccion/info_subsistema_produccion.dart';
+export 'package:app_banca_finanzas/screens/subsistema_produccion/subsistema_produccion_screen.dart';
+export 'package:app_banca_finanzas/screens/subsistema_produccion/form_sub_produccion_screen.dart';

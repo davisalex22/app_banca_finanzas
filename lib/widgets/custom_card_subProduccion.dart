@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:app_banca_finanzas/models/models.dart';
+import 'package:flutter/material.dart';
 import 'package:app_banca_finanzas/theme/app_theme.dart';
 
-class CustomCardSubsistemaM extends StatelessWidget {
-  final SubsistemaMercado subsistema;
+class CustomCardSubsistemaP extends StatelessWidget {
+  final SubsistemaProduccion subsistema;
 
-  const CustomCardSubsistemaM({
+  const CustomCardSubsistemaP({
     Key? key,
     required this.subsistema,
   }) : super(key: key);
@@ -40,7 +40,7 @@ class CustomCardSubsistemaM extends StatelessWidget {
                   title: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Text(
-                      subsistema.merComentariosMercado.toString(),
+                      subsistema.prodCometarioProduccion.toString(),
                       style: const TextStyle(fontSize: 18.0),
                     ),
                   ),

@@ -4,17 +4,16 @@ import 'package:app_banca_finanzas/screens/screens.dart';
 import 'package:app_banca_finanzas/services/services.dart';
 import 'package:app_banca_finanzas/widgets/widgets.dart';
 
-class InfoSubsistemaMScreen extends StatelessWidget {
-  const InfoSubsistemaMScreen({Key? key}) : super(key: key);
+class InfoSubsistemaPScreen extends StatelessWidget {
+  const InfoSubsistemaPScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final empresasService = Provider.of<SubMercadoService>(context);
-    final value = empresasService.selectedsubMercado;
+    final subProduccionService = Provider.of<SubProduccionService>(context);
+    final value = subProduccionService.selectedsubProduccion;
 
-    if (empresasService.isLoading) return const HomeScreen();
+    if (subProduccionService.isLoading) return const HomeScreen();
 
-    const textStyleColumTitle = TextStyle(fontWeight: FontWeight.bold);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(0.0),
@@ -29,7 +28,7 @@ class InfoSubsistemaMScreen extends StatelessWidget {
         child: Column(children: [
           MainHeader(
             titlePage:
-                'Información de sub-sistema \n${value.merComentariosMercado}',
+                'Información de sub-sistema \n${value.prodCometarioProduccion}',
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -41,7 +40,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 16),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/formSubMercado');
+                  Navigator.pushNamed(context, '/formSubProduccion',
+                      arguments: value);
                 },
               ),
               ElevatedButton.icon(
@@ -51,13 +51,13 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 16),
                 ),
                 onPressed: () {
-                  empresasService.deleteSubsistema(value);
+                  subProduccionService.deleteSubsistema(value);
                   Navigator.of(context).pop();
                 },
               ),
             ],
           ),
-          CustomCardType2(
+          /*CustomCardType2(
             column1: Column(
               children: [
                 CardInformationTable(
@@ -465,7 +465,7 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                 ),
               ],
             ),
-          ),
+          ),*/
         ]),
       ),
       bottomNavigationBar: const CustomNavigationBar(),

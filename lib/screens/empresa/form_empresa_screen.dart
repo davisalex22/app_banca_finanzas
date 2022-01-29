@@ -519,7 +519,6 @@ class _EmpresaForm extends StatelessWidget {
                             source: ImageSource.camera, imageQuality: 100);
 
                         if (pickedFile == null) {
-                          print('No seleccionó nada');
                           return;
                         }
 

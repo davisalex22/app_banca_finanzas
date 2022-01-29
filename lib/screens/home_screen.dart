@@ -45,10 +45,18 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(height: 20.0),
                 CustomCardType5(
                   iconCard: Icons.arrow_forward_ios,
-                  titleCard: 'Subsistema',
+                  titleCard: 'Subsistema Mercado',
                   logoCard:
                       'https://www.macmillandictionaryblog.com/wp-content/uploads/2017/08/enterprise-1024x625.jpg',
                   routePage: '/subMercado',
+                ),
+                SizedBox(height: 20.0),
+                CustomCardType5(
+                  iconCard: Icons.arrow_forward_ios,
+                  titleCard: 'Subsistema Producción',
+                  logoCard:
+                      'https://www.macmillandictionaryblog.com/wp-content/uploads/2017/08/enterprise-1024x625.jpg',
+                  routePage: '/subProduccion',
                 ),
               ],
             ),

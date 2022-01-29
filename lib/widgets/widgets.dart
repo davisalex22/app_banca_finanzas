@@ -17,3 +17,4 @@ export 'package:app_banca_finanzas/widgets/drop_down_search.dart';
 export 'package:app_banca_finanzas/widgets/custom_card_subMercado.dart';
 export 'package:app_banca_finanzas/widgets/card_table_subsistemas.dart';
 export 'package:app_banca_finanzas/widgets/organigrama_image.dart';
+export 'package:app_banca_finanzas/widgets/custom_card_subProduccion.dart';

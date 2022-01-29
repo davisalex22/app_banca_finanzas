@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:app_banca_finanzas/models/subsistema_produccion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -13,8 +12,6 @@ class SubProduccionService extends ChangeNotifier {
 
   final storage = const FlutterSecureStorage();
 
-  File? newPictureFile;
-
   bool isLoading = true;
   bool isSaving = false;
 
@@ -26,12 +23,12 @@ class SubProduccionService extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    final url = Uri.https(_baseUrl, 'RegistrossubSistemasProduccionList.json');
+    final url = Uri.https(_baseUrl, 'RegistrosSubsistemasProduccion.json');
     final resp = await http.get(url);
 
     final Map<String, dynamic> subSistemasProduccionListMap =
         json.decode(resp.body);
-    print(subSistemasProduccionListMap);
+
     subSistemasProduccionListMap.forEach((key, value) {
       final tempsub = SubsistemaProduccion.fromMap(value);
       tempsub.id = key;
@@ -61,12 +58,11 @@ class SubProduccionService extends ChangeNotifier {
   }
 
   Future<String> updatesubProduccion(SubsistemaProduccion subProduccion) async {
-    final url =
-        Uri.https(_baseUrl, 'SubsistemasProduccion/${subProduccion.id}.json');
+    final url = Uri.https(
+        _baseUrl, 'RegistrosSubistemasProduccion/${subProduccion.id}.json');
     final resp = await http.put(url, body: subProduccion.toJson());
     final decodeData = resp.body;
 
-    print(decodeData);
     final index = subSistemasProduccionList
         .indexWhere((element) => element.id == subProduccion.id);
     subSistemasProduccionList[index] = subProduccion;
@@ -75,12 +71,11 @@ class SubProduccionService extends ChangeNotifier {
   }
 
   Future<String> createSubProduccion(SubsistemaProduccion subProduccion) async {
-    final url = Uri.https(_baseUrl, 'SubsistemasProduccion.json');
+    final url = Uri.https(_baseUrl, 'RegistrosSubsistemasProduccion.json');
 
     final resp = await http.post(url, body: subProduccion.toJson());
     final decodedData = json.decode(resp.body);
 
-    print(decodedData);
     subProduccion.id = decodedData['name'];
 
     // empresas.add(empresa);
@@ -89,41 +84,14 @@ class SubProduccionService extends ChangeNotifier {
     return '';
   }
 
-  // void updateSelectedProductImage(String path) {
-  //   selectedE.picture = path;
-  //   newPictureFile = File.fromUri(Uri(path: path));
-
-  //   notifyListeners();
-  // }
-
-  // Future<String?> uploadImage() async {
-  //   if (newPictureFile == null) return null;
-
-  //   isSaving = true;
-  //   notifyListeners();
-
-  //   final url = Uri.parse(
-  //       'https://api.cloudinary.com/v1_1/dx0pryfzn/image/upload?upload_preset=autwc6pa');
-
-  //   final imageUploadRequest = http.MultipartRequest('POST', url);
-
-  //   final file =
-  //       await http.MultipartFile.fromPath('file', newPictureFile!.path);
-
-  //   imageUploadRequest.files.add(file);
-
-  //   final streamResponse = await imageUploadRequest.send();
-  //   final resp = await http.Response.fromStream(streamResponse);
-
-  //   if (resp.statusCode != 200 && resp.statusCode != 201) {
-  //     // print('algo salio mal');
-  //     // print(resp.body);
-  //     return null;
-  //   }
-
-  //   newPictureFile = null;
-
-  //   final decodedData = json.decode(resp.body);
-  //   return decodedData['secure_url'];
-  // }
+  Future deleteSubsistema(SubsistemaProduccion subProduccion) async {
+    isLoading = true;
+    notifyListeners();
+    final url = Uri.https(
+        _baseUrl, 'RegistrosSubsistemasProduccion/${subProduccion.id}.json');
+    final resp = await http.delete(url);
+    final decodeData = resp.body;
+    isLoading = false;
+    notifyListeners();
+  }
 }
