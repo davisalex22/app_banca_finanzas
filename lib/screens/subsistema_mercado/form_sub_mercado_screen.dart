@@ -77,11 +77,19 @@ class _SubMercadoScreenBody extends StatelessWidget {
 }
 
 class _SubMercadoForm extends StatelessWidget {
-  double value_ = 0;
   @override
   Widget build(BuildContext context) {
     final subMercadoForm = Provider.of<SubMercadoFormProvider>(context);
     final registroSub = subMercadoForm.subMercado;
+    double value_ = 0;
+
+    valueSlider(String? campo) {
+      if (campo == null) {
+        return value_;
+      } else {
+        return double.parse(campo);
+      }
+    }
 
     return Form(
       key: subMercadoForm.formKey,
@@ -113,7 +121,8 @@ class _SubMercadoForm extends StatelessWidget {
                               builder: (context, state) => Center(
                                 child: Slider(
                                   activeColor: const Color(0XffA73030),
-                                  value: value_,
+                                  value: valueSlider(
+                                      registroSub.merPoliticaRentabilidad),
                                   min: 0.0,
                                   max: 3.0,
                                   divisions: 3,
