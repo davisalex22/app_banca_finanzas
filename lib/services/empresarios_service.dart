@@ -66,7 +66,7 @@ class EmpresariosService extends ChangeNotifier {
 
     final index =
         empresarios.indexWhere((element) => element.id == empresario.id);
-    empresarios[index] = empresario;
+    this.empresarios[index] = empresario;
 
     return empresario.id!;
   }

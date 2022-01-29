@@ -65,7 +65,7 @@ class SubProduccionService extends ChangeNotifier {
 
     final index = subSistemasProduccionList
         .indexWhere((element) => element.id == subProduccion.id);
-    subSistemasProduccionList[index] = subProduccion;
+    this.subSistemasProduccionList[index] = subProduccion;
 
     return subProduccion.id!;
   }

@@ -9,6 +9,14 @@ class InfoEmpresarioScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    valueNull(String campo) {
+      if (campo == "null") {
+        return "Sin\ninformación";
+      } else {
+        return campo;
+      }
+    }
+
     final empresariosService = Provider.of<EmpresariosService>(context);
     final value = empresariosService.selectedEmpresario;
 
@@ -67,7 +75,7 @@ class InfoEmpresarioScreen extends StatelessWidget {
                   children: [
                     CardInformationTable(
                       columnVar1: 'Nombre',
-                      columnVar2: value.empresarioNombre.toString(),
+                      columnVar2: valueNull(value.empresarioNombre.toString()),
                       titleCategory: 'General',
                       dataRow: [
                         DataRow(
@@ -76,8 +84,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Dirección',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.empresarioDireccion.toString())),
+                            DataCell(Text(valueNull(
+                                value.empresarioDireccion.toString()))),
                           ],
                         ),
                         DataRow(
@@ -86,7 +94,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Teléfono',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.empresarioTelefono.toString())),
+                            DataCell(Text(valueNull(
+                                value.empresarioTelefono.toString()))),
                           ],
                         ),
                       ],
@@ -95,7 +104,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                     CardInformationTable(
                       titleCategory: 'Precedentes',
                       columnVar1: 'Origen',
-                      columnVar2: value.empresarioOriginario.toString(),
+                      columnVar2:
+                          valueNull(value.empresarioOriginario.toString()),
                       dataRow: [
                         DataRow(
                           cells: <DataCell>[
@@ -103,7 +113,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Lugar',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.empresarioLugar.toString())),
+                            DataCell(Text(
+                                valueNull(value.empresarioLugar.toString()))),
                           ],
                         ),
                         DataRow(
@@ -112,7 +123,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Edad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.empresarioEdad.toString())),
+                            DataCell(Text(
+                                valueNull(value.empresarioEdad.toString()))),
                           ],
                         ),
                         DataRow(
@@ -121,8 +133,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Estado civil',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.empresarioEstadoCivil.toString())),
+                            DataCell(Text(valueNull(
+                                value.empresarioEstadoCivil.toString()))),
                           ],
                         ),
                         DataRow(
@@ -131,8 +143,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Ocupacion',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.empresarioOcupacion.toString())),
+                            DataCell(Text(valueNull(
+                                value.empresarioOcupacion.toString()))),
                           ],
                         ),
                         DataRow(
@@ -141,8 +153,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Escolaridad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.empresarioEscolaridad.toString())),
+                            DataCell(Text(valueNull(
+                                value.empresarioEscolaridad.toString()))),
                           ],
                         ),
                         DataRow(
@@ -151,8 +163,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Estado salud',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.empresarioEstadoSalud.toString())),
+                            DataCell(Text(valueNull(
+                                value.empresarioEstadoSalud.toString()))),
                           ],
                         ),
                         DataRow(
@@ -161,8 +173,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Comentario',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.empresarioComentario.toString())),
+                            DataCell(Text(valueNull(
+                                value.empresarioComentario.toString()))),
                           ],
                         ),
                       ],
@@ -170,7 +182,7 @@ class InfoEmpresarioScreen extends StatelessWidget {
                     const LineDivider(),
                     CardInformationTable(
                       columnVar1: 'Nombres',
-                      columnVar2: value.emprPadresNombres.toString(),
+                      columnVar2: valueNull(value.emprPadresNombres.toString()),
                       titleCategory: 'Padres',
                       dataRow: [
                         DataRow(
@@ -179,8 +191,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Originarios',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprPadresOriginarios.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprPadresOriginarios.toString()))),
                           ],
                         ),
                         DataRow(
@@ -189,7 +201,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Viven',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprPadresViven.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprPadresViven.toString()))),
                           ],
                         ),
                         DataRow(
@@ -198,7 +211,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Lugar',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprPadresLugar.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprPadresLugar.toString()))),
                           ],
                         ),
                         DataRow(
@@ -207,7 +221,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Edad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprPadresEdad.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprPadresEdad.toString()))),
                           ],
                         ),
                         DataRow(
@@ -216,8 +231,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Ocupacion',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprPadresOcupacion.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprPadresOcupacion.toString()))),
                           ],
                         ),
                         DataRow(
@@ -226,8 +241,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Escolaridad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprPadresEscolaridad.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprPadresEscolaridad.toString()))),
                           ],
                         ),
                         DataRow(
@@ -236,8 +251,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Edad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprPadresEstadoSalud.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprPadresEstadoSalud.toString()))),
                           ],
                         ),
                         DataRow(
@@ -246,8 +261,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Comentario',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprPadresComentario.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprPadresComentario.toString()))),
                           ],
                         ),
                       ],
@@ -255,7 +270,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                     const LineDivider(),
                     CardInformationTable(
                       columnVar1: 'Nombres',
-                      columnVar2: value.emprHermanosNombres.toString(),
+                      columnVar2:
+                          valueNull(value.emprHermanosNombres.toString()),
                       titleCategory: 'Hermanos',
                       dataRow: [
                         DataRow(
@@ -264,7 +280,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Edad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprHermanosEdad.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprHermanosEdad.toString()))),
                           ],
                         ),
                         DataRow(
@@ -273,8 +290,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Ocupación',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprHermanosOcupacion.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprHermanosOcupacion.toString()))),
                           ],
                         ),
                         DataRow(
@@ -283,8 +300,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Lugar entre\nhermanos',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(
-                                value.emprHermanosLugarHermanos.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprHermanosLugarHermanos.toString()))),
                           ],
                         ),
                       ],
@@ -292,7 +309,7 @@ class InfoEmpresarioScreen extends StatelessWidget {
                     const LineDivider(),
                     CardInformationTable(
                       columnVar1: 'Nombre',
-                      columnVar2: value.emprParejaNombre.toString(),
+                      columnVar2: valueNull(value.emprParejaNombre.toString()),
                       titleCategory: 'Pareja',
                       dataRow: [
                         DataRow(
@@ -301,8 +318,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Originaria',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprParejaOriginaria.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprParejaOriginaria.toString()))),
                           ],
                         ),
                         DataRow(
@@ -311,7 +328,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Vive',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprParejaVive.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprParejaVive.toString()))),
                           ],
                         ),
                         DataRow(
@@ -320,7 +338,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Lugar',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprParejaLugar.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprParejaLugar.toString()))),
                           ],
                         ),
                         DataRow(
@@ -329,7 +348,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Edad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprParejaEdad.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprParejaEdad.toString()))),
                           ],
                         ),
                         DataRow(
@@ -338,8 +358,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Ocupacion',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprParejaOcupacion.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprParejaOcupacion.toString()))),
                           ],
                         ),
                         DataRow(
@@ -348,8 +368,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Escolaridad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprParejaEscolaridad.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprParejaEscolaridad.toString()))),
                           ],
                         ),
                         DataRow(
@@ -358,8 +378,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Estado salud',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprParejaEstadoSalud.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprParejaEstadoSalud.toString()))),
                           ],
                         ),
                         DataRow(
@@ -368,7 +388,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Edad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprParejaEdad.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprParejaEdad.toString()))),
                           ],
                         ),
                       ],
@@ -376,7 +397,7 @@ class InfoEmpresarioScreen extends StatelessWidget {
                     const LineDivider(),
                     CardInformationTable(
                       columnVar1: 'Nombres',
-                      columnVar2: value.emprSuegrosNombre.toString(),
+                      columnVar2: valueNull(value.emprSuegrosNombre.toString()),
                       titleCategory: 'Suegros',
                       dataRow: [
                         DataRow(
@@ -385,8 +406,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Originarios',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprSuegrosOriginarios.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprSuegrosOriginarios.toString()))),
                           ],
                         ),
                         DataRow(
@@ -395,7 +416,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Viven',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprSuegrosViven.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprSuegrosViven.toString()))),
                           ],
                         ),
                         DataRow(
@@ -404,7 +426,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Lugar',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprSuegrosLugar.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprSuegrosLugar.toString()))),
                           ],
                         ),
                         DataRow(
@@ -413,7 +436,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Edad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprSuegrosEdad.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprSuegrosEdad.toString()))),
                           ],
                         ),
                         DataRow(
@@ -422,8 +446,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Ocupacion',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprSuegrosOcupacion.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprSuegrosOcupacion.toString()))),
                           ],
                         ),
                         DataRow(
@@ -432,8 +456,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Escolaridad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprSuegrosEscolaridad.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprSuegrosEscolaridad.toString()))),
                           ],
                         ),
                         DataRow(
@@ -442,8 +466,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Edad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprSuegrosEstadoSalud.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprSuegrosEstadoSalud.toString()))),
                           ],
                         ),
                         DataRow(
@@ -452,8 +476,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Comentario',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprSuegrosComentario.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprSuegrosComentario.toString()))),
                           ],
                         ),
                       ],
@@ -461,7 +485,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                     const LineDivider(),
                     CardInformationTable(
                       columnVar1: 'Nombres',
-                      columnVar2: value.emprCuniadosNombre.toString(),
+                      columnVar2:
+                          valueNull(value.emprCuniadosNombre.toString()),
                       titleCategory: 'Cuñados',
                       dataRow: [
                         DataRow(
@@ -470,7 +495,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Edad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprCuniadosEdad.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprCuniadosEdad.toString()))),
                           ],
                         ),
                         DataRow(
@@ -479,8 +505,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Ocupación',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprCuniadosOcupacion.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprCuniadosOcupacion.toString()))),
                           ],
                         ),
                         DataRow(
@@ -489,16 +515,17 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Lugar entre\nHermanos',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(
-                                value.emprCuniadosLugarHermanos.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprCuniadosLugarHermanos.toString()))),
                           ],
                         ),
                       ],
                     ),
                     const LineDivider(),
                     CardInformationTable(
-                      columnVar1: 'Años de casados',
-                      columnVar2: value.emprMatrimonioAniosCasado.toString(),
+                      columnVar1: 'Años casados',
+                      columnVar2:
+                          valueNull(value.emprMatrimonioAniosCasado.toString()),
                       titleCategory: 'Matrimonio',
                       dataRow: [
                         DataRow(
@@ -507,8 +534,9 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Situación afectiva',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprMatrimonioSituacionAfectiva
-                                .toString())),
+                            DataCell(Text(valueNull(value
+                                .emprMatrimonioSituacionAfectiva
+                                .toString()))),
                           ],
                         ),
                         DataRow(
@@ -517,8 +545,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Numero de hijos',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(
-                                value.emprMatrimonioHNumeroHijos.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprMatrimonioHNumeroHijos.toString()))),
                           ],
                         ),
                         DataRow(
@@ -527,8 +555,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Edad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprMatrimonioHEdad.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprMatrimonioHEdad.toString()))),
                           ],
                         ),
                         DataRow(
@@ -537,8 +565,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Ocupación',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(
-                                value.emprMatrimonioHOcupacion.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprMatrimonioHOcupacion.toString()))),
                           ],
                         ),
                         DataRow(
@@ -547,8 +575,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Estado civil',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(
-                                value.emprMatrimonioHEstadoCivil.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprMatrimonioHEstadoCivil.toString()))),
                           ],
                         ),
                         DataRow(
@@ -557,8 +585,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Escolaridad',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(
-                                value.emprMatrimonioHEscolaridad.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprMatrimonioHEscolaridad.toString()))),
                           ],
                         ),
                         DataRow(
@@ -567,8 +595,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Estado de salud',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(
-                                value.emprMatrimonioHEstadoSalud.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprMatrimonioHEstadoSalud.toString()))),
                           ],
                         ),
                       ],
@@ -576,7 +604,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                     const LineDivider(),
                     CardInformationTable(
                       columnVar1: 'Hobies, color,\npersonas',
-                      columnVar2: value.emprFilosofiaHobbies.toString(),
+                      columnVar2:
+                          valueNull(value.emprFilosofiaHobbies.toString()),
                       titleCategory: 'Filosofía\nCarácter',
                       dataRow: [
                         DataRow(
@@ -585,8 +614,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Comentario',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprFilosofiaComentario.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprFilosofiaComentario.toString()))),
                           ],
                         ),
                       ],
@@ -594,7 +623,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                     const LineDivider(),
                     CardInformationTable(
                       columnVar1: 'Profesionales',
-                      columnVar2: value.emprMetasProfesionales.toString(),
+                      columnVar2:
+                          valueNull(value.emprMetasProfesionales.toString()),
                       titleCategory: 'Metas\nPersonales',
                       dataRow: [
                         DataRow(
@@ -603,7 +633,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Afectivas',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprMetasAfectivas.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprMetasAfectivas.toString()))),
                           ],
                         ),
                         DataRow(
@@ -612,7 +643,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Físicas',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprMetasFisicas.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprMetasFisicas.toString()))),
                           ],
                         ),
                         DataRow(
@@ -621,8 +653,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Comentario',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprMetasComentario.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprMetasComentario.toString()))),
                           ],
                         ),
                       ],
@@ -630,7 +662,7 @@ class InfoEmpresarioScreen extends StatelessWidget {
                     const LineDivider(),
                     CardInformationTable(
                       columnVar1: 'Día',
-                      columnVar2: value.emprAdmTiempoDia.toString(),
+                      columnVar2: valueNull(value.emprAdmTiempoDia.toString()),
                       titleCategory: 'Gestión\ntiempo',
                       dataRow: [
                         DataRow(
@@ -639,8 +671,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Semana',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprAdmTiempoSemana.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprAdmTiempoSemana.toString()))),
                           ],
                         ),
                         DataRow(
@@ -649,7 +681,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Mes',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprAdmTiempoMes.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprAdmTiempoMes.toString()))),
                           ],
                         ),
                         DataRow(
@@ -658,7 +691,8 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Año',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(value.emprAdmTiempoAnio.toString())),
+                            DataCell(Text(
+                                valueNull(value.emprAdmTiempoAnio.toString()))),
                           ],
                         ),
                         DataRow(
@@ -667,17 +701,17 @@ class InfoEmpresarioScreen extends StatelessWidget {
                               'Comentario',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(
-                                Text(value.emprAdmTiempoComentario.toString())),
+                            DataCell(Text(valueNull(
+                                value.emprAdmTiempoComentario.toString()))),
                           ],
                         ),
                       ],
                     ),
                     const LineDivider(),
                     CardInformationTable(
-                      columnVar1: 'Comentario ejecutivo',
-                      columnVar2:
-                          value.empresarioComentarioEjecutivo.toString(),
+                      columnVar1: 'Comentario',
+                      columnVar2: valueNull(
+                          value.empresarioComentarioEjecutivo.toString()),
                       titleCategory: 'Comentario ejecutivo',
                       dataRow: const [],
                     ),

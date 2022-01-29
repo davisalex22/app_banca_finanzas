@@ -71,7 +71,7 @@ class EmpresasService extends ChangeNotifier {
 
     //print(decodeData);
     final index = empresas.indexWhere((element) => element.id == empresa.id);
-    empresas[index] = empresa;
+    this.empresas[index] = empresa;
 
     return empresa.id!;
   }

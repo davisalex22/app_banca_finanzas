@@ -64,7 +64,7 @@ class SubMercadoService extends ChangeNotifier {
 
     final index = subSistemasMercadosList
         .indexWhere((element) => element.id == subMercado.id);
-    subSistemasMercadosList[index] = subMercado;
+    this.subSistemasMercadosList[index] = subMercado;
 
     return subMercado.id!;
   }

@@ -97,10 +97,10 @@ class _SubMercadoForm extends StatelessWidget {
       child: Column(
         children: [
           const MainHeader(
-            titlePage: 'Registrar Sub-sistema Mercado',
+            titlePage: 'Registrar sub-sistema mercado',
           ),
           CustomCardType2(
-            titleCard: 'Políticas de Producto y/o Servicio',
+            titleCard: 'Políticas de producto y/o servicio',
             column1: Column(
               children: [
                 CardTableSubsistemas(
@@ -111,7 +111,7 @@ class _SubMercadoForm extends StatelessWidget {
                       cells: <DataCell>[
                         const DataCell(SizedBox(
                           child: Text(
-                            'Rentabilidad \nde los productos',
+                            'Rentabilidad \nde productos',
                           ),
                         )),
                         DataCell(
@@ -144,10 +144,32 @@ class _SubMercadoForm extends StatelessWidget {
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Nuevos\nProductos',
+                          'Nuevos\nproductos',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merPoliticaNuevos, 0.0, 2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merPoliticaNuevos),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merPoliticaNuevos = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -168,8 +190,30 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Quien es su cliente,\ntipificar',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merSegmentoCliente, 0.0, 5.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merSegmentoCliente),
+                                  min: 0.0,
+                                  max: 5.0,
+                                  divisions: 5,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merSegmentoCliente = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -179,8 +223,31 @@ class _SubMercadoForm extends StatelessWidget {
                             'Distribución y proporción\npor productos',
                           ),
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merSegmentoDistribucion, 0.0, 5.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merSegmentoDistribucion),
+                                  min: 0.0,
+                                  max: 5.0,
+                                  divisions: 5,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merSegmentoDistribucion =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -188,8 +255,30 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Conoce magnitud\nde mercado',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merSegmentoMagnitud, 0.0, 5.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merSegmentoMagnitud),
+                                  min: 0.0,
+                                  max: 5.0,
+                                  divisions: 5,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merSegmentoMagnitud = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -197,17 +286,63 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Indicadores clave\nde mercado',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merSegmentoTenIndicadores, 0.0, 3.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merSegmentoTenIndicadores),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merSegmentoTenIndicadores =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Indicadores clave\nde mercado',
+                          'Otras fuentes de\ninformación',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merSegmentoTenFuentes, 0.0, 2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merSegmentoTenFuentes),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merSegmentoTenFuentes =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -215,8 +350,31 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Mercado potencial\nactual',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merSegmentoPotenActual, 0.0, 3.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merSegmentoPotenActual),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merSegmentoPotenActual =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -224,8 +382,31 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Mercado potencial\ntendencia',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merSegmentoPotenActual, 0.0, 2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merSegmentoPotenTendencia),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merSegmentoPotenTendencia =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -246,8 +427,30 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Usuario',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merClienteUsuario, 0.0, 2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merClienteUsuario),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merClienteUsuario = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -255,17 +458,61 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Decisor',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merClienteDecisor, 0.0, 2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merClienteDecisor),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merClienteDecisor = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Da los recursos',
+                          'Ofrece los recursos',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merClienteRecursos, 0.0, 1.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merClienteRecursos),
+                                  min: 0.0,
+                                  max: 1.0,
+                                  divisions: 1,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merClienteRecursos = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -286,10 +533,31 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Calidad',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaCompranCalidad,
-                            0.0,
-                            2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merExpectativaCompranCalidad),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merExpectativaCompranCalidad =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -297,10 +565,32 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Servicio',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaCompranServicio,
-                            0.0,
-                            2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(registroSub
+                                      .merExpectativaCompranServicio),
+                                  min: 0.0,
+                                  max: 1.0,
+                                  divisions: 1,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub
+                                              .merExpectativaCompranServicio =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -308,8 +598,31 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Precio',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaCompranPrecio, 0.0, 2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merExpectativaCompranPrecio),
+                                  min: 0.0,
+                                  max: 5.0,
+                                  divisions: 5,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merExpectativaCompranPrecio =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -317,8 +630,31 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Mercado',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaFijaMercado, 0.0, 5.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merExpectativaFijaMercado),
+                                  min: 0.0,
+                                  max: 5.0,
+                                  divisions: 5,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merExpectativaFijaMercado =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -326,10 +662,32 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Competencia',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaFijaCompetencia,
-                            0.0,
-                            4.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(registroSub
+                                      .merExpectativaFijaCompetencia),
+                                  min: 0.0,
+                                  max: 4.0,
+                                  divisions: 4,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub
+                                              .merExpectativaFijaCompetencia =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -337,8 +695,31 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Costo',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaFijaCosto, 0.0, 3.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merExpectativaFijaCosto),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merExpectativaFijaCosto =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -346,8 +727,31 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Liricos',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaFijaLirico, 0.0, 2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merExpectativaFijaLirico),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merExpectativaFijaLirico =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -355,10 +759,31 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Oferente 1/2,1/2\nConsumidor',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaCanalOferente1,
-                            0.0,
-                            2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merExpectativaCanalOferente1),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merExpectativaCanalOferente1 =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -366,10 +791,31 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Oferente 1/2\nConsumidor',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaCanalOferente2,
-                            0.0,
-                            2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merExpectativaCanalOferente2),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merExpectativaCanalOferente2 =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -377,66 +823,221 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Oferente - Consumidor',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaCanalOferente3,
-                            0.0,
-                            2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merExpectativaCanalOferente3),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merExpectativaCanalOferente3 =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Tiene identificados',
+                          'Competencia\nidentificados',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merCompetenciaIdentificador, 0.0, 2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merCompetenciaIdentificador),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merCompetenciaIdentificador =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Cantidad',
+                          'Competencia\ncantidad',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merCompetenciaEvCantidad, 0.0, 2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merCompetenciaEvCantidad),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merCompetenciaEvCantidad =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Calidad',
+                          'Competencia\ncalidad',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merCompetenciaEvCalidad, 0.0, 2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merCompetenciaEvCalidad),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merCompetenciaEvCalidad =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Precio',
+                          'Competencia\nprecio',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merCompetenciaEvPrecio, 0.0, 2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merCompetenciaEvPrecio),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merCompetenciaEvPrecio =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Fuerzas',
+                          'Competencia\nventajas',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merCompetenciaMenFuerzas, 0.0, 1.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merCompetenciaMenFuerzas),
+                                  min: 0.0,
+                                  max: 1.0,
+                                  divisions: 1,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merCompetenciaMenFuerzas =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Debilidades',
+                          'Competencia\ndebilidades',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merCompetenciasMenDebilidades,
-                            0.0,
-                            1.0)),
+                        DataCell(SizedBox(
+                          width: 130,
+                          child: StatefulBuilder(
+                            builder: (context, state) => Center(
+                              child: Slider(
+                                activeColor: const Color(0XffA73030),
+                                value: valueSlider(
+                                    registroSub.merCompetenciasMenDebilidades),
+                                min: 0.0,
+                                max: 1.0,
+                                divisions: 1,
+                                label: value_.round().toString(),
+                                onChanged: (val) {
+                                  state(() {
+                                    value_ = val;
+                                    registroSub.merCompetenciasMenDebilidades =
+                                        '$val';
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ))
                       ],
                     ),
                   ],
@@ -455,89 +1056,257 @@ class _SubMercadoForm extends StatelessWidget {
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Personales',
+                          'Anuncios\npersonales',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionSisPersonales,
-                            0.0,
-                            2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(registroSub
+                                      .merComercializacionSisPersonales),
+                                  min: 0.0,
+                                  max: 1.0,
+                                  divisions: 1,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub
+                                              .merComercializacionSisPersonales =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Masivos',
+                          'Anuncios\nmasivos',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionSisMasivos,
-                            0.0,
-                            2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(registroSub
+                                      .merComercializacionSisMasivos),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub
+                                              .merComercializacionSisMasivos =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Expectativa',
+                          'Anuncios\nExpectativa',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionSisExpectativa,
-                            0.0,
-                            2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(registroSub
+                                      .merComercializacionSisExpectativa),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub
+                                              .merComercializacionSisExpectativa =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Emblema',
+                          'Imágen\nemblema',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionImEmblema,
-                            0.0,
-                            2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merComercializacionImEmblema),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merComercializacionImEmblema =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Logotipo',
+                          'Imágen\nlogotipo',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionImLogotipo,
-                            0.0,
-                            3.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(registroSub
+                                      .merComercializacionImLogotipo),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub
+                                              .merComercializacionImLogotipo =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Número de Vendedores',
+                          'Número de vendedores',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenVendedores,
-                            0.0,
-                            1.0)),
+                        DataCell(SizedBox(
+                          width: 130,
+                          child: StatefulBuilder(
+                            builder: (context, state) => Center(
+                              child: Slider(
+                                activeColor: const Color(0XffA73030),
+                                value: valueSlider(registroSub
+                                    .merComercializacionVenVendedores),
+                                min: 0.0,
+                                max: 1.0,
+                                divisions: 1,
+                                label: value_.round().toString(),
+                                onChanged: (val) {
+                                  state(() {
+                                    value_ = val;
+                                    registroSub
+                                            .merComercializacionVenVendedores =
+                                        '$val';
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ))
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Reparto Territorio',
+                          'Reparto territorio',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenTerritorio,
-                            0.0,
-                            1.0)),
+                        DataCell(SizedBox(
+                          width: 130,
+                          child: StatefulBuilder(
+                            builder: (context, state) => Center(
+                              child: Slider(
+                                activeColor: const Color(0XffA73030),
+                                value: valueSlider(registroSub
+                                    .merComercializacionVenTerritorio),
+                                min: 0.0,
+                                max: 1.0,
+                                divisions: 1,
+                                label: value_.round().toString(),
+                                onChanged: (val) {
+                                  state(() {
+                                    value_ = val;
+                                    registroSub
+                                            .merComercializacionVenTerritorio =
+                                        '$val';
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ))
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Equipo de Ventas',
+                          'Equipo de ventas',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenEquipo,
-                            0.0,
-                            1.0)),
+                        DataCell(SizedBox(
+                          width: 130,
+                          child: StatefulBuilder(
+                            builder: (context, state) => Center(
+                              child: Slider(
+                                activeColor: const Color(0XffA73030),
+                                value: valueSlider(
+                                    registroSub.merComercializacionVenEquipo),
+                                min: 0.0,
+                                max: 1.0,
+                                divisions: 1,
+                                label: value_.round().toString(),
+                                onChanged: (val) {
+                                  state(() {
+                                    value_ = val;
+                                    registroSub.merComercializacionVenEquipo =
+                                        '$val';
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ))
                       ],
                     ),
                     DataRow(
@@ -545,8 +1314,31 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Plan de presentación',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenPlan, 0.0, 1.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merComercializacionVenPlan),
+                                  min: 0.0,
+                                  max: 1.0,
+                                  divisions: 1,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merComercializacionVenPlan =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -554,10 +1346,30 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Entrenamiento',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenEntrenamiento,
-                            0.0,
-                            1.0)),
+                        DataCell(SizedBox(
+                          width: 130,
+                          child: StatefulBuilder(
+                            builder: (context, state) => Center(
+                              child: Slider(
+                                activeColor: const Color(0XffA73030),
+                                value: valueSlider(registroSub
+                                    .merComercializacionVenEntrenamiento),
+                                min: 0.0,
+                                max: 1.0,
+                                divisions: 1,
+                                label: value_.round().toString(),
+                                onChanged: (val) {
+                                  state(() {
+                                    value_ = val;
+                                    registroSub
+                                            .merComercializacionVenEntrenamiento =
+                                        '$val';
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ))
                       ],
                     ),
                     DataRow(
@@ -565,10 +1377,29 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Cuotas',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenCuotas,
-                            0.0,
-                            1.0)),
+                        DataCell(SizedBox(
+                          width: 130,
+                          child: StatefulBuilder(
+                            builder: (context, state) => Center(
+                              child: Slider(
+                                activeColor: const Color(0XffA73030),
+                                value: valueSlider(
+                                    registroSub.merComercializacionVenCuotas),
+                                min: 0.0,
+                                max: 1.0,
+                                divisions: 1,
+                                label: value_.round().toString(),
+                                onChanged: (val) {
+                                  state(() {
+                                    value_ = val;
+                                    registroSub.merComercializacionVenCuotas =
+                                        '$val';
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ))
                       ],
                     ),
                     DataRow(
@@ -576,10 +1407,30 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Presupuestos',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenPresupuestos,
-                            0.0,
-                            1.0)),
+                        DataCell(SizedBox(
+                          width: 130,
+                          child: StatefulBuilder(
+                            builder: (context, state) => Center(
+                              child: Slider(
+                                activeColor: const Color(0XffA73030),
+                                value: valueSlider(registroSub
+                                    .merComercializacionVenPresupuestos),
+                                min: 0.0,
+                                max: 1.0,
+                                divisions: 1,
+                                label: value_.round().toString(),
+                                onChanged: (val) {
+                                  state(() {
+                                    value_ = val;
+                                    registroSub
+                                            .merComercializacionVenPresupuestos =
+                                        '$val';
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ))
                       ],
                     ),
                     DataRow(
@@ -587,21 +1438,65 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Reportes',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenReportes,
-                            0.0,
-                            2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(registroSub
+                                      .merComercializacionVenReportes),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub
+                                              .merComercializacionVenReportes =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Rentabilidad',
+                          'Rentabilidad\nvendedor',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenRentabilidad,
-                            0.0,
-                            1.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(registroSub
+                                      .merComercializacionVenRentabilidad),
+                                  min: 0.0,
+                                  max: 1.0,
+                                  divisions: 1,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub
+                                              .merComercializacionVenRentabilidad =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ],
@@ -610,7 +1505,7 @@ class _SubMercadoForm extends StatelessWidget {
             ),
           ),
           CustomCardType2(
-            titleCard: 'Reportes de Mercado',
+            titleCard: 'Reportes de mercado',
             column1: Column(
               children: [
                 CardTableSubsistemas(
@@ -622,35 +1517,92 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Clientes',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesClientes, 0.0, 5.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merReportesClientes),
+                                  min: 0.0,
+                                  max: 5.0,
+                                  divisions: 5,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merReportesClientes = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Producto y/o Servicio',
+                          'Producto y/o servicio',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesProducto, 0.0, 5.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merReportesProducto),
+                                  min: 0.0,
+                                  max: 5.0,
+                                  divisions: 5,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merReportesProducto = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Canal de Distribución',
+                          'Canal de distribución',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesCanal, 0.0, 5.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Canal de Distribución',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesCanal, 0.0, 5.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.merReportesCanal),
+                                  min: 0.0,
+                                  max: 5.0,
+                                  divisions: 5,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merReportesCanal = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -658,8 +1610,30 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Precio',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesPrecio, 0.0, 5.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merReportesPrecio),
+                                  min: 0.0,
+                                  max: 5.0,
+                                  divisions: 5,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merReportesPrecio = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
@@ -667,62 +1641,244 @@ class _SubMercadoForm extends StatelessWidget {
                         const DataCell(Text(
                           'Competencia',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesCompetencia, 0.0, 5.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merReportesCompetencia),
+                                  min: 0.0,
+                                  max: 5.0,
+                                  divisions: 5,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merReportesCompetencia =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Sistemas de Información\nVentas',
+                          'Sistemas de información',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesSistemas, 0.0, 5.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merReportesSistemas),
+                                  min: 0.0,
+                                  max: 5.0,
+                                  divisions: 5,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merReportesSistemas = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Lírico',
+                          'Ventas',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesLirico, 0.0, 2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merReportesVentas),
+                                  min: 0.0,
+                                  max: 5.0,
+                                  divisions: 5,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merReportesVentas = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Manual',
+                          'Forma\nlírico',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesManual, 0.0, 4.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merReportesLirico),
+                                  min: 0.0,
+                                  max: 2.0,
+                                  divisions: 2,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merReportesLirico = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Computarizado',
+                          'Forma\nmanual',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesComputarizado, 0.0, 4.0)),
+                        DataCell(SizedBox(
+                          width: 130,
+                          child: StatefulBuilder(
+                            builder: (context, state) => Center(
+                              child: Slider(
+                                activeColor: const Color(0XffA73030),
+                                value:
+                                    valueSlider(registroSub.merReportesManual),
+                                min: 0.0,
+                                max: 4.0,
+                                divisions: 4,
+                                label: value_.round().toString(),
+                                onChanged: (val) {
+                                  state(() {
+                                    value_ = val;
+                                    registroSub.merReportesManual = '$val';
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ))
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Personal',
+                          'Forma\ncomputarizado',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesPersonal, 0.0, 4.0)),
+                        DataCell(SizedBox(
+                          width: 130,
+                          child: StatefulBuilder(
+                            builder: (context, state) => Center(
+                              child: Slider(
+                                activeColor: const Color(0XffA73030),
+                                value: valueSlider(
+                                    registroSub.merReportesComputarizado),
+                                min: 0.0,
+                                max: 1.0,
+                                divisions: 1,
+                                label: value_.round().toString(),
+                                onChanged: (val) {
+                                  state(() {
+                                    value_ = val;
+                                    registroSub.merReportesComputarizado =
+                                        '$val';
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ))
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(Text(
-                          'Organizacional',
+                          'Forma\npersonal',
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesOrganizacional, 0.0, 5.0)),
+                        DataCell(SizedBox(
+                          width: 130,
+                          child: StatefulBuilder(
+                            builder: (context, state) => Center(
+                              child: Slider(
+                                activeColor: const Color(0XffA73030),
+                                value: valueSlider(
+                                    registroSub.merReportesPersonal),
+                                min: 0.0,
+                                max: 4.0,
+                                divisions: 4,
+                                label: value_.round().toString(),
+                                onChanged: (val) {
+                                  state(() {
+                                    value_ = val;
+                                    registroSub.merReportesPersonal = '$val';
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ))
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(Text(
+                          'Forma\norganizacional',
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.merReportesOrganizacional),
+                                  min: 0.0,
+                                  max: 5.0,
+                                  divisions: 5,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merReportesOrganizacional =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -731,7 +1887,7 @@ class _SubMercadoForm extends StatelessWidget {
             ),
           ),
           CustomCardType2(
-            titleCard: 'Comentarios de Mercado Paramétrico',
+            titleCard: 'Comentarios de mercado paramétrico',
             column1: Column(
               children: [
                 CustomInputField(
@@ -741,8 +1897,8 @@ class _SubMercadoForm extends StatelessWidget {
                   minLines: 4,
                   maxLines: null,
                   keyboardType: TextInputType.multiline,
-                  labelText: 'Comentarios de Mercado Paramétrico',
-                  hintText: 'Comentarios de Mercado Paramétrico',
+                  labelText: 'Comentarios de mercado paramétrico',
+                  hintText: 'Comentarios de mercado paramétrico',
                   valueNullable: false,
                 ),
               ],

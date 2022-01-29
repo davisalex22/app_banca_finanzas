@@ -20,7 +20,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     final authService = Provider.of<AuthService>(context, listen: false);
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      backgroundColor: const Color(0xFFED4156),
+      backgroundColor: const Color(0XffA73030),
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.white.withOpacity(.60),
       selectedFontSize: 14,

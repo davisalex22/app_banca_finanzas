@@ -11,6 +11,13 @@ class InfoSubsistemaMScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final empresasService = Provider.of<SubMercadoService>(context);
     final value = empresasService.selectedsubMercado;
+    valueNull(String campo) {
+      if (campo == "null") {
+        return "Vacio";
+      } else {
+        return campo;
+      }
+    }
 
     if (empresasService.isLoading) return const HomeScreen();
 
@@ -62,7 +69,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
               children: [
                 CardInformationTable(
                   columnVar1: 'Rentabilidad de\nProductos',
-                  columnVar2: value.merPoliticaRentabilidad.toString(),
+                  columnVar2:
+                      valueNull(value.merPoliticaRentabilidad.toString()),
                   titleCategory: 'Políticas de producto y/o servicio',
                   dataRow: [
                     DataRow(
@@ -71,7 +79,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Nuevos productos',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(value.merPoliticaNuevos.toString())),
+                        DataCell(Text(
+                            valueNull(value.merPoliticaNuevos.toString()))),
                       ],
                     ),
                   ],
@@ -79,7 +88,7 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                 const LineDivider(),
                 CardInformationTable(
                   columnVar1: 'Quién es su cliente,\ntipicicar',
-                  columnVar2: value.merSegmentoCliente.toString(),
+                  columnVar2: valueNull(value.merSegmentoCliente.toString()),
                   titleCategory: 'Segmento',
                   dataRow: [
                     DataRow(
@@ -88,8 +97,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Sabe la distribución y\nproporción de sus\nproductos',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(
-                            Text(value.merSegmentoDistribucion.toString())),
+                        DataCell(Text(valueNull(
+                            value.merSegmentoDistribucion.toString()))),
                       ],
                     ),
                     DataRow(
@@ -98,7 +107,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Conoce la magnitud\ndel mercado',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(value.merSegmentoMagnitud.toString())),
+                        DataCell(Text(
+                            valueNull(value.merSegmentoMagnitud.toString()))),
                       ],
                     ),
                     DataRow(
@@ -107,8 +117,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Indicadores claves\ndel mercado',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(
-                            Text(value.merSegmentoTenIndicadores.toString())),
+                        DataCell(Text(valueNull(
+                            value.merSegmentoTenIndicadores.toString()))),
                       ],
                     ),
                     DataRow(
@@ -117,8 +127,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Otras fuentes de\ninformación',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(
-                            Text(value.merSegmentoTenIndicadores.toString())),
+                        DataCell(Text(valueNull(
+                            value.merSegmentoTenIndicadores.toString()))),
                       ],
                     ),
                     DataRow(
@@ -127,7 +137,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Conoce su mercado\npotencial actual',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(value.merSegmentoPotenActual.toString())),
+                        DataCell(Text(valueNull(
+                            value.merSegmentoPotenActual.toString()))),
                       ],
                     ),
                     DataRow(
@@ -136,8 +147,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Conoce su mercado\npotencial tendencia',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(
-                            Text(value.merSegmentoPotenTendencia.toString())),
+                        DataCell(Text(valueNull(
+                            value.merSegmentoPotenTendencia.toString()))),
                       ],
                     ),
                   ],
@@ -145,7 +156,7 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                 const LineDivider(),
                 CardInformationTable(
                   columnVar1: 'Usuario',
-                  columnVar2: value.merClienteUsuario.toString(),
+                  columnVar2: valueNull(value.merClienteUsuario.toString()),
                   titleCategory: 'Cliente',
                   dataRow: [
                     DataRow(
@@ -154,7 +165,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Decisor',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(value.merClienteDecisor.toString())),
+                        DataCell(Text(
+                            valueNull(value.merClienteDecisor.toString()))),
                       ],
                     ),
                     DataRow(
@@ -163,7 +175,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Da los recursos',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(value.merClienteRecursos.toString())),
+                        DataCell(Text(
+                            valueNull(value.merClienteRecursos.toString()))),
                       ],
                     ),
                   ],
@@ -171,7 +184,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                 const LineDivider(),
                 CardInformationTable(
                   columnVar1: 'Productos y/o \nservicios calidad',
-                  columnVar2: value.merExpectativaCompranCalidad.toString(),
+                  columnVar2:
+                      valueNull(value.merExpectativaCompranCalidad.toString()),
                   titleCategory: 'Expectativa',
                   dataRow: [
                     DataRow(
@@ -180,8 +194,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Productos y/o \nservicios servicio',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merExpectativaCompranServicio.toString())),
+                        DataCell(Text(valueNull(
+                            value.merExpectativaCompranServicio.toString()))),
                       ],
                     ),
                     DataRow(
@@ -190,8 +204,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Productos y/o \nservicios precio',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(
-                            Text(value.merExpectativaCompranPrecio.toString())),
+                        DataCell(Text(valueNull(
+                            value.merExpectativaCompranPrecio.toString()))),
                       ],
                     ),
                     DataRow(
@@ -200,8 +214,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Fijan precios de\nmercado',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(
-                            Text(value.merExpectativaFijaMercado.toString())),
+                        DataCell(Text(valueNull(
+                            value.merExpectativaFijaMercado.toString()))),
                       ],
                     ),
                     DataRow(
@@ -210,8 +224,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Fijan precios de\nmercado',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(
-                            Text(value.merExpectativaFijaMercado.toString())),
+                        DataCell(Text(valueNull(
+                            value.merExpectativaFijaMercado.toString()))),
                       ],
                     ),
                     DataRow(
@@ -220,8 +234,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Fijan precios de\ncompetencia',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merExpectativaFijaCompetencia.toString())),
+                        DataCell(Text(valueNull(
+                            value.merExpectativaFijaCompetencia.toString()))),
                       ],
                     ),
                     DataRow(
@@ -230,8 +244,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Fijan precios de\ncosto',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(
-                            Text(value.merExpectativaFijaCosto.toString())),
+                        DataCell(Text(valueNull(
+                            value.merExpectativaFijaCosto.toString()))),
                       ],
                     ),
                     DataRow(
@@ -240,8 +254,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Fijan precios de\nlírico',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(
-                            Text(value.merExpectativaFijaLirico.toString())),
+                        DataCell(Text(valueNull(
+                            value.merExpectativaFijaLirico.toString()))),
                       ],
                     ),
                     DataRow(
@@ -250,8 +264,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Canal de distribución\nOferente 1/2,1/2\nconsumidor',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merExpectativaCanalOferente1.toString())),
+                        DataCell(Text(valueNull(
+                            value.merExpectativaCanalOferente1.toString()))),
                       ],
                     ),
                     DataRow(
@@ -260,8 +274,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Canal de distribución\nOferente 1/2\nconsumidor',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merExpectativaCanalOferente2.toString())),
+                        DataCell(Text(valueNull(
+                            value.merExpectativaCanalOferente2.toString()))),
                       ],
                     ),
                     DataRow(
@@ -270,8 +284,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Canal de distribución\nOferente - consumidor',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merExpectativaCanalOferente3.toString())),
+                        DataCell(Text(valueNull(
+                            value.merExpectativaCanalOferente3.toString()))),
                       ],
                     ),
                     DataRow(
@@ -280,8 +294,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Competencia cantidad',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(
-                            Text(value.merCompetenciaEvCantidad.toString())),
+                        DataCell(Text(valueNull(
+                            value.merCompetenciaEvCantidad.toString()))),
                       ],
                     ),
                     DataRow(
@@ -290,8 +304,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Competencia calidad',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(
-                            Text(value.merCompetenciaEvCalidad.toString())),
+                        DataCell(Text(valueNull(
+                            value.merCompetenciaEvCalidad.toString()))),
                       ],
                     ),
                     DataRow(
@@ -300,7 +314,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Competencia precio',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(value.merCompetenciaEvPrecio.toString())),
+                        DataCell(Text(valueNull(
+                            value.merCompetenciaEvPrecio.toString()))),
                       ],
                     ),
                     DataRow(
@@ -309,8 +324,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Conoce competencia\nfuerzas',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(
-                            Text(value.merCompetenciaMenFuerzas.toString())),
+                        DataCell(Text(valueNull(
+                            value.merCompetenciaMenFuerzas.toString()))),
                       ],
                     ),
                     DataRow(
@@ -319,16 +334,17 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Conoce competencia\ndebilidades',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merCompetenciasMenDebilidades.toString())),
+                        DataCell(Text(valueNull(
+                            value.merCompetenciasMenDebilidades.toString()))),
                       ],
                     ),
                   ],
                 ),
                 const LineDivider(),
                 CardInformationTable(
-                  columnVar1: 'Anuncian información\npersonales',
-                  columnVar2: value.merComercializacionSisPersonales.toString(),
+                  columnVar1: 'Anuncian\ninformación\npersonales',
+                  columnVar2: valueNull(
+                      value.merComercializacionSisPersonales.toString()),
                   titleCategory: 'Comercio',
                   dataRow: [
                     DataRow(
@@ -337,8 +353,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Anuncian información\nmasivos',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merComercializacionSisMasivos.toString())),
+                        DataCell(Text(valueNull(
+                            value.merComercializacionSisMasivos.toString()))),
                       ],
                     ),
                     DataRow(
@@ -347,8 +363,9 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Anuncian información\nexpectativa',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(value.merComercializacionSisExpectativa
-                            .toString())),
+                        DataCell(Text(valueNull(value
+                            .merComercializacionSisExpectativa
+                            .toString()))),
                       ],
                     ),
                     DataRow(
@@ -357,8 +374,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Imagen emblema',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merComercializacionImEmblema.toString())),
+                        DataCell(Text(valueNull(
+                            value.merComercializacionImEmblema.toString()))),
                       ],
                     ),
                     DataRow(
@@ -367,8 +384,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Imagen logotipo',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merComercializacionImLogotipo.toString())),
+                        DataCell(Text(valueNull(
+                            value.merComercializacionImLogotipo.toString()))),
                       ],
                     ),
                     DataRow(
@@ -377,8 +394,9 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Número de vendedores',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merComercializacionVenVendedores.toString())),
+                        DataCell(Text(valueNull(value
+                            .merComercializacionVenVendedores
+                            .toString()))),
                       ],
                     ),
                     DataRow(
@@ -387,8 +405,9 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Reparto de Territorio',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merComercializacionVenTerritorio.toString())),
+                        DataCell(Text(valueNull(value
+                            .merComercializacionVenTerritorio
+                            .toString()))),
                       ],
                     ),
                     DataRow(
@@ -397,8 +416,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Equipo de Ventas',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merComercializacionVenEquipo.toString())),
+                        DataCell(Text(valueNull(
+                            value.merComercializacionVenEquipo.toString()))),
                       ],
                     ),
                     DataRow(
@@ -407,8 +426,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Plan de Presentación',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merComercializacionVenEquipo.toString())),
+                        DataCell(Text(valueNull(
+                            value.merComercializacionVenEquipo.toString()))),
                       ],
                     ),
                     DataRow(
@@ -417,8 +436,9 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Entrenamiento',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(value.merComercializacionVenEntrenamiento
-                            .toString())),
+                        DataCell(Text(valueNull(value
+                            .merComercializacionVenEntrenamiento
+                            .toString()))),
                       ],
                     ),
                     DataRow(
@@ -427,8 +447,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Controla sus\nventas cuotas',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merComercializacionVenCuotas.toString())),
+                        DataCell(Text(valueNull(
+                            value.merComercializacionVenCuotas.toString()))),
                       ],
                     ),
                     DataRow(
@@ -437,8 +457,9 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Controla sus\nventas presupuestos',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(value.merComercializacionVenPresupuestos
-                            .toString())),
+                        DataCell(Text(valueNull(value
+                            .merComercializacionVenPresupuestos
+                            .toString()))),
                       ],
                     ),
                     DataRow(
@@ -447,8 +468,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Controla sus\nventas reportes',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(
-                            value.merComercializacionVenReportes.toString())),
+                        DataCell(Text(valueNull(
+                            value.merComercializacionVenReportes.toString()))),
                       ],
                     ),
                     DataRow(
@@ -457,8 +478,9 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                           'Controla sus\nrentabilidad',
                           style: textStyleColumTitle,
                         )),
-                        DataCell(Text(value.merComercializacionVenRentabilidad
-                            .toString())),
+                        DataCell(Text(valueNull(value
+                            .merComercializacionVenRentabilidad
+                            .toString()))),
                       ],
                     ),
                   ],

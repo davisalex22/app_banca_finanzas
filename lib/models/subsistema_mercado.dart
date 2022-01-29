@@ -50,6 +50,7 @@ class SubsistemaMercado {
     this.merReportesPrecio,
     this.merReportesProducto,
     this.merReportesSistemas,
+    this.merReportesVentas,
     this.merSegmentoCliente,
     this.merSegmentoDistribucion,
     this.merSegmentoMagnitud,
@@ -108,6 +109,7 @@ class SubsistemaMercado {
   String? merReportesPrecio;
   String? merReportesProducto;
   String? merReportesSistemas;
+  String? merReportesVentas;
   String? merSegmentoCliente;
   String? merSegmentoDistribucion;
   String? merSegmentoMagnitud;
@@ -179,6 +181,7 @@ class SubsistemaMercado {
         merReportesOrganizacional: json["mer_reportes_organizacional"],
         merReportesPersonal: json["mer_reportes_personal"],
         merReportesPrecio: json["mer_reportes_precio"],
+        merReportesVentas: json["mer_reportes_ventas"],
         merReportesProducto: json["mer_reportes_producto"],
         merReportesSistemas: json["mer_reportes_sistemas"],
         merSegmentoCliente: json["mer_segmentoCliente"],
@@ -243,6 +246,7 @@ class SubsistemaMercado {
         "mer_reportes_precio": merReportesPrecio,
         "mer_reportes_producto": merReportesProducto,
         "mer_reportes_sistemas": merReportesSistemas,
+        "mer_reportes_ventas": merReportesVentas,
         "mer_segmentoCliente": merSegmentoCliente,
         "mer_segmentoDistribucion": merSegmentoDistribucion,
         "mer_segmentoMagnitud": merSegmentoMagnitud,
@@ -302,6 +306,7 @@ class SubsistemaMercado {
         merReportesPrecio: merReportesPrecio,
         merReportesProducto: merReportesProducto,
         merReportesSistemas: merReportesSistemas,
+        merReportesVentas: merReportesVentas,
         merSegmentoCliente: merSegmentoCliente,
         merSegmentoDistribucion: merSegmentoDistribucion,
         merSegmentoMagnitud: merSegmentoMagnitud,
