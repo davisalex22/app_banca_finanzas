@@ -29,7 +29,7 @@ class InfoSubsistemaMScreen extends StatelessWidget {
         child: Column(children: [
           MainHeader(
             titlePage:
-                'Información de sub-sistema \n${value.merClienteDecisor}',
+                'Información de sub-sistema \n${value.merComentariosMercado}',
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

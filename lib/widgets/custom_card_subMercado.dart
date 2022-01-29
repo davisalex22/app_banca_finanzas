@@ -40,7 +40,7 @@ class CustomCardSubsistemaM extends StatelessWidget {
                   title: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Text(
-                      subsistema.merCompetenciasMenDebilidades.toString(),
+                      subsistema.merComentariosMercado.toString(),
                       style: const TextStyle(fontSize: 18.0),
                     ),
                   ),

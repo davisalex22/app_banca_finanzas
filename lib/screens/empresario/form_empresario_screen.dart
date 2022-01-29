@@ -152,27 +152,30 @@ class _EmpresarioForm extends StatelessWidget {
                   hintText: 'Edad',
                   valueNullable: false,
                 ),
-                DropdownSearch<String>(
-                  validator: (v) => v == null ? "required field" : null,
-                  dropdownSearchDecoration: const InputDecoration(
-                    hintText: "Estado civil",
-                    labelText: "Estado civil",
-                    contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
-                    border: OutlineInputBorder(),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15.0, left: 15.0),
+                  child: DropdownSearch<String>(
+                    validator: (v) => v == null ? "required field" : null,
+                    dropdownSearchDecoration: const InputDecoration(
+                      hintText: "Estado civil",
+                      labelText: "Estado civil",
+                      contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                      border: OutlineInputBorder(),
+                    ),
+                    mode: Mode.MENU,
+                    showSelectedItems: true,
+                    onChanged: (value) =>
+                        registroEmp.empresarioEstadoCivil = value,
+                    items: const [
+                      "Soltero/a",
+                      "Casado/a",
+                      "Divorciado/a",
+                      "Viudo/a"
+                    ],
+                    showClearButton: false,
+                    clearButtonSplashRadius: 20,
+                    selectedItem: "Soltero/a",
                   ),
-                  mode: Mode.MENU,
-                  showSelectedItems: true,
-                  onChanged: (value) =>
-                      registroEmp.empresarioEstadoCivil = value,
-                  items: const [
-                    "Soltero/a",
-                    "Casado/a",
-                    "Divorciado/a",
-                    "Viudo/a"
-                  ],
-                  showClearButton: false,
-                  clearButtonSplashRadius: 20,
-                  selectedItem: "Soltero/a",
                 ),
                 CustomInputField(
                   initialValue: registroEmp.empresarioOcupacion,

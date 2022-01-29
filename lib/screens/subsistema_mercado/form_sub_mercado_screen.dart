@@ -77,6 +77,7 @@ class _SubMercadoScreenBody extends StatelessWidget {
 }
 
 class _SubMercadoForm extends StatelessWidget {
+  double value_ = 0;
   @override
   Widget build(BuildContext context) {
     final subMercadoForm = Provider.of<SubMercadoFormProvider>(context);
@@ -105,8 +106,30 @@ class _SubMercadoForm extends StatelessWidget {
                             'Rentabilidad \nde los productos',
                           ),
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merPoliticaRentabilidad, 0.0, 3.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: value_,
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.merPoliticaRentabilidad =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
