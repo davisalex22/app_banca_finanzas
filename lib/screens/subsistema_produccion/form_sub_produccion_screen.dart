@@ -98,10 +98,295 @@ class _SubProduccionForm extends StatelessWidget {
       child: Column(
         children: [
           const MainHeader(
-            titlePage: 'Registrar Sub-sistema Mercado',
+            titlePage: 'Registrar Sub-sistema Producción',
           ),
           CustomCardType2(
-            titleCard: 'Políticas de Producto y/o Servicio',
+            titleCard: 'Materiales',
+            column1: Column(
+              children: [
+                CardTableSubsistemas(
+                  columnVar1: 'Máximo de puntos (10)',
+                  columnVar2: '',
+                  dataRow: [
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Canditidad de materiales\ncompras',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodMatCantidadCompras),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodMatCantidadCompras =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Canditidad de materiales\ninventarios',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodMatCantidadInventarios),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodMatCantidadInventarios =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Calidad de materiales\natributos físicos',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodMatCalidadAtributos),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodMatCalidadAtributos =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Calidad de materiales\nestandarización',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(registroSub
+                                      .prodMatCalidadEstandarizacion),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub
+                                              .prodMatCalidadEstandarizacion =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Calidad de materiales\ntrabajabilidad',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodMatCalidadTrabajabilidad),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodMatCalidadTrabajabilidad =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Calidad de materiales\ndisponibilidad',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodMatCalidadDisponibilidad),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodMatCalidadDisponibilidad =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Calidad de materiales\ntiempo de entregas',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodMatCalidadEntregas),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodMatCalidadEntregas =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Calidad de materiales\nprecio',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodMatCalidadPrecio),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodMatCalidadPrecio = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          CustomCardType2(
+            titleCard: 'Ubicación del lugar de trabajo',
             column1: Column(
               children: [
                 CardTableSubsistemas(
@@ -112,7 +397,1264 @@ class _SubProduccionForm extends StatelessWidget {
                       cells: <DataCell>[
                         const DataCell(SizedBox(
                           child: Text(
-                            'Rentabilidad \nde los productos',
+                            'Materia prima',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodUbiMateriaPrima),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodUbiMateriaPrima = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Mano de obra',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodUbiManoObra),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodUbiManoObra = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Clientes',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodUbiClientes),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodUbiClientes = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Medio ambiente',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodUbiEconomico),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodUbiMedioAmbiente = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          CustomCardType2(
+            titleCard: 'Ubicación del lugar de trabajo',
+            column1: Column(
+              children: [
+                CardTableSubsistemas(
+                  columnVar1: 'Máximo de puntos (5)',
+                  columnVar2: '',
+                  dataRow: [
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Materia prima',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodUbiMateriaPrima),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodUbiMateriaPrima = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Mano de obra',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodUbiManoObra),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodUbiManoObra = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Clientes',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodUbiClientes),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodUbiClientes = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Medio ambiente',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodUbiEconomico),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodUbiMedioAmbiente = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          CustomCardType2(
+            titleCard: 'Lugar de Trabajo',
+            column1: Column(
+              children: [
+                CardTableSubsistemas(
+                  columnVar1: 'Máximo de puntos (20)',
+                  columnVar2: '',
+                  dataRow: [
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Edificio',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodLugEdificio),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugEdificio = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Espacio',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodLugEspacio),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugEspacio = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Ambientacion Temperatura',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodLugAmbTemperatura),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugAmbTemperatura =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Ambientación Luz',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(registroSub.prodLugAmbLuz),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugAmbLuz = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Ambientación Ruido',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodLugAmbRuido),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugAmbRuido = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Ambientación Colores',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodLugAmbColores),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugAmbColores = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Ambientación Ventilación',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodLugAmbVentilacion),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugAmbVentilacion =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Ambientación\nInstalaciones sanitarias',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodLugAmbSanitarias),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugAmbSanitarias = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Ambientación Lockers',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodLugAmbLockers),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugAmbLockers = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Ambientación Alimentos',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodLugAmbAlimentos),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugAmbAlimentos = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Seguridad Industrial\nequipos',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodLugAmbSegSeguridad),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugAmbSegSeguridad =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Seguridad Industrial\nbotiquín',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodLugAmbSegBotiquin),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugAmbSegBotiquin =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Seguridad Industrial\nteléfono de emergencia',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodLugAmbSegTelefono),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugAmbSegTelefono =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Dstribución\npor puesto',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodLugDisPuesto),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugDisPuesto = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Dstribución\npor taller',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodLugDisTaller),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugDisTaller = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Dstribución\npor línea',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodLugDisLinea),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodLugDisLinea = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          CustomCardType2(
+            titleCard: 'Procedimientos de trabajo',
+            column1: Column(
+              children: [
+                CardTableSubsistemas(
+                  columnVar1: 'Máximo de puntos (15)',
+                  columnVar2: '',
+                  dataRow: [
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Procesos / Tareas',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodProcProcesos),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodProcProcesos = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Normas / Tiempo',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodProcNormas),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodProcNormas = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Desperdicios',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodProcDesperdicios),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodProcDesperdicios = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Ocios',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(registroSub.prodProcOcios),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodProcOcios = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Dispositivos de medición',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodProcDispositivos),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodProcDispositivos = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Costos Fijos',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodProcCostosFijos),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodProcCostosFijos = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Costos Variables',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodProcCostosVariables),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodProcCostosVariables =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Manejo de materiales',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodProcMateriales),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodProcMateriales = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Embarques',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodProcEmbarques),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodProcEmbarques = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          CustomCardType2(
+            titleCard: 'Maquinaria y equipo',
+            column1: Column(
+              children: [
+                CardTableSubsistemas(
+                  columnVar1: 'Máximo de puntos (5)',
+                  columnVar2: '',
+                  dataRow: [
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Adecuado',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodMaqAdecuado),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodMaqAdecuado = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Suficiente',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodMaqSuficiente),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodMaqSuficiente = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Mantenimiento',
+                          ),
+                        )),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodMaqMantenimiento),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodMaqMantenimiento = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          CustomCardType2(
+            titleCard: 'Calidad',
+            column1: Column(
+              children: [
+                CardTableSubsistemas(
+                  columnVar1: 'Máximo de puntos (5)',
+                  columnVar2: '',
+                  dataRow: [
+                    DataRow(
+                      cells: <DataCell>[
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Es estándar',
                           ),
                         )),
                         DataCell(
@@ -143,129 +1685,68 @@ class _SubProduccionForm extends StatelessWidget {
                     ),
                     DataRow(
                       cells: <DataCell>[
-                        const DataCell(Text(
-                          'Nuevos\nProductos',
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Mejora de Procesos',
+                          ),
                         )),
-                        DataCell(inputSliderP(
-                            registroSub.prodCalEstandar, 0.0, 2.0)),
-                      ],
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-          /*CustomCardType2(
-            titleCard: 'Segmento',
-            column1: Column(
-              children: [
-                CardTableSubsistemas(
-                  columnVar1: 'Máximo de puntos (25)',
-                  columnVar2: '',
-                  dataRow: [
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Quien es su cliente,\ntipificar',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merSegmentoCliente, 0.0, 5.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodCalMejoras),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodCalMejoras = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
                         const DataCell(SizedBox(
                           child: Text(
-                            'Distribución y proporción\npor productos',
+                            'Tecnología Actualizada',
                           ),
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merSegmentoDistribucion, 0.0, 5.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Conoce magnitud\nde mercado',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merSegmentoMagnitud, 0.0, 5.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Indicadores clave\nde mercado',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merSegmentoTenIndicadores, 0.0, 3.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Indicadores clave\nde mercado',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merSegmentoTenFuentes, 0.0, 2.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Mercado potencial\nactual',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merSegmentoPotenActual, 0.0, 3.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Mercado potencial\ntendencia',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merSegmentoPotenActual, 0.0, 2.0)),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          CustomCardType2(
-            titleCard: 'Cliente',
-            column1: Column(
-              children: [
-                CardTableSubsistemas(
-                  columnVar1: 'Máximo de puntos (5)',
-                  columnVar2: '',
-                  dataRow: [
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Usuario',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merClienteUsuario, 0.0, 2.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Decisor',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merClienteDecisor, 0.0, 2.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Da los recursos',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merClienteRecursos, 0.0, 1.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodCalTecnologia),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodCalTecnologia = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -274,7 +1755,7 @@ class _SubProduccionForm extends StatelessWidget {
             ),
           ),
           CustomCardType2(
-            titleCard: 'Expectativa',
+            titleCard: 'Reportes de producción',
             column1: Column(
               children: [
                 CardTableSubsistemas(
@@ -283,160 +1764,333 @@ class _SubProduccionForm extends StatelessWidget {
                   dataRow: [
                     DataRow(
                       cells: <DataCell>[
-                        const DataCell(Text(
-                          'Calidad',
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Calidad de los\nmateriales',
+                          ),
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaCompranCalidad,
-                            0.0,
-                            2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodRepCalidadMateriales),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodRepCalidadMateriales =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
-                        const DataCell(Text(
-                          'Servicio',
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Costos de los\nmateriales',
+                          ),
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaCompranServicio,
-                            0.0,
-                            2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodRepCostosMateriales),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodRepCostosMateriales =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
-                        const DataCell(Text(
-                          'Precio',
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Inventarios de\nmateriales',
+                          ),
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaCompranPrecio, 0.0, 2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodRepInventarios),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodRepInventarios = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
-                        const DataCell(Text(
-                          'Mercado',
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Desperdicios',
+                          ),
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaFijaMercado, 0.0, 5.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodRepDesperdicios),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodRepDesperdicios = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
-                        const DataCell(Text(
-                          'Competencia',
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Rechazo de los\nproductos',
+                          ),
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaFijaCompetencia,
-                            0.0,
-                            4.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodRepRechazados),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodRepRechazados = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
-                        const DataCell(Text(
-                          'Costo',
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Forma lírico',
+                          ),
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaFijaCosto, 0.0, 3.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(registroSub.prodRepLirico),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodRepLirico = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
-                        const DataCell(Text(
-                          'Liricos',
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Forma manual',
+                          ),
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaFijaLirico, 0.0, 2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(registroSub.prodRepManual),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodRepManual = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
-                        const DataCell(Text(
-                          'Oferente 1/2,1/2\nConsumidor',
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Forma Computarizado',
+                          ),
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaCanalOferente1,
-                            0.0,
-                            2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodRepComputarizado),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodRepComputarizado = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
-                        const DataCell(Text(
-                          'Oferente 1/2\nConsumidor',
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Forma Personal',
+                          ),
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaCanalOferente2,
-                            0.0,
-                            2.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value:
+                                      valueSlider(registroSub.prodRepPersonal),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodRepPersonal = '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     DataRow(
                       cells: <DataCell>[
-                        const DataCell(Text(
-                          'Oferente - Consumidor',
+                        const DataCell(SizedBox(
+                          child: Text(
+                            'Forma Organizal',
+                          ),
                         )),
-                        DataCell(inputSlider(
-                            registroSub.merExpectativaCanalOferente3,
-                            0.0,
-                            2.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Tiene identificados',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merCompetenciaIdentificador, 0.0, 2.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Cantidad',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merCompetenciaEvCantidad, 0.0, 2.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Calidad',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merCompetenciaEvCalidad, 0.0, 2.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Precio',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merCompetenciaEvPrecio, 0.0, 2.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Fuerzas',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merCompetenciaMenFuerzas, 0.0, 1.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Debilidades',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merCompetenciasMenDebilidades,
-                            0.0,
-                            1.0)),
+                        DataCell(
+                          SizedBox(
+                            width: 130,
+                            child: StatefulBuilder(
+                              builder: (context, state) => Center(
+                                child: Slider(
+                                  activeColor: const Color(0XffA73030),
+                                  value: valueSlider(
+                                      registroSub.prodRepOrganizacional),
+                                  min: 0.0,
+                                  max: 3.0,
+                                  divisions: 3,
+                                  label: value_.round().toString(),
+                                  onChanged: (val) {
+                                    state(() {
+                                      value_ = val;
+                                      registroSub.prodRepOrganizacional =
+                                          '$val';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -445,336 +2099,25 @@ class _SubProduccionForm extends StatelessWidget {
             ),
           ),
           CustomCardType2(
-            titleCard: 'Comercialización',
-            column1: Column(
-              children: [
-                CardTableSubsistemas(
-                  columnVar1: 'Máximo de puntos (20)',
-                  columnVar2: '',
-                  dataRow: [
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Personales',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionSisPersonales,
-                            0.0,
-                            2.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Masivos',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionSisMasivos,
-                            0.0,
-                            2.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Expectativa',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionSisExpectativa,
-                            0.0,
-                            2.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Emblema',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionImEmblema,
-                            0.0,
-                            2.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Logotipo',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionImLogotipo,
-                            0.0,
-                            3.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Número de Vendedores',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenVendedores,
-                            0.0,
-                            1.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Reparto Territorio',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenTerritorio,
-                            0.0,
-                            1.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Equipo de Ventas',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenEquipo,
-                            0.0,
-                            1.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Plan de presentación',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenPlan, 0.0, 1.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Entrenamiento',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenEntrenamiento,
-                            0.0,
-                            1.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Cuotas',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenCuotas,
-                            0.0,
-                            1.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Presupuestos',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenPresupuestos,
-                            0.0,
-                            1.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Reportes',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenReportes,
-                            0.0,
-                            2.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Rentabilidad',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merComercializacionVenRentabilidad,
-                            0.0,
-                            1.0)),
-                      ],
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-          CustomCardType2(
-            titleCard: 'Reportes de Mercado',
-            column1: Column(
-              children: [
-                CardTableSubsistemas(
-                  columnVar1: 'Máximo de puntos (5)',
-                  columnVar2: '',
-                  dataRow: [
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Clientes',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesClientes, 0.0, 5.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Producto y/o Servicio',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesProducto, 0.0, 5.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Canal de Distribución',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesCanal, 0.0, 5.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Canal de Distribución',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesCanal, 0.0, 5.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Precio',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesPrecio, 0.0, 5.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Competencia',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesCompetencia, 0.0, 5.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Sistemas de Información\nVentas',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesSistemas, 0.0, 5.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Lírico',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesLirico, 0.0, 2.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Manual',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesManual, 0.0, 4.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Computarizado',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesComputarizado, 0.0, 4.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Personal',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesPersonal, 0.0, 4.0)),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        const DataCell(Text(
-                          'Organizacional',
-                        )),
-                        DataCell(inputSlider(
-                            registroSub.merReportesOrganizacional, 0.0, 5.0)),
-                      ],
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-          CustomCardType2(
-            titleCard: 'Comentarios de Mercado Paramétrico',
+            titleCard: 'Comentarios de Producción Paramétrico',
             column1: Column(
               children: [
                 CustomInputField(
-                  initialValue: registroSub.merComentariosMercado,
+                  initialValue: registroSub.prodCometarioProduccion,
                   onChangedValue: (value) =>
-                      registroSub.merComentariosMercado = value,
+                      registroSub.prodCometarioProduccion = value,
                   minLines: 4,
                   maxLines: null,
                   keyboardType: TextInputType.multiline,
-                  labelText: 'Comentarios de Mercado Paramétrico',
-                  hintText: 'Comentarios de Mercado Paramétrico',
+                  labelText: 'Comentarios de Producción Paramétrico',
+                  hintText: 'Comentarios de Producción Paramétrico',
                   valueNullable: false,
                 ),
               ],
             ),
-          ),*/
+          ),
         ],
       ),
     );
   }
-}
-
-Widget inputSliderP(variable, double min, double max) {
-  double value_ = 0;
-  return SizedBox(
-    width: 130,
-    child: StatefulBuilder(
-      builder: (context, state) => Center(
-        child: Slider(
-          activeColor: const Color(0XffA73030),
-          value: value_,
-          min: min,
-          max: max,
-          divisions: max.toInt(),
-          label: value_.round().toString(),
-          onChanged: (val) {
-            state(() {
-              value_ = val;
-              variable = '$val';
-            });
-          },
-        ),
-      ),
-    ),
-  );
 }

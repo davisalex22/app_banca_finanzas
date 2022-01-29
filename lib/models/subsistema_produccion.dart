@@ -24,6 +24,7 @@ class SubsistemaProduccion {
     this.prodLugEspacio,
     this.prodMaqAdecuado,
     this.prodMaqSuficiente,
+    this.prodMaqMantenimiento,
     this.prodMatCalidadAtributos,
     this.prodMatCalidadDisponibilidad,
     this.prodMatCalidadEntregas,
@@ -37,7 +38,6 @@ class SubsistemaProduccion {
     this.prodProcDesperdicios,
     this.prodProcDispositivos,
     this.prodProcEmbarques,
-    this.prodProcMantenimiento,
     this.prodProcMateriales,
     this.prodProcNormas,
     this.prodProcOcios,
@@ -82,6 +82,7 @@ class SubsistemaProduccion {
   String? prodLugEspacio;
   String? prodMaqAdecuado;
   String? prodMaqSuficiente;
+  String? prodMaqMantenimiento;
   String? prodMatCalidadAtributos;
   String? prodMatCalidadDisponibilidad;
   String? prodMatCalidadEntregas;
@@ -95,7 +96,6 @@ class SubsistemaProduccion {
   String? prodProcDesperdicios;
   String? prodProcDispositivos;
   String? prodProcEmbarques;
-  String? prodProcMantenimiento;
   String? prodProcMateriales;
   String? prodProcNormas;
   String? prodProcOcios;
@@ -146,6 +146,7 @@ class SubsistemaProduccion {
         prodLugEspacio: json["prod_lug_espacio"],
         prodMaqAdecuado: json["prod_maq_adecuado"],
         prodMaqSuficiente: json["prod_maq_suficiente"],
+        prodMaqMantenimiento: json["prod_maq_mantenimiento"],
         prodMatCalidadAtributos: json["prod_mat_calidadAtributos"],
         prodMatCalidadDisponibilidad: json["prod_mat_calidadDisponibilidad"],
         prodMatCalidadEntregas: json["prod_mat_calidadEntregas"],
@@ -159,7 +160,6 @@ class SubsistemaProduccion {
         prodProcDesperdicios: json["prod_proc_desperdicios"],
         prodProcDispositivos: json["prod_proc_dispositivos"],
         prodProcEmbarques: json["prod_proc_embarques"],
-        prodProcMantenimiento: json["prod_proc_mantenimiento"],
         prodProcMateriales: json["prod_proc_materiales"],
         prodProcNormas: json["prod_proc_normas"],
         prodProcOcios: json["prod_proc_ocios"],
@@ -204,6 +204,7 @@ class SubsistemaProduccion {
         "prod_lug_espacio": prodLugEspacio,
         "prod_maq_adecuado": prodMaqAdecuado,
         "prod_maq_suficiente": prodMaqSuficiente,
+        "prod_maq_mantenimiento": prodMaqMantenimiento,
         "prod_mat_calidadAtributos": prodMatCalidadAtributos,
         "prod_mat_calidadDisponibilidad": prodMatCalidadDisponibilidad,
         "prod_mat_calidadEntregas": prodMatCalidadEntregas,
@@ -217,7 +218,6 @@ class SubsistemaProduccion {
         "prod_proc_desperdicios": prodProcDesperdicios,
         "prod_proc_dispositivos": prodProcDispositivos,
         "prod_proc_embarques": prodProcEmbarques,
-        "prod_proc_mantenimiento": prodProcMantenimiento,
         "prod_proc_materiales": prodProcMateriales,
         "prod_proc_normas": prodProcNormas,
         "prod_proc_ocios": prodProcOcios,
@@ -261,6 +261,7 @@ class SubsistemaProduccion {
         prodLugEspacio: prodLugEspacio,
         prodMaqAdecuado: prodMaqAdecuado,
         prodMaqSuficiente: prodMaqSuficiente,
+        prodMaqMantenimiento: prodMaqMantenimiento,
         prodMatCalidadAtributos: prodMatCalidadAtributos,
         prodMatCalidadDisponibilidad: prodMatCalidadDisponibilidad,
         prodMatCalidadEntregas: prodMatCalidadEntregas,
@@ -274,7 +275,6 @@ class SubsistemaProduccion {
         prodProcDesperdicios: prodProcDesperdicios,
         prodProcDispositivos: prodProcDispositivos,
         prodProcEmbarques: prodProcEmbarques,
-        prodProcMantenimiento: prodProcMantenimiento,
         prodProcMateriales: prodProcMateriales,
         prodProcNormas: prodProcNormas,
         prodProcOcios: prodProcOcios,
