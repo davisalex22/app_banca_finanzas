@@ -86,9 +86,8 @@ class EmpresariosService extends ChangeNotifier {
 
     empresario.id = decodedData['name'];
 
-    // empresas.add(empresa);
+    empresarios.add(empresario);
 
-    // return empresa.id!;
-    return '';
+    return empresario.id!;
   }
 }

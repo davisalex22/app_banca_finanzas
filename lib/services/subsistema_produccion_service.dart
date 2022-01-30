@@ -78,10 +78,8 @@ class SubProduccionService extends ChangeNotifier {
 
     subProduccion.id = decodedData['name'];
 
-    // empresas.add(empresa);
-
-    // return empresa.id!;
-    return '';
+    subSistemasProduccionList.add(subProduccion);
+    return subProduccion.id!;
   }
 
   Future deleteSubsistema(SubsistemaProduccion subProduccion) async {

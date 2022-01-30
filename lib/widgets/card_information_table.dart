@@ -16,9 +16,13 @@ class CardInformationTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double your_number_of_rows = 6.0;
+    double rowHeight =
+        (MediaQuery.of(context).size.height - 56) / your_number_of_rows;
+
     return Row(
       children: <Widget>[
-        Expanded(
+        Flexible(
           flex: 1,
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.25,
@@ -29,16 +33,21 @@ class CardInformationTable extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
+        Flexible(
           flex: 3,
           child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.25,
             child: DataTable(
+              //dataRowHeight: rowHeight,
+              //headingRowHeight: rowHeight,
+              headingRowHeight: 0,
+              border: TableBorder(
+                top: BorderSide.none,
+                left: BorderSide.none,
+              ),
               columns: <DataColumn>[
                 DataColumn(
-                  label: Text(
-                    columnVar1,
-                  ),
+                  label: Text(columnVar1,
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 DataColumn(
                   label: Text(

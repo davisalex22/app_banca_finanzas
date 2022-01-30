@@ -217,8 +217,11 @@ class InfoEmpresaScreen extends StatelessWidget {
                               'Empleados \nComentario',
                               style: textStyleColumTitle,
                             )),
-                            DataCell(Text(valueNull(
-                                value.empTamNumEmpComentarios.toString()))),
+                            DataCell(Text(
+                              valueNull(
+                                  value.empTamNumEmpComentarios.toString()),
+                              softWrap: true,
+                            )),
                           ],
                         ),
                         DataRow(

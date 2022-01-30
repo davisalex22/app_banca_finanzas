@@ -77,10 +77,9 @@ class SubMercadoService extends ChangeNotifier {
 
     subMercado.id = decodedData['name'];
 
-    // empresas.add(empresa);
+    subSistemasMercadosList.add(subMercado);
 
-    // return empresa.id!;
-    return '';
+    return subMercado.id!;
   }
 
   Future deleteSubsistema(SubsistemaMercado subMercado) async {

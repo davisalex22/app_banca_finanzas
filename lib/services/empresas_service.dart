@@ -85,10 +85,9 @@ class EmpresasService extends ChangeNotifier {
     // print(decodedData);
     empresa.id = decodedData['name'];
 
-    // empresas.add(empresa);
+    empresas.add(empresa);
 
-    // return empresa.id!;
-    return '';
+    return empresa.id!;
   }
 
   void updateSelectedProductImage(String path) {
