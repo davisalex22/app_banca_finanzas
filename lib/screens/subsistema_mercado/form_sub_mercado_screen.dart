@@ -2,6 +2,7 @@ import 'package:app_banca_finanzas/providers/subsistema_mercado_provider.dart';
 import 'package:app_banca_finanzas/services/services.dart';
 import 'package:app_banca_finanzas/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -11,7 +12,7 @@ class RegistroSubMercadoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final subMercadoService = Provider.of<SubMercadoService>(context);
-
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     return ChangeNotifierProvider(
       create: (_) =>
           SubMercadoFormProvider(subMercadoService.selectedsubMercado),
@@ -33,6 +34,17 @@ class _SubMercadoScreenBody extends StatelessWidget {
     final subMercadoForm = Provider.of<SubMercadoFormProvider>(context);
 
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(140.0),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 35),
+          child: Column(
+            children: const [
+              MainHeader(titlePage: 'Registrar Subsistema Mercado')
+            ],
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
@@ -72,6 +84,13 @@ class _SubMercadoScreenBody extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const CustomNavigationBar(
+        actualPage: 0,
+        iconOption: Icon(Icons.my_library_books_sharp),
+        nameOption: 'Registros',
+        currentIndex: 0,
+        routePage: '/subMercado',
+      ),
     );
   }
 }
@@ -83,6 +102,12 @@ class _SubMercadoForm extends StatelessWidget {
     final registroSub = subMercadoForm.subMercado;
     double value_ = 0;
 
+    // Empresa
+    final empresaService = Provider.of<EmpresasService>(context);
+    final List<String> nombresEmpresas = empresaService.empresas
+        .map((e) =>
+            '${e.empresaNombre.toString()} - ${e.empresaDuenio.toString()}')
+        .toList();
     valueSlider(String? campo) {
       if (campo == null) {
         return value_;
@@ -96,8 +121,20 @@ class _SubMercadoForm extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
-          const MainHeader(
-            titlePage: 'Registrar sub-sistema mercado',
+          CustomCardType2(
+            titleCard: 'Seleccione empresa',
+            column1: Column(
+              children: [
+                DropDownSearchList(
+                  labelTextInput: 'Seleccione empresa',
+                  labelTextSearch: 'Buscar empresa',
+                  titleSearch: 'Empresas',
+                  listOptions: nombresEmpresas,
+                  onChangedValue: (value) => registroSub.empresaDuenio = value,
+                  selectedItem: registroSub.empresaDuenio.toString(),
+                ),
+              ],
+            ),
           ),
           CustomCardType2(
             titleCard: 'Políticas de producto y/o servicio',

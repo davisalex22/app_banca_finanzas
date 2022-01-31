@@ -12,7 +12,7 @@ class RegistroEmpresarioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final empresarioService = Provider.of<EmpresariosService>(context);
-
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     return ChangeNotifierProvider(
       create: (_) =>
           EmpresarioFormProvider(empresarioService.selectedEmpresario),
@@ -34,6 +34,15 @@ class _EmpresarioScreenBody extends StatelessWidget {
     final empresarioForm = Provider.of<EmpresarioFormProvider>(context);
 
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(140.0),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 35),
+          child: Column(
+            children: const [MainHeader(titlePage: 'Registrar Empresario')],
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
@@ -73,6 +82,13 @@ class _EmpresarioScreenBody extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const CustomNavigationBar(
+        actualPage: 0,
+        iconOption: Icon(Icons.my_library_books_sharp),
+        nameOption: 'Registros',
+        currentIndex: 0,
+        routePage: '/empresario',
+      ),
     );
   }
 }
@@ -80,16 +96,33 @@ class _EmpresarioScreenBody extends StatelessWidget {
 class _EmpresarioForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Empresario
     final empresarioForm = Provider.of<EmpresarioFormProvider>(context);
     final registroEmp = empresarioForm.empresario;
+    // Empresa
+    final empresaService = Provider.of<EmpresasService>(context);
+    final List<String> nombresEmpresas =
+        empresaService.empresas.map((e) => e.empresaNombre.toString()).toList();
 
     return Form(
       key: empresarioForm.formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
-          const MainHeader(
-            titlePage: 'Registrar empresario',
+          CustomCardType2(
+            titleCard: 'Seleccione empresa',
+            column1: Column(
+              children: [
+                DropDownSearchList(
+                  labelTextInput: 'Seleccione empresa',
+                  labelTextSearch: 'Buscar empresa',
+                  titleSearch: 'Empresas',
+                  listOptions: nombresEmpresas,
+                  onChangedValue: (value) => registroEmp.empresaDuenio = value,
+                  selectedItem: registroEmp.empresaDuenio.toString(),
+                ),
+              ],
+            ),
           ),
           CustomCardType2(
             titleCard: 'Generales',

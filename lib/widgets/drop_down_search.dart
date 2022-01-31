@@ -5,6 +5,7 @@ class DropDownSearchList extends StatelessWidget {
   final String labelTextInput;
   final String labelTextSearch;
   final String titleSearch;
+  final String selectedItem;
   final List<String> listOptions;
   final Function(String?) onChangedValue;
 
@@ -15,6 +16,7 @@ class DropDownSearchList extends StatelessWidget {
     required this.titleSearch,
     required this.listOptions,
     required this.onChangedValue,
+    required this.selectedItem,
   }) : super(key: key);
 
   @override
@@ -30,7 +32,7 @@ class DropDownSearchList extends StatelessWidget {
           border: const OutlineInputBorder(),
         ),
         onChanged: onChangedValue,
-        selectedItem: "...",
+        selectedItem: selectedItem,
         showSearchBox: true,
         searchFieldProps: TextFieldProps(
           decoration: InputDecoration(

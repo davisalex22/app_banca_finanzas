@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,7 +16,7 @@ class RegistroEmpresaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final empresaService = Provider.of<EmpresasService>(context);
-
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     return ChangeNotifierProvider(
       create: (_) => EmpresaFormProvider(empresaService.selectedEmpresa),
       child: _EmpresaScreenBody(empresaService: empresaService),
@@ -36,12 +38,16 @@ class _EmpresaScreenBody extends StatelessWidget {
 
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(0.0),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-          )),
+        preferredSize: const Size.fromHeight(140.0),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 35),
+          child: Column(
+            children: const [
+              MainHeader(titlePage: 'Registro de Empresa'),
+            ],
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
@@ -88,7 +94,13 @@ class _EmpresaScreenBody extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const CustomNavigationBar(),
+      bottomNavigationBar: const CustomNavigationBar(
+        actualPage: 1,
+        iconOption: Icon(Icons.my_library_books_sharp),
+        nameOption: 'Registros',
+        currentIndex: 0,
+        routePage: '/empresa',
+      ),
     );
   }
 }
@@ -96,8 +108,10 @@ class _EmpresaScreenBody extends StatelessWidget {
 class _EmpresaForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Empresa
     final empresaForm = Provider.of<EmpresaFormProvider>(context);
     final registroEmp = empresaForm.empresa;
+    // Empresario
     final empresariosService = Provider.of<EmpresariosService>(context);
     final empresaService = Provider.of<EmpresasService>(context);
     final List<String> nombresEmpresarios = empresariosService.empresarios
@@ -108,7 +122,6 @@ class _EmpresaForm extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
-          const MainHeader(titlePage: 'Registro de Empresa'),
           CustomCardType2(
             titleCard: 'Seleccione empresario',
             column1: Column(
@@ -119,6 +132,7 @@ class _EmpresaForm extends StatelessWidget {
                   titleSearch: 'Empresarios',
                   listOptions: nombresEmpresarios,
                   onChangedValue: (value) => registroEmp.empresaDuenio = value,
+                  selectedItem: registroEmp.empresaDuenio.toString(),
                 ),
               ],
             ),

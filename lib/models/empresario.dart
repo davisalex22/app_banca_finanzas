@@ -68,6 +68,7 @@ class Empresario {
     this.empresarioOcupacion,
     this.empresarioOriginario,
     this.empresarioTelefono,
+    this.empresaDuenio,
     this.id,
   });
 
@@ -137,6 +138,7 @@ class Empresario {
   String? empresarioOcupacion;
   String? empresarioOriginario;
   String? empresarioTelefono;
+  String? empresaDuenio;
   String? id;
 
   factory Empresario.fromJson(String str) =>
@@ -214,6 +216,7 @@ class Empresario {
         empresarioOcupacion: json["empresario_ocupacion"],
         empresarioOriginario: json["empresario_originario"],
         empresarioTelefono: json["empresario_telefono"],
+        empresaDuenio: json["empresa_duenio"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -283,6 +286,7 @@ class Empresario {
         "empresario_ocupacion": empresarioOcupacion,
         "empresario_originario": empresarioOriginario,
         "empresario_telefono": empresarioTelefono,
+        "empresa_duenio": empresaDuenio,
       };
 
   Empresario copy() => Empresario(
@@ -352,6 +356,7 @@ class Empresario {
         empresarioOcupacion: empresarioOcupacion,
         empresarioOriginario: empresarioOriginario,
         empresarioTelefono: empresarioTelefono,
+        empresaDuenio: empresaDuenio,
         id: id,
       );
 }

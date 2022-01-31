@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app_banca_finanzas/providers/login_form_provider.dart';
 import 'package:app_banca_finanzas/services/services.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'package:app_banca_finanzas/ui/input_decorations.dart';
@@ -11,6 +12,7 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     return Scaffold(
         body: AuthBackground(
             child: SingleChildScrollView(

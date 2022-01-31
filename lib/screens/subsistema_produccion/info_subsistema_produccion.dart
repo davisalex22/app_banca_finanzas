@@ -559,7 +559,13 @@ class InfoSubsistemaPScreen extends StatelessWidget {
           ),
         )
       ]),
-      bottomNavigationBar: const CustomNavigationBar(),
+      bottomNavigationBar: const CustomNavigationBar(
+        actualPage: 0,
+        iconOption: Icon(Icons.my_library_books_sharp),
+        nameOption: 'Registros',
+        currentIndex: 0,
+        routePage: '/subProduccion',
+      ),
     );
   }
 }

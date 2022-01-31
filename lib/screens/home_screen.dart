@@ -1,78 +1,72 @@
-import 'package:app_banca_finanzas/services/services.dart';
 import 'package:app_banca_finanzas/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final authService = Provider.of<AuthService>(context, listen: false);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(0.0),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            elevation: 0, // hides leading widget
-          )),
-      body: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(60),
-            child: PrincipalTitle(),
+        preferredSize: const Size.fromHeight(90.0),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 60),
+          child: Column(
+            children: const [
+              PrincipalTitle(),
+            ],
           ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.63,
-            width: MediaQuery.of(context).size.width,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      CustomCardType5(
-                        iconCard: Icons.arrow_forward_ios,
-                        titleCard: 'Empresarios',
-                        logoCard:
-                            'https://img.freepik.com/foto-gratis/empresario-sonriente-anteojos-sentado-junto-mesa-cafeteria-computadora-portatil-mientras-usa-telefono-inteligente-escribe-algo_171337-5589.jpg?size=626&ext=jpg',
-                        routePage: '/empresario',
-                      ),
-                      SizedBox(height: 20.0),
-                      CustomCardType5(
-                        iconCard: Icons.arrow_forward_ios,
-                        titleCard: 'Empresas',
-                        logoCard:
-                            'https://www.automotivesupplynews.com.mx/wp-content/uploads/2017/10/tipos-de-empresas.jpg',
-                        routePage: '/empresa',
-                      ),
-                      SizedBox(height: 20.0),
-                      CustomCardType5(
-                        iconCard: Icons.arrow_forward_ios,
-                        titleCard: 'Subsistema Mercado',
-                        logoCard:
-                            'https://www.macmillandictionaryblog.com/wp-content/uploads/2017/08/enterprise-1024x625.jpg',
-                        routePage: '/subMercado',
-                      ),
-                      SizedBox(height: 20.0),
-                      CustomCardType5(
-                        iconCard: Icons.arrow_forward_ios,
-                        titleCard: 'Subsistema Producción',
-                        logoCard:
-                            'https://www.macmillandictionaryblog.com/wp-content/uploads/2017/08/enterprise-1024x625.jpg',
-                        routePage: '/subProduccion',
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
-      bottomNavigationBar: const CustomNavigationBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const <Widget>[
+                SizedBox(height: 30.0),
+                CustomCardType1(
+                  titleCard: 'Empresarios',
+                  description: '',
+                  assetImage: 'assets/images/background_empresario.jpg',
+                  routePage: '/empresario',
+                ),
+                SizedBox(height: 80.0),
+                CustomCardType1(
+                  titleCard: 'Empresas',
+                  description: '',
+                  assetImage: 'assets/images/background_empresa.jpg',
+                  routePage: '/empresa',
+                ),
+                SizedBox(height: 70.0),
+                CustomCardType1(
+                  titleCard: 'Subsistemas de Mercado',
+                  description: '',
+                  assetImage: 'assets/images/background_subM.jpg',
+                  routePage: '/subMercado',
+                ),
+                SizedBox(height: 60.0),
+                CustomCardType1(
+                  titleCard: 'Subsistemas de Producción',
+                  description: '',
+                  assetImage: 'assets/images/background_subP.jpg',
+                  routePage: '/subProduccion',
+                ),
+                SizedBox(height: 60.0),
+              ],
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: const CustomNavigationBar(
+        actualPage: 0,
+        iconOption: Icon(Icons.my_library_books_sharp),
+        nameOption: 'Registros',
+        currentIndex: 1,
+        routePage: '/home',
+      ),
     );
   }
 }

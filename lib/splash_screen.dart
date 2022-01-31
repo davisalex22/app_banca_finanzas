@@ -1,11 +1,9 @@
-// ignore_for_file: non_constant_identifier_names
-
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:app_banca_finanzas/screens/screens.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? Key}) : super(key: Key);
-
+  const SplashScreen({Key? key}) : super(key: key);
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -26,13 +24,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    FocusScope.of(context).unfocus();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(0.0),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-          )),
       body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: const AssetImage('assets/images/background_splash.jpg'),
@@ -75,6 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             const Image(
               image: AssetImage('assets/images/utpl_logo.png'),
+              width: 100,
               height: 100,
             ),
             Row(

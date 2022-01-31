@@ -3,18 +3,21 @@ import 'package:app_banca_finanzas/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CustomNavigationBar extends StatefulWidget {
+class CustomNavigationBar extends StatelessWidget {
+  final int actualPage;
+  final int currentIndex;
+  final String nameOption;
+  final String routePage;
+  final Widget iconOption;
   const CustomNavigationBar({
     Key? key,
+    required this.actualPage,
+    required this.nameOption,
+    required this.iconOption,
+    required this.currentIndex,
+    required this.routePage,
   }) : super(key: key);
 
-  @override
-  State<CustomNavigationBar> createState() => _CustomNavigationBarState();
-}
-
-int _paginaActual = 1;
-
-class _CustomNavigationBarState extends State<CustomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context, listen: false);
@@ -25,34 +28,35 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       unselectedItemColor: Colors.white.withOpacity(.60),
       selectedFontSize: 14,
       unselectedFontSize: 14,
-      onTap: (index) {
-        setState(() => _paginaActual = index);
-        if (_paginaActual == 1) {
+      onTap: (actualPage) {
+        if (actualPage == 0) {
+          Navigator.pushNamed(context, routePage);
+        }
+        if (actualPage == 1) {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const HomeScreen()),
           );
         }
-        if (_paginaActual == 2) {
+        if (actualPage == 2) {
           authService.logout();
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const LoginScreen()),
           );
         }
-        setState(() => _paginaActual = index);
       },
-      currentIndex: _paginaActual,
-      items: const [
+      currentIndex: currentIndex,
+      items: [
         BottomNavigationBarItem(
-          label: 'Registros',
-          icon: Icon(Icons.library_books),
+          label: nameOption,
+          icon: iconOption,
         ),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           label: 'Inicio',
           icon: Icon(Icons.home),
         ),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           label: 'Salir',
           icon: Icon(Icons.login_outlined),
         ),

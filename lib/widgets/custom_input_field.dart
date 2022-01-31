@@ -40,7 +40,6 @@ class CustomInputField extends StatelessWidget {
       child: TextFormField(
         initialValue: initialValue,
         onChanged: onChangedValue,
-        textCapitalization: TextCapitalization.words,
         keyboardType: keyboardType,
         obscureText: obscureText,
         minLines: minLines,

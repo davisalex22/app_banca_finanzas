@@ -30,7 +30,7 @@ class InfoEmpresaScreen extends StatelessWidget {
               icon: const Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            actions: [],
+            actions: const [],
           )),
       body: Column(children: [
         MainHeader(
@@ -80,7 +80,7 @@ class InfoEmpresaScreen extends StatelessWidget {
                         DataRow(
                           cells: <DataCell>[
                             const DataCell(SizedBox(
-                                width: 48,
+                                width: 60,
                                 child: Text(
                                   'Dirección',
                                   style: textStyleColumTitle,
@@ -380,7 +380,13 @@ class InfoEmpresaScreen extends StatelessWidget {
           ),
         )
       ]),
-      bottomNavigationBar: const CustomNavigationBar(),
+      bottomNavigationBar: const CustomNavigationBar(
+        actualPage: 0,
+        iconOption: Icon(Icons.my_library_books_sharp),
+        nameOption: 'Registros',
+        currentIndex: 0,
+        routePage: '/empresario',
+      ),
     );
   }
 }

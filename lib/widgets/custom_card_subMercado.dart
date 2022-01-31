@@ -34,13 +34,13 @@ class CustomCardSubsistemaM extends StatelessWidget {
                       maxWidth: 100,
                       maxHeight: 100,
                     ),
-                    child: Image.asset('assets/images/logo_empresa.png',
+                    child: Image.asset('assets/images/logo_subM.png',
                         fit: BoxFit.cover),
                   ),
                   title: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Text(
-                      subsistema.merComentariosMercado.toString(),
+                      subsistema.empresaDuenio.toString(),
                       style: const TextStyle(fontSize: 18.0),
                     ),
                   ),

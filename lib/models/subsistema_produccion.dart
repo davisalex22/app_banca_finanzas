@@ -57,6 +57,7 @@ class SubsistemaProduccion {
     this.prodUbiManoObra,
     this.prodUbiMateriaPrima,
     this.prodUbiMedioAmbiente,
+    this.empresaDuenio,
     this.id,
   });
 
@@ -115,6 +116,7 @@ class SubsistemaProduccion {
   String? prodUbiManoObra;
   String? prodUbiMateriaPrima;
   String? prodUbiMedioAmbiente;
+  String? empresaDuenio;
   String? id;
 
   factory SubsistemaProduccion.fromJson(String str) =>
@@ -179,6 +181,7 @@ class SubsistemaProduccion {
         prodUbiManoObra: json["prod_ubi_manoObra"],
         prodUbiMateriaPrima: json["prod_ubi_materiaPrima"],
         prodUbiMedioAmbiente: json["prod_ubi_medioAmbiente"],
+        empresaDuenio: json["empresa_duenio"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -237,6 +240,7 @@ class SubsistemaProduccion {
         "prod_ubi_manoObra": prodUbiManoObra,
         "prod_ubi_materiaPrima": prodUbiMateriaPrima,
         "prod_ubi_medioAmbiente": prodUbiMedioAmbiente,
+        "empresa_duenio": empresaDuenio,
       };
   SubsistemaProduccion copy() => SubsistemaProduccion(
         prodCalEstandar: prodCalEstandar,
@@ -294,6 +298,7 @@ class SubsistemaProduccion {
         prodUbiManoObra: prodUbiManoObra,
         prodUbiMateriaPrima: prodUbiMateriaPrima,
         prodUbiMedioAmbiente: prodUbiMedioAmbiente,
+        empresaDuenio: empresaDuenio,
         id: id,
       );
 }

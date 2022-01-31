@@ -27,6 +27,10 @@ class CustomCardType3 extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: ListTile(
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: Text(empresa.empresaDuenio.toString()),
+                  ),
                   leading: ConstrainedBox(
                     constraints: const BoxConstraints(
                       minWidth: 50,

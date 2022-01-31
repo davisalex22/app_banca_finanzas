@@ -15,7 +15,8 @@ class PrincipalTitle extends StatelessWidget {
           width: 60,
         ),
         const SizedBox(width: 20),
-        const Text("Enterprise Forms", style: TextStyle(fontSize: 25))
+        const Text("Enterprise Forms",
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
       ],
     );
   }

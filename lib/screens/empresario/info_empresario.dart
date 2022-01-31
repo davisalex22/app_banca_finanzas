@@ -31,7 +31,7 @@ class InfoEmpresarioScreen extends StatelessWidget {
               icon: const Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            actions: [],
+            actions: const [],
           )),
       body: Column(children: [
         MainHeader(
@@ -722,7 +722,13 @@ class InfoEmpresarioScreen extends StatelessWidget {
           ),
         )
       ]),
-      bottomNavigationBar: const CustomNavigationBar(),
+      bottomNavigationBar: const CustomNavigationBar(
+        actualPage: 0,
+        iconOption: Icon(Icons.my_library_books_sharp),
+        nameOption: 'Registros',
+        currentIndex: 0,
+        routePage: '/empresario',
+      ),
     );
   }
 }

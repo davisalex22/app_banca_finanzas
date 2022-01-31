@@ -16,10 +16,6 @@ class CardInformationTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double your_number_of_rows = 6.0;
-    double rowHeight =
-        (MediaQuery.of(context).size.height - 56) / your_number_of_rows;
-
     return Row(
       children: <Widget>[
         Flexible(
@@ -40,7 +36,7 @@ class CardInformationTable extends StatelessWidget {
               //dataRowHeight: rowHeight,
               //headingRowHeight: rowHeight,
               headingRowHeight: 0,
-              border: TableBorder(
+              border: const TableBorder(
                 top: BorderSide.none,
                 left: BorderSide.none,
               ),

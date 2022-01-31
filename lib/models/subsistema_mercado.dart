@@ -58,6 +58,7 @@ class SubsistemaMercado {
     this.merSegmentoPotenTendencia,
     this.merSegmentoTenFuentes,
     this.merSegmentoTenIndicadores,
+    this.empresaDuenio,
     this.id,
   });
 
@@ -117,6 +118,7 @@ class SubsistemaMercado {
   String? merSegmentoPotenTendencia;
   String? merSegmentoTenFuentes;
   String? merSegmentoTenIndicadores;
+  String? empresaDuenio;
   String? id;
 
   factory SubsistemaMercado.fromJson(String str) =>
@@ -191,6 +193,7 @@ class SubsistemaMercado {
         merSegmentoPotenTendencia: json["mer_segmento_potenTendencia"],
         merSegmentoTenFuentes: json["mer_segmento_tenFuentes"],
         merSegmentoTenIndicadores: json["mer_segmento_tenIndicadores"],
+        empresaDuenio: json["empresa_duenio"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -254,6 +257,7 @@ class SubsistemaMercado {
         "mer_segmento_potenTendencia": merSegmentoPotenTendencia,
         "mer_segmento_tenFuentes": merSegmentoTenFuentes,
         "mer_segmento_tenIndicadores": merSegmentoTenIndicadores,
+        "empresa_duenio": empresaDuenio,
       };
 
   SubsistemaMercado copy() => SubsistemaMercado(
@@ -314,6 +318,7 @@ class SubsistemaMercado {
         merSegmentoPotenTendencia: merSegmentoPotenTendencia,
         merSegmentoTenFuentes: merSegmentoTenFuentes,
         merSegmentoTenIndicadores: merSegmentoTenIndicadores,
+        empresaDuenio: empresaDuenio,
         id: id,
       );
 }

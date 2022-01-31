@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:app_banca_finanzas/models/models.dart';
 import 'package:app_banca_finanzas/screens/screens.dart';
@@ -11,19 +12,22 @@ class EmpresaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final empresasService = Provider.of<EmpresasService>(context);
-
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     if (empresasService.isLoading) return const HomeScreen();
 
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(0.0),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            elevation: 0, // hides leading widget
-          )),
+        preferredSize: const Size.fromHeight(140.0),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 35),
+          child: Column(
+            children: const [
+              MainHeader(titlePage: 'Listado de Empresas'),
+            ],
+          ),
+        ),
+      ),
       body: Column(children: [
-        const MainHeader(titlePage: 'Listado de empresas'),
         Expanded(
           child: ListView.builder(
               itemCount: empresasService.empresas.length,
@@ -48,7 +52,13 @@ class EmpresaScreen extends StatelessWidget {
           Navigator.pushNamed(context, '/formEmpresa');
         },
       ),
-      bottomNavigationBar: const CustomNavigationBar(),
+      bottomNavigationBar: const CustomNavigationBar(
+        actualPage: 0,
+        iconOption: Icon(Icons.arrow_back_rounded),
+        nameOption: 'Atrás',
+        currentIndex: 0,
+        routePage: '/home',
+      ),
     );
   }
 }

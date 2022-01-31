@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'package:app_banca_finanzas/models/models.dart';
@@ -13,20 +14,22 @@ class EmpresarioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final empresariosService = Provider.of<EmpresariosService>(context);
-    final authService = Provider.of<AuthService>(context, listen: false);
-
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     if (empresariosService.isLoading) return const HomeScreen();
 
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(0.0),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            elevation: 0, // hides leading widget
-          )),
+        preferredSize: const Size.fromHeight(140.0),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 35),
+          child: Column(
+            children: const [
+              MainHeader(titlePage: 'Listado de Empresarios'),
+            ],
+          ),
+        ),
+      ),
       body: Column(children: [
-        const MainHeader(titlePage: 'Listado de empresarios'),
         Expanded(
           child: ListView.builder(
               itemCount: empresariosService.empresarios.length,
@@ -50,6 +53,13 @@ class EmpresarioScreen extends StatelessWidget {
           empresariosService.selectedEmpresario = Empresario();
           Navigator.pushNamed(context, '/formEmpresario');
         },
+      ),
+      bottomNavigationBar: const CustomNavigationBar(
+        actualPage: 0,
+        iconOption: Icon(Icons.arrow_back_rounded),
+        nameOption: 'Atrás',
+        currentIndex: 0,
+        routePage: '/home',
       ),
     );
   }
