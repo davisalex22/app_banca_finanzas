@@ -9,20 +9,10 @@ class InfoEmpresarioScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    valueNull(String campo) {
-      if (campo == "null") {
-        return "Sin\ninformación";
-      } else {
-        return campo;
-      }
-    }
-
     final empresariosService = Provider.of<EmpresariosService>(context);
     final value = empresariosService.selectedEmpresario;
 
     if (empresariosService.isLoading) return const HomeScreen();
-
-    const textStyleColumTitle = TextStyle(fontWeight: FontWeight.bold);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(0.0),
@@ -31,7 +21,7 @@ class InfoEmpresarioScreen extends StatelessWidget {
               icon: const Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            actions: const [],
+            actions: [],
           )),
       body: Column(children: [
         MainHeader(
@@ -73,648 +63,140 @@ class InfoEmpresarioScreen extends StatelessWidget {
               CustomCardType2(
                 column1: Column(
                   children: [
-                    CardInformationTable(
-                      columnVar1: 'Nombre',
-                      columnVar2: valueNull(value.empresarioNombre.toString()),
-                      titleCategory: 'General',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Dirección',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empresarioDireccion.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Teléfono',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empresarioTelefono.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
+                    CardInformationTable(titleCategory: 'General', dataRow: [
+                      buildCellTable("Nombre", value.empresarioNombre),
+                      buildCellTable("Direccion", value.empresarioDireccion),
+                      buildCellTable("Contactos", value.empresarioTelefono),
+                    ]),
                     const LineDivider(),
                     CardInformationTable(
-                      titleCategory: 'Precedentes',
-                      columnVar1: 'Origen',
-                      columnVar2:
-                          valueNull(value.empresarioOriginario.toString()),
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Lugar',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.empresarioLugar.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Edad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.empresarioEdad.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Estado civil',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empresarioEstadoCivil.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Ocupacion',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empresarioOcupacion.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Escolaridad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empresarioEscolaridad.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Estado salud',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empresarioEstadoSalud.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Comentario',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empresarioComentario.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
+                        titleCategory: 'Precedentes',
+                        dataRow: [
+                          buildCellTable("Origen", value.empresarioOriginario),
+                          buildCellTable("Edad", value.empresarioEdad),
+                          buildCellTable(
+                              "Estado civil", value.empresarioEstadoCivil),
+                          buildCellTable(
+                              "Ocupación", value.empresarioOcupacion),
+                          buildCellTable(
+                              "Escolaridad", value.empresarioEscolaridad),
+                          buildCellTable(
+                              "Estado salud", value.empresarioEstadoSalud),
+                          buildCellTable(
+                              "Comentario", value.empresarioComentario),
+                        ]),
+                    const LineDivider(),
+                    CardInformationTable(titleCategory: 'Padres', dataRow: [
+                      buildCellTable("Nombres", value.emprPadresNombres),
+                      buildCellTable(
+                          "Originarios", value.emprPadresOriginarios),
+                      buildCellTable("Viven", value.emprPadresViven),
+                      buildCellTable("Lugar", value.emprPadresLugar),
+                      buildCellTable("Edad", value.emprPadresEdad),
+                      buildCellTable("Ocupacion", value.emprPadresOcupacion),
+                      buildCellTable(
+                          "Escolaridad", value.emprPadresEscolaridad),
+                      buildCellTable(
+                          "Estado salud", value.emprPadresEstadoSalud),
+                      buildCellTable("Comentario", value.emprPadresComentario),
+                    ]),
+                    const LineDivider(),
+                    CardInformationTable(titleCategory: 'Hermanos', dataRow: [
+                      buildCellTable("Nombres", value.emprHermanosNombres),
+                      buildCellTable("Edad", value.emprHermanosEdad),
+                      buildCellTable("Ocupación", value.emprHermanosOcupacion),
+                      buildCellTable("Lugar entre\nhermanos",
+                          value.emprHermanosLugarHermanos),
+                    ]),
+                    const LineDivider(),
+                    CardInformationTable(titleCategory: 'Pareja', dataRow: [
+                      buildCellTable("Nombre", value.emprParejaNombre),
+                      buildCellTable("Originaria", value.emprParejaOriginaria),
+                      buildCellTable("Vive", value.emprParejaVive),
+                      buildCellTable("Lugar", value.emprParejaLugar),
+                      buildCellTable("Edad", value.emprParejaEdad),
+                      buildCellTable("Ocupacion", value.emprParejaOcupacion),
+                      buildCellTable(
+                          "Escolaridad", value.emprParejaEscolaridad),
+                      buildCellTable(
+                          "Estado salud", value.emprParejaEstadoSalud),
+                      buildCellTable("Comentario", value.emprParejaComentario),
+                    ]),
+                    const LineDivider(),
+                    CardInformationTable(titleCategory: 'Suegros', dataRow: [
+                      buildCellTable("Nombres", value.emprSuegrosNombre),
+                      buildCellTable(
+                          "Originarios", value.emprSuegrosOriginarios),
+                      buildCellTable("Viven", value.emprSuegrosViven),
+                      buildCellTable("Lugar", value.emprSuegrosLugar),
+                      buildCellTable("Edad", value.emprSuegrosEdad),
+                      buildCellTable("Ocupacion", value.emprSuegrosOcupacion),
+                      buildCellTable(
+                          "Escolaridad", value.emprSuegrosEscolaridad),
+                      buildCellTable(
+                          "Estado salud", value.emprSuegrosEstadoSalud),
+                      buildCellTable("Comentario", value.emprSuegrosComentario),
+                    ]),
+                    const LineDivider(),
+                    CardInformationTable(titleCategory: 'Cuñados', dataRow: [
+                      buildCellTable("Nombres", value.emprCuniadosNombre),
+                      buildCellTable("Edad", value.emprCuniadosEdad),
+                      buildCellTable("Ocupación", value.emprCuniadosOcupacion),
+                      buildCellTable("Lugar entre\nhermanos\npareja",
+                          value.emprCuniadosLugarHermanos),
+                    ]),
+                    const LineDivider(),
+                    CardInformationTable(titleCategory: 'Matrimonio', dataRow: [
+                      buildCellTable(
+                          "Años casados", value.emprMatrimonioAniosCasado),
+                      buildCellTable("Situación afectiva",
+                          value.emprMatrimonioSituacionAfectiva),
+                      buildCellTable(
+                          "Número de hijos", value.emprMatrimonioHNumeroHijos),
+                      buildCellTable("Edad\nhijos", value.emprMatrimonioHEdad),
+                      buildCellTable(
+                          "Ocupación\nhijos", value.emprMatrimonioHOcupacion),
+                      buildCellTable("Estado civil\nhijos",
+                          value.emprMatrimonioHEstadoCivil),
+                      buildCellTable("Escolaridadl\nhijos",
+                          value.emprMatrimonioHEscolaridad),
+                      buildCellTable("Estado salud\nhijos",
+                          value.emprMatrimonioHEstadoSalud),
+                    ]),
                     const LineDivider(),
                     CardInformationTable(
-                      columnVar1: 'Nombres',
-                      columnVar2: valueNull(value.emprPadresNombres.toString()),
-                      titleCategory: 'Padres',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Originarios',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprPadresOriginarios.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Viven',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprPadresViven.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Lugar',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprPadresLugar.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Edad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprPadresEdad.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Ocupacion',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprPadresOcupacion.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Escolaridad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprPadresEscolaridad.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Edad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprPadresEstadoSalud.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Comentario',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprPadresComentario.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
+                        titleCategory: 'Filosofía\nCarácter',
+                        dataRow: [
+                          buildCellTable("Hobies, color, personas",
+                              value.emprFilosofiaHobbies),
+                          buildCellTable(
+                              "Comentario", value.emprFilosofiaComentario),
+                        ]),
                     const LineDivider(),
                     CardInformationTable(
-                      columnVar1: 'Nombres',
-                      columnVar2:
-                          valueNull(value.emprHermanosNombres.toString()),
-                      titleCategory: 'Hermanos',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Edad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprHermanosEdad.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Ocupación',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprHermanosOcupacion.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Lugar entre\nhermanos',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprHermanosLugarHermanos.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
+                        titleCategory: 'Metas\npersonales',
+                        dataRow: [
+                          buildCellTable("Afectivas", value.emprMetasAfectivas),
+                          buildCellTable("Físicas", value.emprMetasFisicas),
+                          buildCellTable(
+                              "Comentarios", value.emprMetasComentario),
+                        ]),
                     const LineDivider(),
                     CardInformationTable(
-                      columnVar1: 'Nombre',
-                      columnVar2: valueNull(value.emprParejaNombre.toString()),
-                      titleCategory: 'Pareja',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Originaria',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprParejaOriginaria.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Vive',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprParejaVive.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Lugar',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprParejaLugar.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Edad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprParejaEdad.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Ocupacion',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprParejaOcupacion.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Escolaridad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprParejaEscolaridad.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Estado salud',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprParejaEstadoSalud.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Edad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprParejaEdad.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
+                        titleCategory: 'Gestión\ntiempo',
+                        dataRow: [
+                          buildCellTable("Día", value.emprAdmTiempoDia),
+                          buildCellTable("Semana", value.emprAdmTiempoSemana),
+                          buildCellTable("Mes", value.emprAdmTiempoMes),
+                          buildCellTable("Año", value.emprAdmTiempoAnio),
+                          buildCellTable(
+                              "Comentarios", value.emprAdmTiempoComentario),
+                        ]),
                     const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Nombres',
-                      columnVar2: valueNull(value.emprSuegrosNombre.toString()),
-                      titleCategory: 'Suegros',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Originarios',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprSuegrosOriginarios.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Viven',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprSuegrosViven.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Lugar',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprSuegrosLugar.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Edad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprSuegrosEdad.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Ocupacion',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprSuegrosOcupacion.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Escolaridad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprSuegrosEscolaridad.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Edad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprSuegrosEstadoSalud.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Comentario',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprSuegrosComentario.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Nombres',
-                      columnVar2:
-                          valueNull(value.emprCuniadosNombre.toString()),
-                      titleCategory: 'Cuñados',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Edad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprCuniadosEdad.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Ocupación',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprCuniadosOcupacion.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Lugar entre\nHermanos',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprCuniadosLugarHermanos.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Años casados',
-                      columnVar2:
-                          valueNull(value.emprMatrimonioAniosCasado.toString()),
-                      titleCategory: 'Matrimonio',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Situación afectiva',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .emprMatrimonioSituacionAfectiva
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Numero de hijos',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprMatrimonioHNumeroHijos.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Edad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprMatrimonioHEdad.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Ocupación',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprMatrimonioHOcupacion.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Estado civil',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprMatrimonioHEstadoCivil.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Escolaridad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprMatrimonioHEscolaridad.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Estado de salud',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprMatrimonioHEstadoSalud.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Hobies, color,\npersonas',
-                      columnVar2:
-                          valueNull(value.emprFilosofiaHobbies.toString()),
-                      titleCategory: 'Filosofía\nCarácter',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Comentario',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprFilosofiaComentario.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Profesionales',
-                      columnVar2:
-                          valueNull(value.emprMetasProfesionales.toString()),
-                      titleCategory: 'Metas\nPersonales',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Afectivas',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprMetasAfectivas.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Físicas',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprMetasFisicas.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Comentario',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprMetasComentario.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Día',
-                      columnVar2: valueNull(value.emprAdmTiempoDia.toString()),
-                      titleCategory: 'Gestión\ntiempo',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Semana',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprAdmTiempoSemana.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Mes',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprAdmTiempoMes.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Año',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.emprAdmTiempoAnio.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Comentario',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.emprAdmTiempoComentario.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Comentario',
-                      columnVar2: valueNull(
-                          value.empresarioComentarioEjecutivo.toString()),
-                      titleCategory: 'Comentario ejecutivo',
-                      dataRow: const [],
-                    ),
+                    CardInformationTable(titleCategory: 'Comentario', dataRow: [
+                      buildCellTable(
+                          "Ejecutivo", value.empresarioComentarioEjecutivo),
+                    ]),
                   ],
                 ),
               ),
@@ -729,23 +211,6 @@ class InfoEmpresarioScreen extends StatelessWidget {
         currentIndex: 0,
         routePage: '/empresario',
       ),
-    );
-  }
-}
-
-class LineDivider extends StatelessWidget {
-  const LineDivider({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Divider(
-      color: Colors.black,
-      height: 20,
-      thickness: 2,
-      indent: 2,
-      endIndent: 2,
     );
   }
 }

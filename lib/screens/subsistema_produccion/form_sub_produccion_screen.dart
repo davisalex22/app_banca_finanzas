@@ -153,7 +153,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -187,7 +187,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -221,7 +221,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -255,7 +255,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -290,7 +290,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -324,7 +324,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -358,7 +358,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -392,7 +392,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -438,7 +438,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -471,7 +471,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -504,7 +504,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -537,7 +537,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -583,7 +583,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -616,7 +616,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -649,7 +649,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -682,7 +682,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -728,7 +728,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -761,7 +761,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -794,7 +794,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -828,7 +828,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -860,7 +860,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -893,7 +893,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -926,7 +926,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -960,7 +960,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -993,7 +993,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1026,7 +1026,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1059,7 +1059,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1093,7 +1093,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1127,7 +1127,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1161,7 +1161,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1194,7 +1194,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1227,7 +1227,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1273,7 +1273,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1306,7 +1306,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1339,7 +1339,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1372,7 +1372,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1404,7 +1404,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1437,7 +1437,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1470,7 +1470,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1504,7 +1504,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1537,7 +1537,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1583,7 +1583,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1616,7 +1616,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1649,7 +1649,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1695,7 +1695,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1728,7 +1728,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1761,7 +1761,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1807,7 +1807,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1841,7 +1841,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1875,7 +1875,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1908,7 +1908,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1941,7 +1941,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -1974,7 +1974,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -2006,7 +2006,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -2038,7 +2038,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -2071,7 +2071,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(
@@ -2104,7 +2104,7 @@ class _SubProduccionForm extends StatelessWidget {
                         )),
                         DataCell(
                           SizedBox(
-                            width: 130,
+                            width: 105,
                             child: StatefulBuilder(
                               builder: (context, state) => Center(
                                 child: Slider(

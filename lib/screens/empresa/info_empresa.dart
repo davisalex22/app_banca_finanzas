@@ -11,17 +11,9 @@ class InfoEmpresaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final empresasService = Provider.of<EmpresasService>(context);
     final value = empresasService.selectedEmpresa;
-    valueNull(String campo) {
-      if (campo == "null") {
-        return "Sin\ninformación";
-      } else {
-        return campo;
-      }
-    }
 
     if (empresasService.isLoading) return const HomeScreen();
 
-    const textStyleColumTitle = TextStyle(fontWeight: FontWeight.bold);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(0.0),
@@ -30,7 +22,7 @@ class InfoEmpresaScreen extends StatelessWidget {
               icon: const Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            actions: const [],
+            actions: [],
           )),
       body: Column(children: [
         MainHeader(
@@ -64,328 +56,110 @@ class InfoEmpresaScreen extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.63,
-          width: MediaQuery.of(context).size.width,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(children: [
-              CustomCardType2(
-                column1: Column(
-                  children: [
-                    CardInformationTable(
-                      columnVar1: 'Nombre',
-                      columnVar2: value.empresaNombre.toString(),
-                      titleCategory: 'Generales',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(SizedBox(
-                                width: 60,
-                                child: Text(
-                                  'Dirección',
-                                  style: textStyleColumTitle,
-                                ))),
-                            DataCell(SizedBox(
-                                width: 95,
-                                child: Text(valueNull(
-                                    value.empresaDireccion.toString())))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(SizedBox(
-                                width: 48,
-                                child: Text(
-                                  'R.F.C',
-                                  style: textStyleColumTitle,
-                                ))),
-                            DataCell(
-                                Text(valueNull(value.empresaRfc.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(SizedBox(
-                                width: 48,
-                                child: Text(
-                                  'Domicilio',
-                                  style: textStyleColumTitle,
-                                ))),
-                            DataCell(Text(
-                                valueNull(value.empresaDireccion.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Años de antigüedad',
-                      columnVar2:
-                          valueNull(value.empresaAniosAntiguedad.toString()),
-                      titleCategory: 'Antiguedad de la Empresa',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(SizedBox(
-                                width: 80,
-                                child: Text(
-                                  'Año de inicio',
-                                  style: textStyleColumTitle,
-                                ))),
-                            DataCell(Text(valueNull(
-                                value.empresaAniosInicio.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Persona física',
-                      columnVar2:
-                          valueNull(value.empEstLegalPersonaFisica.toString()),
-                      titleCategory: 'Estatus legal de la Empresa',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Persona moral',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empEstLegalPersonaMoral.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Persona\nno registrada',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empEstLegalNoRegistrada.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Fiscal',
-                      columnVar2: valueNull(value.empEstatusFiscal.toString()),
-                      titleCategory: 'Estatus Fiscal de la empresa',
-                      dataRow: const [],
-                    ),
-                    const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Empleados \nOperativos',
-                      columnVar2:
-                          valueNull(value.empTamNumEmpOperativos.toString()),
-                      titleCategory: 'Tamaño de la Empresa',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Empleados\nAdministrativos',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empTamNumEmpAdministrativos.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Empleados\nOtros',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.empTamNumEmpOtros.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Empleados \nTotal',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.empTamNumEmpTotal.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Empleados \nComentario',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                              valueNull(
-                                  value.empTamNumEmpComentarios.toString()),
-                              softWrap: true,
-                            )),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Ventas Diarias',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.empVentasDiarias.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Ventas Semanales',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empVentasSemanales.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Ventas Mensuales',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empVentasSemanales.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Valor Terreno',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empValActivosTerreno.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Valor Bienes',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empValActivosBienes.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Valor Otros',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empValActivosOtros.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Calculo\nVentas/Empleados',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empCalculosVentasEmpleados.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Ventas/Activos',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empCalculosVentasActivos.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Local',
-                      columnVar2:
-                          valueNull(value.empCobMercadoLocal.toString()),
-                      titleCategory: 'Cobertura de Mercado',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Regional',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empCobMercadoRegional.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Internacional',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empCobMercadoInternacional.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Corto plazo',
-                      columnVar2:
-                          valueNull(value.empVisionCortoPlazo.toString()),
-                      titleCategory: 'Visión de la empresa',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Largo plazo',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.empVisionLargoPlazo.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Comentario',
-                      columnVar2:
-                          valueNull(value.empComentarioEjecutivo.toString()),
-                      titleCategory: 'Comentario ejecutivo',
-                      dataRow: const [],
-                    ),
-                    const LineDivider(),
-                    const Text(
-                      'Organigrama',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    OrganigramaImage(
-                      url: value.picture,
-                    ),
-                  ],
-                ),
-              ),
-            ]),
-          ),
-        )
+            height: MediaQuery.of(context).size.height * 0.63,
+            width: MediaQuery.of(context).size.width,
+            child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(children: [
+                  CustomCardType2(
+                    column1: Column(children: [
+                      CardInformationTable(
+                          titleCategory: 'Generales',
+                          dataRow: [
+                            buildCellTable("Nombre", value.empresaNombre),
+                            buildCellTable("Direccion", value.empresaDireccion),
+                            buildCellTable("Contactos", value.empresaTelefono),
+                            buildCellTable("R.F.C", value.empresaRfc),
+                            buildCellTable("Domicilio\nFiscal",
+                                value.empresaDomicilioFiscal),
+                          ]),
+                      const LineDivider(),
+                      CardInformationTable(
+                          titleCategory: 'Antiguedad de \nantiguedad',
+                          dataRow: [
+                            buildCellTable("Años desde\ncreación",
+                                value.empresaAniosAntiguedad),
+                            buildCellTable(
+                                "Año de inicio", value.empresaAniosInicio),
+                          ]),
+                      const LineDivider(),
+                      CardInformationTable(
+                          titleCategory: 'Estatus legal',
+                          dataRow: [
+                            buildCellTable("Persona\nfísica",
+                                value.empEstLegalPersonaFisica),
+                            buildCellTable("Persona\nmoral",
+                                value.empEstLegalPersonaMoral),
+                            buildCellTable("Persona\nno registrada",
+                                value.empEstLegalNoRegistrada),
+                          ]),
+                      const LineDivider(),
+                      CardInformationTable(
+                          titleCategory: 'Estatus fiscal',
+                          dataRow: [
+                            buildCellTable("Empleados\noperativos",
+                                value.empTamNumEmpOperativos),
+                            buildCellTable("Empleados\nadministrativos",
+                                value.empTamNumEmpAdministrativos),
+                            buildCellTable(
+                                "Empleados\notros", value.empTamNumEmpOtros),
+                            buildCellTable(
+                                'Empleados \ntotal', value.empTamNumEmpTotal),
+                            buildCellTable('Empleados \ncomentario',
+                                value.empTamNumEmpComentarios.toString()),
+                            buildCellTable(
+                                'Ventas diarias', value.empVentasDiarias),
+                            buildCellTable(
+                                'Ventas semanales', value.empVentasSemanales),
+                            buildCellTable(
+                                'Ventas mensuales', value.empVentasSemanales),
+                            buildCellTable(
+                                'Valor terreno', value.empValActivosTerreno),
+                            buildCellTable(
+                                'Valor bienes', value.empValActivosBienes),
+                            buildCellTable(
+                                'Valor otros', value.empValActivosOtros),
+                            buildCellTable('Calculo\nVentas/Empleados',
+                                value.empCalculosVentasEmpleados),
+                            buildCellTable('Calculo\nVentas/Activos',
+                                value.empCalculosVentasActivos),
+                          ]),
+                      const LineDivider(),
+                      CardInformationTable(
+                          titleCategory: 'Cobertura de mercado',
+                          dataRow: [
+                            buildCellTable("Local", value.empCobMercadoLocal),
+                            buildCellTable(
+                                "Regional", value.empCobMercadoRegional),
+                            buildCellTable("Internacional",
+                                value.empCobMercadoInternacional),
+                          ]),
+                      const LineDivider(),
+                      CardInformationTable(
+                          titleCategory: 'Visión de la empresa',
+                          dataRow: [
+                            buildCellTable(
+                                "Corto plazo", value.empVisionCortoPlazo),
+                            buildCellTable(
+                                "Largo plazo", value.empVisionLargoPlazo),
+                          ]),
+                      const LineDivider(),
+                      CardInformationTable(
+                          titleCategory: 'Comentario ',
+                          dataRow: [
+                            buildCellTable(
+                                "Ejecutivo", value.empComentarioEjecutivo),
+                          ]),
+                    ]),
+                  ),
+                ])))
       ]),
       bottomNavigationBar: const CustomNavigationBar(
         actualPage: 0,
         iconOption: Icon(Icons.my_library_books_sharp),
         nameOption: 'Registros',
         currentIndex: 0,
-        routePage: '/empresario',
+        routePage: '/empresa',
       ),
     );
   }

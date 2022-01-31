@@ -3,25 +3,19 @@ import 'package:provider/provider.dart';
 import 'package:app_banca_finanzas/screens/screens.dart';
 import 'package:app_banca_finanzas/services/services.dart';
 import 'package:app_banca_finanzas/widgets/widgets.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class InfoSubsistemaMScreen extends StatelessWidget {
   const InfoSubsistemaMScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final empresasService = Provider.of<SubMercadoService>(context);
-    final value = empresasService.selectedsubMercado;
-    valueNull(String campo) {
-      if (campo == "null") {
-        return "Vacio";
-      } else {
-        return campo;
-      }
-    }
+    final subMercadoService = Provider.of<SubMercadoService>(context);
+    final value = subMercadoService.selectedsubMercado;
+    if (subMercadoService.isLoading) return const HomeScreen();
+    puntajeFinal = 0;
 
-    if (empresasService.isLoading) return const HomeScreen();
-
-    const textStyleColumTitle = TextStyle(fontWeight: FontWeight.bold);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(0.0),
@@ -34,8 +28,7 @@ class InfoSubsistemaMScreen extends StatelessWidget {
           )),
       body: Column(children: [
         MainHeader(
-          titlePage:
-              'Información de sub-sistema \n${value.merComentariosMercado}',
+          titlePage: 'Subsistema ${value.empresaDuenio}',
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -57,8 +50,8 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 16),
               ),
               onPressed: () {
-                empresasService.deleteSubsistema(value);
-                Navigator.of(context).pop();
+                subMercadoService.deleteSubsistema(value);
+                //Navigator.of(context).pop();
               },
             ),
           ],
@@ -73,437 +66,144 @@ class InfoSubsistemaMScreen extends StatelessWidget {
                 column1: Column(
                   children: [
                     CardInformationTable(
-                      columnVar1: 'Rentabilidad de\nProductos',
-                      columnVar2:
-                          valueNull(value.merPoliticaRentabilidad.toString()),
-                      titleCategory: 'Políticas de producto y/o servicio',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Nuevos productos',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.merPoliticaNuevos.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
+                        titleCategory: 'Políticas producto y/o servicio',
+                        dataRow: [
+                          buildCellTableSubs(
+                              "Rentabilidad", value.merPoliticaRentabilidad, 3),
+                          buildCellTableSubs(
+                              "Nuevos\nproductos", value.merPoliticaNuevos, 2),
+                        ]),
+                    const LineDivider(),
+                    CardInformationTable(titleCategory: 'Segmento', dataRow: [
+                      buildCellTableSubs("Quién es su cliente,\ntipicicar",
+                          value.merSegmentoCliente, 5),
+                      buildCellTableSubs("Conoce la distribución por producto",
+                          value.merSegmentoDistribucion, 5),
+                      buildCellTableSubs("Conoce la magnitud\ndel mercado",
+                          value.merSegmentoMagnitud, 5),
+                      buildCellTableSubs("Indicadores claves\ndel mercado",
+                          value.merSegmentoTenIndicadores, 3),
+                      buildCellTableSubs("Otras fuentes de\ninformación",
+                          value.merSegmentoTenIndicadores, 2),
+                      buildCellTableSubs("Conoce su mercado\npotencial actual",
+                          value.merSegmentoPotenActual, 3),
+                      buildCellTableSubs(
+                          "Conoce su mercado\npotencial tendencia",
+                          value.merSegmentoPotenTendencia,
+                          2),
+                    ]),
+                    const LineDivider(),
+                    CardInformationTable(titleCategory: 'Cliente', dataRow: [
+                      buildCellTableSubs("Usuario", value.merClienteUsuario, 2),
+                      buildCellTableSubs("Decisor", value.merClienteDecisor, 2),
+                      buildCellTableSubs(
+                          "Da los recursos", value.merClienteRecursos, 1),
+                    ]),
                     const LineDivider(),
                     CardInformationTable(
-                      columnVar1: 'Quién es su cliente,\ntipicicar',
-                      columnVar2:
-                          valueNull(value.merSegmentoCliente.toString()),
-                      titleCategory: 'Segmento',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Sabe la distribución y\nproporción de sus\nproductos',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merSegmentoDistribucion.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Conoce la magnitud\ndel mercado',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merSegmentoMagnitud.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Indicadores claves\ndel mercado',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merSegmentoTenIndicadores.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Otras fuentes de\ninformación',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merSegmentoTenIndicadores.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Conoce su mercado\npotencial actual',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merSegmentoPotenActual.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Conoce su mercado\npotencial tendencia',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merSegmentoPotenTendencia.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
+                        titleCategory: 'Expectativa',
+                        dataRow: [
+                          buildCellTableSubs(
+                              "Productos y/o \nservicios calidad",
+                              value.merExpectativaCompranCalidad,
+                              2),
+                          buildCellTableSubs(
+                              "Productos y/o \nservicios servicio",
+                              value.merExpectativaCompranServicio,
+                              2),
+                          buildCellTableSubs("Productos y/o \nservicios precio",
+                              value.merExpectativaCompranPrecio, 1),
+                          buildCellTableSubs("Fijan precios de\nmercado",
+                              value.merExpectativaFijaMercado, 5),
+                          buildCellTableSubs("Fijan precios de\ncompetencia",
+                              value.merExpectativaFijaCompetencia, 4),
+                          buildCellTableSubs("Fijan precios de\ncosto",
+                              value.merExpectativaFijaCosto, 3),
+                          buildCellTableSubs("Fijan precios de\nlirico",
+                              value.merExpectativaFijaLirico, 2),
+                          buildCellTableSubs(
+                              "Canal de distribución\nOferente 1/2,1/2\nconsumidor",
+                              value.merExpectativaCanalOferente1,
+                              5),
+                          buildCellTableSubs(
+                              "Canal de distribución\nOferente 1/2\nconsumidor",
+                              value.merExpectativaCanalOferente2,
+                              5),
+                          buildCellTableSubs(
+                              "Canal de distribución\nOferente - consumidor",
+                              value.merExpectativaCanalOferente3,
+                              5),
+                          buildCellTableSubs("Competencia identificados",
+                              value.merCompetenciaIdentificador, 2),
+                          buildCellTableSubs("Competencia cantidad",
+                              value.merCompetenciaEvCantidad, 2),
+                          buildCellTableSubs("Competencia calidad",
+                              value.merCompetenciaEvCalidad, 2),
+                          buildCellTableSubs("Competencia precio",
+                              value.merCompetenciaEvPrecio, 2),
+                          buildCellTableSubs("Conoce fuerzas\ncompetencia",
+                              value.merCompetenciaMenFuerzas, 1),
+                          buildCellTableSubs("Conoce debilidades\ncompetencia",
+                              value.merCompetenciasMenDebilidades, 1),
+                        ]),
                     const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Usuario',
-                      columnVar2: valueNull(value.merClienteUsuario.toString()),
-                      titleCategory: 'Cliente',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Decisor',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(
-                                valueNull(value.merClienteDecisor.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Da los recursos',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merClienteRecursos.toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
+                    CardInformationTable(titleCategory: 'Comercio', dataRow: [
+                      buildCellTableSubs("Anuncian información personal",
+                          value.merComercializacionSisPersonales, 1),
+                      buildCellTableSubs('Anuncian información\nmasivos',
+                          value.merComercializacionSisMasivos, 2),
+                      buildCellTableSubs('Anuncian información\nexpectativa',
+                          value.merComercializacionSisExpectativa, 2),
+                      buildCellTableSubs('Imagen emblema',
+                          value.merComercializacionImEmblema, 2),
+                      buildCellTableSubs('Imagen logotipo',
+                          value.merComercializacionImLogotipo, 3),
+                      buildCellTableSubs('Número de vendedores',
+                          value.merComercializacionVenVendedores, 1),
+                      buildCellTableSubs('Reparto de territorio',
+                          value.merComercializacionVenTerritorio, 1),
+                      buildCellTableSubs('Equipo de ventas',
+                          value.merComercializacionVenEquipo, 1),
+                      buildCellTableSubs('Plan de presentación',
+                          value.merComercializacionVenEquipo, 1),
+                      buildCellTableSubs('Entrenamiento',
+                          value.merComercializacionVenEntrenamiento, 1),
+                      buildCellTableSubs('Controla sus\nventas cuotas',
+                          value.merComercializacionVenCuotas, 1),
+                      buildCellTableSubs('Controla sus\nventas presupuestos',
+                          value.merComercializacionVenPresupuestos, 1),
+                      buildCellTableSubs('Controla sus\nventas reportes',
+                          value.merComercializacionVenReportes, 2),
+                      buildCellTableSubs('Controla sus\nrentabilidad',
+                          value.merComercializacionVenRentabilidad, 1),
+                    ]),
                     const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Productos y/o \nservicios calidad',
-                      columnVar2: valueNull(
-                          value.merExpectativaCompranCalidad.toString()),
-                      titleCategory: 'Expectativa',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Productos y/o \nservicios servicio',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merExpectativaCompranServicio
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Productos y/o \nservicios precio',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merExpectativaCompranPrecio.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Fijan precios de\nmercado',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merExpectativaFijaMercado.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Fijan precios de\nmercado',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merExpectativaFijaMercado.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Fijan precios de\ncompetencia',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merExpectativaFijaCompetencia
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Fijan precios de\ncosto',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merExpectativaFijaCosto.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Fijan precios de\nlírico',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merExpectativaFijaLirico.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Canal de distribución\nOferente 1/2,1/2\nconsumidor',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merExpectativaCanalOferente1
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Canal de distribución\nOferente 1/2\nconsumidor',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merExpectativaCanalOferente2
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Canal de distribución\nOferente - consumidor',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merExpectativaCanalOferente3
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Competencia cantidad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merCompetenciaEvCantidad.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Competencia calidad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merCompetenciaEvCalidad.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Competencia precio',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merCompetenciaEvPrecio.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Conoce competencia\nfuerzas',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(
-                                value.merCompetenciaMenFuerzas.toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Conoce competencia\ndebilidades',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merCompetenciasMenDebilidades
-                                .toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
+                    CardInformationTable(titleCategory: 'Reportes', dataRow: [
+                      buildCellTableSubs(
+                          "Clientes", value.merReportesClientes, 5),
+                      buildCellTableSubs("Productos y/o servicio",
+                          value.merReportesProducto, 5),
+                      buildCellTableSubs(
+                          "Canales distribución", value.merReportesCanal, 5),
+                      buildCellTableSubs("Precio", value.merReportesPrecio, 5),
+                      buildCellTableSubs(
+                          "Competencia", value.merReportesCompetencia, 5),
+                      buildCellTableSubs(
+                          "Sistemas información", value.merReportesSistemas, 5),
+                      buildCellTableSubs("Ventas", value.merReportesVentas, 5),
+                      buildCellTableSubs(
+                          "Forma lírica", value.merReportesLirico, 2),
+                      buildCellTableSubs(
+                          "Forma manual", value.merReportesManual, 4),
+                      buildCellTableSubs("Forma computarizada",
+                          value.merReportesComputarizado, 5),
+                      buildCellTableSubs(
+                          "Forma personal", value.merReportesPersonal, 4),
+                      buildCellTableSubs("Forma organizacional",
+                          value.merReportesOrganizacional, 5),
+                    ]),
                     const LineDivider(),
-                    CardInformationTable(
-                      columnVar1: 'Anuncian\ninformación\npersonales',
-                      columnVar2: valueNull(
-                          value.merComercializacionSisPersonales.toString()),
-                      titleCategory: 'Comercio',
-                      dataRow: [
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Anuncian información\nmasivos',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merComercializacionSisMasivos
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Anuncian información\nexpectativa',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merComercializacionSisExpectativa
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Imagen emblema',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merComercializacionImEmblema
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Imagen logotipo',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merComercializacionImLogotipo
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Número de vendedores',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merComercializacionVenVendedores
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Reparto de Territorio',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merComercializacionVenTerritorio
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Equipo de Ventas',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merComercializacionVenEquipo
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Plan de Presentación',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merComercializacionVenEquipo
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Entrenamiento',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merComercializacionVenEntrenamiento
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Controla sus\nventas cuotas',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merComercializacionVenCuotas
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Controla sus\nventas presupuestos',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merComercializacionVenPresupuestos
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Controla sus\nventas reportes',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merComercializacionVenReportes
-                                .toString()))),
-                          ],
-                        ),
-                        DataRow(
-                          cells: <DataCell>[
-                            const DataCell(Text(
-                              'Controla sus\nrentabilidad',
-                              style: textStyleColumTitle,
-                            )),
-                            DataCell(Text(valueNull(value
-                                .merComercializacionVenRentabilidad
-                                .toString()))),
-                          ],
-                        ),
-                      ],
-                    ),
+                    resultadoFinal(context, 115),
                   ],
                 ),
               ),

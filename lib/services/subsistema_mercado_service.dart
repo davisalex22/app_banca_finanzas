@@ -88,9 +88,10 @@ class SubMercadoService extends ChangeNotifier {
     final url =
         Uri.https(_baseUrl, 'RegistrosSubistemasMercado/${subMercado.id}.json');
     final resp = await http.delete(url);
-    final decodeData = resp.body;
     isLoading = false;
     notifyListeners();
+    subSistemasMercadosList.remove(subMercado);
+
     // print("eliminado");
   }
 }
