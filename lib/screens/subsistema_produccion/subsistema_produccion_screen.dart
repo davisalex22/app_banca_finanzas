@@ -1,6 +1,5 @@
 import 'package:app_banca_finanzas/models/models.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:app_banca_finanzas/screens/screens.dart';
 import 'package:app_banca_finanzas/services/services.dart';
@@ -13,7 +12,6 @@ class SubsistemaProduccionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final subService = Provider.of<SubProduccionService>(context);
     if (subService.isLoading) return const HomeScreen();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(0.0),
@@ -23,7 +21,7 @@ class SubsistemaProduccionScreen extends StatelessWidget {
             elevation: 0, // hides leading widget
           )),
       body: Column(children: [
-        const MainHeader(titlePage: 'Listado de Subsistemas\nde Producción'),
+        const MainHeader(titlePage: 'Listado subsistemas\nde producción'),
         Expanded(
           child: ListView.builder(
               itemCount: subService.subSistemasProduccionList.length,

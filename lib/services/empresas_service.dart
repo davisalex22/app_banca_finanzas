@@ -45,11 +45,10 @@ class EmpresasService extends ChangeNotifier {
   Future deleteEmpresa(Empresa empresa) async {
     isLoading = true;
     final url = Uri.https(_baseUrl, 'RegistrosEmpresas/${empresa.id}.json');
+    empresas.removeWhere((element) => element.id == empresa.id);
     final resp = await http.delete(url);
-
     isLoading = false;
     notifyListeners();
-    empresas.remove(empresa);
   }
 
   Future saveOrCreateProduct(Empresa empresa) async {

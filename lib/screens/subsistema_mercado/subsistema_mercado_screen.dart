@@ -1,6 +1,5 @@
 import 'package:app_banca_finanzas/models/models.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:app_banca_finanzas/screens/screens.dart';
 import 'package:app_banca_finanzas/services/services.dart';
@@ -11,7 +10,6 @@ class SubsistemaMercadoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     final subService = Provider.of<SubMercadoService>(context);
     if (subService.isLoading) return const HomeScreen();
 
@@ -24,7 +22,7 @@ class SubsistemaMercadoScreen extends StatelessWidget {
             elevation: 0, // hides leading widget
           )),
       body: Column(children: [
-        const MainHeader(titlePage: 'Listado de Subsistemas\nde Mercado'),
+        const MainHeader(titlePage: 'Listado de subsistemas\nde mercado'),
         Expanded(
           child: ListView.builder(
               itemCount: subService.subSistemasMercadosList.length,

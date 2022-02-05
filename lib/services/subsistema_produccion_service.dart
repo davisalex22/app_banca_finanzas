@@ -85,9 +85,10 @@ class SubProduccionService extends ChangeNotifier {
   Future deleteSubsistema(SubsistemaProduccion subProduccion) async {
     final url = Uri.https(
         _baseUrl, 'RegistrosSubsistemasProduccion/${subProduccion.id}.json');
+    subSistemasProduccionList
+        .removeWhere((element) => element.id == subProduccion.id);
     final resp = await http.delete(url);
-    final decodeData = resp.body;
-    this.subSistemasProduccionList.remove(subProduccion);
+    isLoading = false;
     notifyListeners();
   }
 }

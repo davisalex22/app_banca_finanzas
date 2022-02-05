@@ -70,7 +70,7 @@ class InfoEmpresaScreen extends StatelessWidget {
                 ]),
                 const LineDivider(),
                 CardInformationTable(
-                    titleCategory: 'Antiguedad de \nantiguedad',
+                    titleCategory: 'Antiguedad de \nempresa',
                     dataRow: [
                       buildCellTable(
                           "Años desde\ncreación", value.empresaAniosAntiguedad),

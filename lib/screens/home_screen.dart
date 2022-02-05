@@ -7,7 +7,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(90.0),
@@ -26,7 +25,7 @@ class HomeScreen extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const <Widget>[
-                SizedBox(height: 30.0),
+                SizedBox(height: 32.0),
                 CustomCardType1(
                   titleCard: 'Empresarios',
                   description: '',

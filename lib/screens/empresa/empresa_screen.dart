@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:app_banca_finanzas/models/models.dart';
 import 'package:app_banca_finanzas/screens/screens.dart';
@@ -12,7 +11,6 @@ class EmpresaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final empresasService = Provider.of<EmpresasService>(context);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     if (empresasService.isLoading) return const HomeScreen();
 
     return Scaffold(

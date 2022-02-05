@@ -16,7 +16,6 @@ class RegistroEmpresaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final empresaService = Provider.of<EmpresasService>(context);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     return ChangeNotifierProvider(
       create: (_) => EmpresaFormProvider(empresaService.selectedEmpresa),
       child: _EmpresaScreenBody(empresaService: empresaService),

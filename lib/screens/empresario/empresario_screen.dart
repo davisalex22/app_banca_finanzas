@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'package:app_banca_finanzas/models/models.dart';
@@ -14,7 +13,6 @@ class EmpresarioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final empresariosService = Provider.of<EmpresariosService>(context);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     if (empresariosService.isLoading) return const HomeScreen();
 
     return Scaffold(

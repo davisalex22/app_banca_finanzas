@@ -2,7 +2,6 @@ import 'package:app_banca_finanzas/providers/subsistema_produccion_provider.dart
 import 'package:app_banca_finanzas/services/services.dart';
 import 'package:app_banca_finanzas/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -12,7 +11,6 @@ class RegistroSubProduccionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final subProduccionService = Provider.of<SubProduccionService>(context);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     return ChangeNotifierProvider(
       create: (_) =>
           SubProduccionFormProvider(subProduccionService.selectedsubProduccion),

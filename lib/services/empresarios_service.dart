@@ -75,10 +75,11 @@ class EmpresariosService extends ChangeNotifier {
     isLoading = true;
     final url =
         Uri.https(_baseUrl, 'RegistrosEmpresarios/${empresario.id}.json');
+
+    empresarios.removeWhere((element) => element.id == empresario.id);
     final resp = await http.delete(url);
     isLoading = false;
     notifyListeners();
-    empresarios.remove(empresario);
   }
 
   Future<String> createEmpresario(Empresario empresario) async {

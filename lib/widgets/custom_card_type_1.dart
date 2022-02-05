@@ -28,7 +28,7 @@ class CustomCardType1 extends StatelessWidget {
                 Positioned(
                   left: 100,
                   child: SizedBox(
-                    width: 250,
+                    width: MediaQuery.of(context).size.width * 0.58,
                     height: 160,
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -68,7 +68,7 @@ class CustomCardType1 extends StatelessWidget {
                               style: TextButton.styleFrom(
                                 onSurface: Colors.amber,
                               ),
-                              child: const Text('Ir'),
+                              child: const Text('Ver'),
                               onPressed: () =>
                                   Navigator.pushNamed(context, routePage),
                             ),

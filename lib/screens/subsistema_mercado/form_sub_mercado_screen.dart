@@ -12,7 +12,6 @@ class RegistroSubMercadoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final subMercadoService = Provider.of<SubMercadoService>(context);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     return ChangeNotifierProvider(
       create: (_) =>
           SubMercadoFormProvider(subMercadoService.selectedsubMercado),
